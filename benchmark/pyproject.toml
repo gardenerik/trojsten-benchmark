@@ -1,0 +1,11 @@
+[project]
+name = "benchmark"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.7",
+    "openai>=2.3.0",
+    "plumbum>=1.9.0",
+    "requests>=2.32.5",
+    "tqdm>=4.67.1",
+]

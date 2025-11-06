@@ -1,0 +1,2897 @@
+id,competition,problem,solution,difficulty
+5794f2d57c57592d,kms,"Aňa nestíha, taxi zavolala tak si. Z dispečingu jej povedali, že bude
+čakať $n\cdot 2^{n+1} + 1$ minút. Ale Aňa môže čakať len štvorcový čas.
+Ktoré časy sú pre Aňu vhodné?
+
+Nájdite všetky kladné celé čísla $n$, pre ktoré je číslo
+$n\cdot 2^{n+1} + 1$ druhou mocninou celého čísla.
+","Najprv si dokážeme pomocné tvrdenie: Pre všetky celé čísla $p \geq 3$
+platí $$p+2 < 2^p.$$ Dôkaz urobíme matematickou indukciou podľa $p$. Pre
+$p=3$ to platí. Nech to platí pre nejaké $p$. Potom
+$$(p+1)+2 < 2^p + 2 < 2 \cdot 2^p = 2^{p+1}.$$\
+
+Riešenie samotnej úlohy: Hľadáme také kladné celé číslo $n$, že existuje
+celé číslo $a$ tak, aby platilo $$n \cdot 2^{n+1} + 1 = a^2.$$ Zrejme
+$n = 1$, $n = 2$ nevyhovuje. Pre $n = 3$ dostaneme $a = 7$. Dokážeme, že
+úloha žiadne ďalšie riešenie nemá. Nech existujú celé čísla $a$, $n$
+ktoré vyhovujú úlohe. Nech $n \geq 4$. Zrejme $a$ je nepárne, teda
+$a = 2k+1$, $k$ je celé číslo. Po dosadení do rovnice máme
+$$n \cdot 2^{n+1} = a^2 - 1 = 4k^2 + 4k.$$ Po úprave
+$$n \cdot 2^{n-1} = k^2 + k = (k+1)k.$$ Z čísel $k$ a $k+1$ môže byť
+párne iba jedno. Nech je párne $k$, nech $k = q \cdot 2^p$, pričom $p$,
+$q$ sú celé čísla, $q$ je nepárne. Potom
+$$n \cdot 2^{n-1} = q \cdot 2^p \cdot (q \cdot 2^p + 1).$$ Na ľavej
+strane rovnice je aspoň $n-1$ krát číslo $2$ (ak je $n$ párne, tak aj
+viac), na pravej presne $p$ krát.To znamená, že $n-1 \leq p$. Potom
+$$n \cdot  2^{n-1} \leq (p+1) \cdot 2^p < 2^p \cdot 2^p < q \cdot 2^p \cdot  (q \cdot 2^p+1),$$
+čo je spor (použili sme pomocné tvrdenie).
+
+Nech je $k+1 = q \cdot 2^p$, kde $q$ je nepárne. Potom podobne ako v
+prvom prípade
+$$n \cdot 2^{n-1} \leq (p+1) \cdot 2^p < (2^p-1)  \cdot 2^p < q \cdot 2^p \cdot (q \cdot 2^p-1),$$
+čo je opäť spor. Preto je jediným riešením úlohy $n = 3$.
+
+Úloha nebola príliš ťažká, len si bolo treba uvedomiť, čo chceme aby
+platilo a ako to dostať.
+",6
+0614c2b2abc885fa,kms,"František sa mu chce poďakovať, a tak ho pozve k nemu domov do
+kráľovského paláca. Zavedie ho ku kočiaru, kde sa Krtko začudovane
+opýta: začudovane sa opýta František, Krtko si smutne povzdychol a
+podujal sa Františkovi vysvetľovať, čo to ten vlak je.
+
+Na železničnej stanici v Krtkovom meste majú dve slepé koľaje, ktoré sa
+na jednom konci spájajú do jednej, kadiaľ pokračuje trať von z mesta. Na
+prvej koľaji stojí súprava vlaku pozostávajúca z rušňa a $n$ navzájom
+rozlíšiteľných vagónov. V jednom kroku môžu železničiari spraviť
+nasledovný proces:
+
+- rozpoja súpravu na 1. koľaji na ľubovoľnom mieste,
+
+- rušeň odtiahne vagóny, ktoré ostali za ním zapojené, von z mesta,
+
+- rušeň zacúva na 2. koľaj a tým odtlačí vagóny, ktoré boli odtiahnuté
+  von z mesta, pričom ak sa na 2. koľaji už nachádzajú vagóny, tak ich k
+  nim pripojí,
+
+- pokiaľ ešte na 1. koľaji ostali vagóny, rušeň odpoja od všetkých
+  vagónov na 2. koľaji a vráti sa naspäť na 1. koľaj, kde ho pripoja na
+  vagóny.
+
+Tento proces železničiari ľubovoľne opakujú, dokým všetky vagóny
+neskončia na 2. koľaji.
+
+Koľko rôznych súprav možno týmto spôsobom zložiť?
+
+Napríklad ak na začiatku boli na 1. koľaji za rušňom vozne 1, 2, 3, tak
+železničiari mohli napríklad najskôr rozpojiť súpravu medzi vozňami 2 a
+3, potom odtiahnuť vozne 1 a 2 von z mesta a následne ich presunúť na 2.
+koľaj. Rušeň sa potom vráti na prvú koľaj, pripojí sa k nemu vozeň číslo
+$3$, vyjdú von z mesta a potom prejdú na druhú koľaj. Na konci tak budú
+na druhej koľaji za rušňom vozne v poradí 3, 1, 2.
+","Pozrime sa, ako nakoniec vyzeralo každé preusporiadanie celej súpravy.
+Vždy ho vieme popísať iba miestami, na ktorých sa rozhodnú pôvodnú
+súpravu rozpojiť. Všetko ostatné je jednoznačné, postupne odoberú
+odpojený kus súpravy a preradia ho na druhú koľaj, ako sa píše v zadaní.
+
+Medzi každými dvoma z $n$ vagónov môžu súpravu buď rozpojiť alebo
+nerozpojiť, nie je to nijak ovplyvnené tým, či už súpravu rozpojili na
+inom mieste. Počet možností, ako to urobiť, teda bude $2^{n-1}$, lebo
+počet miest medzi vagónmi je $n-1$ a každé má $2$ možnosti.
+
+Teraz už len treba ukázať, že nám z dvoch iných porozpájaní nemôže na
+konci vzniknúť rovnaká súprava. To overíme ľahko -- pozrieme sa na
+nejaké miesto, kde sa dve porozpájania líšia, teda v jednom sme tam
+súpravu rozpojili a v jednom nie. Dva vagóny, ktoré sú priamo pri
+takomto mieste, ostanú v prípade nerozpojenia vzájonme v pôvodnom
+poradí, no v prípade rozpojenia sa do novej súpravy dostane najprv vagón
+ktorý bol bližšie k lokomotíve, teda potom bude z tých dvoch bližšie k
+mestu.
+",3
+c24d8805c190c80b,kms,"Pri vstupe do matematicko-fyzikálnej fakulty majú Dáni zaujímavý systém.
+Namiesto voľného priechodu alebo predkladania ISIC-ov dostanú študenti
+matematickú úlohu, ktorú musia vyriešiť. Kika sa pri úvodnom vstupe
+musela popasovať s touto nerovnosťou:
+
+Nech $a_1,\, a_2,\ \dots,\, a_{25}$ sú nezáporné celé čísla a $k$ je
+hodnota najmenšieho z nich. Dokážte, že
+$$\big\lfloor\sqrt{a_1}\big\rfloor + \big\lfloor\sqrt{a_2}\big\rfloor + \cdots + \big\lfloor\sqrt{a_{25}}\big\rfloor \geq \big\lfloor\sqrt{a_1+a_2+\cdots+a_{25}+200k}\big\rfloor.$$
+Samozrejme, Kika úlohu hravo zvládla. A čo vy?
+
+*Poznámka.* Označenie $\lfloor x \rfloor$ znamená dolná celá časť $x$,
+teda najväčšie celé číslo neprevyšujúce $x$.
+","### Úvodné myšlienky
+
+Zdala sa vám táto úloha škaredá? Ak áno, tak to podľa mňa len znamená,
+že ste ju nevyriešili. ;) Poďme si ukázať riešenie a spoločne sa
+nadchnúť viacerými peknými zákonitosťami, ktoré v sebe táto úloha
+skrýva.
+
+Pri dokazovaní nerovností sa často oplatí zamyslieť sa nad tým, kedy je
+rozdiel medzi väčšou a menšou stranou nerovnosti najmenší -- inak
+povedané, kedy sa nerovnosť dosahuje najtesnejšie. Ak sa nám podarí
+dokázať nerovnosť pre akési prípady a preukážeme, že ostatné prípady sú
+, tak sme vyhrali.
+
+Prečo sa nám také niečo oplatí? Sťažovať si situáciu? Nuž, keď sa nad
+tým zamyslíme, tak si situáciu v skutočnosti nesťažujeme. Tie tesné
+prípady by sme museli dokázať aj tak. Naopak, situácia sa nám
+zjednoduší, lebo budeme úlohu dokazovať pre menej možných hodnôt
+premenných, čim sa nám môže často podariť premenné vyjadriť v špeciálnom
+tvare.
+
+Predstavme si napríklad, že pre $0 \le b \le a \le 2$ chceme dokázať
+nerovnosť $2a - \frac{1}{2}(a^2+b^2)\ge 0$. Hoci v tomto prípade sa
+jedná o veľmi jednoduchú nerovnosť, nejako musíme využiť danú podmienku,
+že $b \le a$, lebo bez nej nerovnosť neplatí. Všimnime si, že v našej
+nerovnosti platí, že čím je $b$ väčšie, tým je hodnota ľavej strany
+menšia a teda nerovnosť tesnejšia. Ak sa nám teda nerovnosť podarí
+dokázať pre najväčšiu možnú hodnotu $b$, tak tým automaticky dokážeme
+nerovnosť pre všetky možné hodnoty $b$. Avšak $b$ je zo zadania
+ohraničené zhora $a$. Preto ho v nerovnosti môžeme nahradiť za $a$ a
+dostaneme: $2a - \frac{1}{2}(a^2+a^2) = 2a - a^2 = a(2-a) \ge 0$.
+Vidíme, že uvažovaním najtesnejšieho možného prípadu sme sa zbavili
+jednej premennej, čím sme si výrazne zjednodušili situáciu. Niečo
+podobné spravíme aj v našej úlohe.
+
+### Dôkaz
+
+Posvieťme si najprv na ľavú stranu našej nerovnosti. Vystupujú tam dolné
+celé časti z odmocnín. To nám po chvíľkovej úvahe napovie, že hodnota
+takýchto výrazov závisí od toho, medzi ktorými dvoma štvorcami (druhými
+mocninami celých/prirodzených čísel) sa naše $a_i$ nachádza. Napríklad,
+ak $a_1=42$, potom toto číslo sa nachádza medzi štvorcami 36 a 49, jeho
+odmocnina bude teda medzi číslami 6 a 7, a teda
+$\big\lfloor\sqrt{a_1}\big\rfloor=6$. Skok v hodnote tohto výrazu
+nastane, ak hodnotu $a_1$ budeme zvyšovať až na hodnotu 49. Vtedy
+hodnota nášho výrazu skočí o 1.
+
+Naopak, výraz $\big\lfloor\sqrt{a_1+a_2+\cdots+a_{25}+200k}\big\rfloor$
+sa zväčšovaním $a_i$ minimálne nezmenšuje. Teda pokiaľ zvýšime všetky
+hodnoty $a_i$ až na level $(c_i+1)^2-1$ pre nejaké $c_i$ také, že
+$c_i^2 \le a_i < (c_i+1)^2$, ostane hodnota výrazu na ľavej strane
+nezmenená, kým hodnota výrazu na pravej strane sa buď nezmení, alebo sa
+zväčší. Preto pre takéto hodnoty $a_i$ je nerovnosť dosahovaná
+najtesnejšie. Stačí nám teda dokázať úlohu pre takéto hodnoty $a_i$.
+
+Bez ujmy na všeobecnosti môžeme (vďaka tomu, že premenné majú v našej
+úlohe rovnaké postavenie) predpokladať
+$a_1 \le a_2 \le \cdots \le a_{25}$. Keďže hodnota $200k$ robí v úlohe
+veľkú šarapatu, budeme úlohu dokazovať pre každú možnú hodnotu $a_1$
+zvlášť.
+
+Ako budeme pri našom dôkaze postupovať? Využijeme pri ňom ďalšiu
+zaujímavú myšlienku, nazvime ju . Uvažujme, že chceme overiť, či platí
+nerovnosť pre nejaké konkrétne hodnoty $a_1,\, a_2,\, \dots,\, a_{25}$.
+Budeme vychádzať zo stavu $a_1 = a_2 = \dots = a_{25} = a_1$ (t.j.
+hodnoty všetkých premenných na hodnotu $a_1$) a postupne budeme od
+poslednej premennej ($a_{25}$) nastavovať hodnoty premenných na tie,
+ktoré chceme. Popri tom budeme sledovať, či sa nám pri tomto procese
+zachováva naša nerovnosť.
+
+Potrebujeme teda na začiatok dokázať, že nerovnosť platí pre všetky
+hodnoty $a_1 = a_2 = \dots = a_{25} = (c_1+1)^2-1$ pre nejaké $c_1$
+nezáporné. Potom zrejme ľavá strana nerovnosti má hodnotu presne
+$25c_1$. Pravá strana nerovnosti bude mať hodnotu
+$\big\lfloor 15\sqrt{(c_1+1)^2-1} \big\rfloor$. Zrejme
+$\big\lfloor 15\sqrt{(c_1+1)^2-1} \big\rfloor < \big\lfloor 15(c_1+1) \big\rfloor = 15(c_1+1)$.
+Pre $c_1 \ge 2$ je teda nerovnosť triviálne splnená. Takisto ak sú
+všetky hodnoty $a_i$ nulové, tak je nerovnosť splnená. Ostáva nám overiť
+už iba prípad, keď $a_i=3$ pre všetky $i$. Po dosadení dostaneme:
+$25 \ge \big\lfloor\sqrt{675}\big\rfloor \doteq \big\lfloor\ 25,98 \big\rfloor = 25$.
+Tu sme narazili na ďalšiu peknú časť našej úlohy a tou je neuveriteľná
+tesnosť nami dokazovanej nerovnosti práve v hodnotách $a_i = 3$. Totiž,
+už $676=26^2$.
+
+Teraz teda predpokladajme, že overujeme platnosť nerovnosti pre hodnoty
+$a_1,\, a_2,\, \dots,\, a_{25}$ (nie nutne rovnaké). Nastavíme na
+začiatok všetky hodnoty $a_i$ na hodnotu $a_1$ a postupne od $a_{25}$
+zväčšujeme hodnoty na nami požadované. Keďže predpokladáme, že všetky
+$a_i$ majú hodnoty o jedna zmenšených štvorcov, budeme tento proces
+robiť nasledovne -- na začiatku je hodnota $a_{25}$ inicializovaná na
+hodnotu $a_1 = (c_1+1)^2-1$. V každom kroku zvýšime hodnotu $a_{25}$
+tak, aby $a_{25}=(c_1+1+k)^2-1$, kde $k$ vyjadruje poradie kroku, ktorý
+robíme. Takýmto spôsobom postupne dosiahneme až hodnotu $a_{25}$.
+
+Napríklad, ak $a_1=8$ a $a_{25}=48$, budeme hodnotu $a_{25}$ zvyšovať po
+hodnotách $8, 15, 24, 35, 48$. Počas tohto procesu budeme sledovať, čo
+sa nám bude diať s jednotlivými stranami nerovnosti. Po dokončení
+procesu s $a_{25}$ prejdeme na $a_{24}$, potom $a_{23}$ atď. až $a_2$.
+Hodnotu $a_1$ meniť nemusíme, lebo predpokladáme, že tá je už od
+začiatku nastavená správne.
+
+Čo sa teda deje so stranami nerovnosti pri postupnom zväčšovaní
+$a_{25}$? Ľahko si premyslíme, že v jednom kroku sa hodnota ľavej strany
+zvýši práve o 1. Stačí teda ukázať, že hodnota pravej strany sa zvýši
+nanajvýš o 1. Ak sa nám to podarí ukázať pre všetky kroky nastavovania
+$a_{25}$ a potom aj ostatných $a_i$, vyhrali sme, lebo sme neporušili
+našu nerovnosť a dosiahli sme hodnoty, pre ktoré sme našu nerovnosť
+overovali (a tieto hodnoty mohli byť ľubovoľné).
+
+Pri dokazovaní toho, že hodnota pravej strany sa v jednom kroku nezvýši
+viac ako o 1 využijeme ďalšiu zaujímavú myšlienku. Tou je, že
+vzdialenosť po sebe idúcich štvorcov s ich rastúcou hodnotou narastá.
+Konkrétne, rozdiely po sebe idúcich štvorcov tvoria aritmetickú
+postupnosť $1,\, 3,\, 5,\, 7,\, \dots$ (skúste si dokázať).
+
+Pri prechode $a_{25}$ medzi dvomi hodnotami o jedna zmenšených po sebe
+idúcich štvorcov sme toto číslo zvýšili presne o rozdiel týchto
+štvorcov. Hodnota pod odmocninou na pravej strane nerovnosti nám pri
+tomto kroku vzrástla o rovnakú hodnotu. Aby sa
+$\big\lfloor \sqrt{a_1+a_2+\cdots+a_{25}+200k} \big\rfloor$ zvýšila
+aspoň o dva, musela by hodnota výrazu pod odmocninou aspoň cez dva
+štvorce. Lenže keďže zrejme $a_1+a_2+\cdots+a_{25}+200k \ge a_{25}$,
+musí byť rozdiel medzi po sebe idúcimi štvorcami na týchto hodnotách
+aspoň taký veľký (alebo vo väčšine prípadov väčší) ako rozdiel medzi po
+sebe idúcimi štvorcami na hodnotách $a_{25}$. Preto aj hodnota $a_{25}$
+by pri jednom kroku musela prejsť cez dva štvorce, čo je spor s tým, že
+prešla iba cez jeden (tu sme ešte implicitne využili, že $a_{25}$ je iba
+o jedna menšie ako štvorec. Inak povedané, stačí ju zväčšiť o viac ako
+rozdiel po sebe idúcich štvorcov, ktoré sú nad ňou a už automaticky
+prejde cez dva štvorce).
+
+Ak sa vám toto zdôvodnenie zdalo príliš neformálne, alebo málo
+algebraické, skúste si ho dokázať algebraicky. Je to pomerne jednoduché.
+Pre účely nášho vzoráku som takýto dôkaz považoval za nepotrebný,
+nakoľko by nás to stálo iba ďalšie zbytočné označenia.
+
+Takýmto spôsobom vieme argumentovať aj pre všetky ostatné $a_i$. Pri
+postupnom nastavovaní hodnôt na nami požadované $a_i$ sme teda
+neporušili nerovnosť (naopak, v každom kroku sa rozdiel medzi ľavou a
+pravou stranou buď nezmenil, alebo o 1 zväčšil).
+
+No a to je, prosím pekne, úspešný koniec nášho dôkazu.
+",8
+41b9e15a85d67e1f,kms,"Vybrali sme sa po Hilbertovej štreke smerom do stredu Citadely.
+Prekročili sme živý plot a putovali sme mnoho dní, len aby sme sa opäť
+ocitli pred hradbami Citadely. Chcel som zaťať zuby a pokračovať v
+ceste, no Krutitruľo poklepal strážnika pred bránou po pleci a opýtal sa
+ho, kde je Kráľ Abstrakcie. Strážnik sa zaškeril a poznamenal, že kráľ
+sa chystá na vojnu a nemá čas riešiť chudákov. Krutitruľo toho
+holobriadka prehol na kolene a láskavo mu vysvetlil, že je svetoznámy
+stratég a kráľovi rád poskytne svoje služby. Tak sme sa ocitli v
+kráľovskej sále situovanej uprostred hrubých hradieb Citadely, kde nám
+šťúply mužíček vysvetlil, že proti nemu naraz vyrazili všetky prirodzené
+čísla a každé si najalo svoju armádu množín, a on sa obáva, či bude
+vedieť svojich nepriateľov spočítať.
+
+Dokážte, že pre akékoľvek kladné celé číslo $k$ existuje iba konečne
+veľa $n$-tíc po dvoch rôznych prvočísel $p_1,p_2,\dots,p_n$ takých, že
+$(p_1+k)(p_2+k)\dots (p_n+k)$ je deliteľné $p_1p_2\dots p_n$.
+","Danú úlohu budeme riešiť sporom. Predpokladajme teda, že existuje nejaké
+kladné celé číslo $k$ také, že pre nekonečne veľa $n$-tíc po dvoch
+rôznych prvočísel $p_1, p_2, \dots ,p_n$ platí, že
+$p_1p_2 \dots p_n \mid (p_1+k)(p_2+k) \dots (p_n+k)$. Bez ujmy na
+všeobecnosti predpokladajme, že $p_1$ je najväčšie prvočíslo nejakej
+$n$-tice. Ak by sa nám podarilo hodnotu $p_1$ nejakým spôsobom zhora
+ohraničiť konkrétnou hodnotou $P$, tak už máme v podstate vyhraté. Isto
+totiž existuje iba konečne veľa $n$-tíc prvočísel menších ako $P$. Naším
+cieľom bude teda ďalej ukázať, že ak $p_1p_2 \dots p_n$ delí
+$(p_1+k)(p_2+k) \dots (p_n+k)$, tak $p_1 \leq 2k^2-k$.
+
+Nech je $p_1>2k^2-k$ . Keďže $p_1$ je prvočíslo, ktoré delí súčin
+$(p_1+k)(p_2+k) \dots (p_n+k)$, musí deliť niektorú z daných zátvoriek.
+Prvočíslo $p_1$ určite nedelí zátvorku $p_1+k$, lebo $2p_1>p_1+k>p_1$,
+pretože platí $p_1>k$.
+
+Bez ujmy na všeobecnosti nech $p_1$ delí zátvorku $(p_2+k)$. Keďže je
+však $p_1>2k^2-k$, tak určite $p_1>k$. Potom zrejme $2p_1>p_2+k$, keďže
+túto nerovnosť vieme získať sčítaním nerovností $p_1>p_2$ a $p_1>k$
+(Zatiaľ predpokladajme, že $k>1$. Prípad $k=1$ potom ľahko doriešime
+neskôr). Ak má zároveň platiť, že dvojnásobok čísla $p_1$ je väčší ako
+$p_2+k$, ale zároveň $p_1$ delí $p_2+k$, tak zrejme $p_1=p_2+k$.
+
+Podobnou úvahou zistíme, že prvočíslo $p_2$ musí deliť niektorú z daných
+zátvoriek. Prvočíslo $p_2$ určite nedelí zátvorku $p_1+k$. Keď je totiž
+$p_1>2k^2-k$ , tak platí, že $2p_2=2p_1-2k > p_1+k$, pretože platí
+$p_1>3k$ (zatiaľ predpokladajme, že $k>2$). Podobným spôsobom vieme
+zistiť, že $p_2$ nedelí zátvorku $p_2+k$.
+
+Za predpokladu $p_1>2k^2-k$ sa vieme podobným spôsobom postupne
+dopracovať k tomu, že pre prvých $k$ prvočísel platí:
+
+$$p_1=p_2+k=p_3+2k= \dots = p_k + (k-1)k.$$
+
+Aby sme to však len tak neodmávali, overíme si toto naše tušenie
+indukciou. Náš indukčný predpoklad bude, že prvočíslo $p_i$ vieme
+zapísať ako $p_i= p_1 - (i-1)k$ a zároveň pre každé $j\leq i$ platí, že
+$p_j= p_1 - (j-1)k$, pričom $i \leq k$. (prvý indukčný krok je zrejmý:
+$p_1=p_1$).
+
+Nech $j \leq i$. Ukážeme, že v takom prípade prvočíslo $p_i$ nedelí
+zátvorku $(p_j+k)$. Keď je totiž $p_1>2k^2-k$, tak platí:
+
+$$p_1 > 2k^2 - k = (2k-1)k > (2i-j)k = 2(i-1)k - (j-1)k + k,$$
+$$2p_1 > p_1 + 2(i-1)k - (j-1)k + k,$$
+$$2p_i = 2(p_1-(i-1)k) > p_1 - (j-1)k + k = p_j+k,$$ $$2p_i > p_j+k.$$
+
+Vidíme, že dvojnásobok prvočísla $p_i$ je už väčší ako číslo $p_j+k$.
+Zároveň však ľahko vidíme, že musí platiť $p_i < p_j + k$. To zároveň
+implikuje, že musí naozaj existovať nejaké ďalšie prvočíslo také, že
+$p_i$ delí súčet tohto prvočísla s číslom $k$.
+
+Bez ujmy na všeobecnosti nech teda $p_i$ delí $p_{i+1}+k$. Znovu ľahko
+ukážeme, že pre $p_1>2k^2-k$ platí (pričom majme stále na pamäti, že
+$i \leq k$):
+
+$$p_1 > 2k^2-k>2ik-k,$$ $$2p_1 > p_{i+1} + 2ik -k,$$
+$$2p_1-2(i-1)k>p_{i+1}+k,$$ $$2p_i>p_{i+1}+k.$$
+
+Keďže dvojnásobok prvočísla $p_i$ je väčší ako výraz $p_{i+1}+k$ a
+zároveň $p_i$ delí tento výraz, musí platiť, že $p_i=p_{i+1}+k$, z čoho
+už ľahko odvodíme:
+
+$$p_{i+1}= p_i - k= p_1 - (i-1)k -k = p_1 -ik,$$ $$p_{i+1}=p_1-ik.$$
+
+Čím sme našu indukciu úspešne dokončili a máme:
+
+$$p_1=p_2+k=p_3+2k= \dots = p_k + (k-1)k.$$
+
+Predpokladajme, že by nejaké dve čísla $p_i$ a $p_j$ z našej $k$-tice
+mali rovnaký zvyšok po delení $k-1$. BUNV predpokladajme, že $i \geq j$.
+Potom platí, že výraz $k-1$ musí deliť $p_j-p_i$,
+
+$$\begin{align*}
+    (k-1) &\mid p_j - p_i, \\
+    (k-1) &\mid p_1 - (j-1)k - p_1 + (i-1)k, \\
+    (k-1) &\mid (i-j)k.
+\end{align*}$$
+
+Čísla $k-1$ a $k$ sú nesúdeliteľné. Potom zrejme výraz $k-1$ musí deliť
+rozdiel $i-j$. Všimnime si ale, že čísla $i,j$ sú z množiny
+${1,2 \dots k-1}$, z čoho jasne vyplýva, že $i=j$. Vidíme, že medzi
+prvočíslami $p_1, p_2, \dots p_k$ teda nie sú žiadne dve prvočísla,
+ktoré by mali rovnaký zvyšok po delení $k-1$. Máme $k-1$ prvočísel a z
+nich každé má iný zvyšok po delení $k-1$. Niektoré z nich potom musí
+dávať zvyšok $0$ po delení $k-1$. Za predpokladu, že $k>2$ to však
+znamená, že dané číslo nie je prvočíslo.
+
+Ostáva nám už len poriešiť prípady, keď $k=1$, alebo $k=2$.
+
+Pokiaľ $k=1$, tak ľahko vidíme, že vyhovuje iba jedna $n$-tica prvočísel
+($p_1=3$ a $p_2=2$).
+
+Pokiaľ $k=2$ vyhovuje tiež iba jedna $n$-tica ($p_1=7$, $p_2=5$,
+$p_3=3$). Ľahko totiž odvodíme, že musí platiť $p_1=p_2+2=p_3+4$.
+Rozmyslite si, že práve jedno z týchto troch čísel musí byť deliteľné
+tromi.
+
+Dokázali sme, že hodnota $p_1$ nemôže byť väčšia ako $k^2-k$. Tým pádom
+je hodnota najväčšieho z prvočísel v danej $n$-tici ohraničená zhora, z
+čoho už jasne vyplýva, že nemôže existovať nekonečne veľa takých
+$n$-tíc.
+",9
+eefae0ed858b9d5c,kms,"Mišovia ši objednali pečené kuracie štehná š ryžou a kompótom. Tie ša
+však už minuli, tak ši Mišovia objednali pomaly pečené bravčové karé. To
+ša pečie tak pomaly, až ši Mišovia začali krátiť čaš hraním ša šo
+šervítkami.
+
+Šervítok je $n^2$, kde $n > 1$ je prirodzené číšlo, a každá má tvar
+rovnoštranného trojuholníka šo štranou dĺžky $1$. Navyše má každá z nich
+jednu z $k$ farieb, kde $1 < k < n^2$. Z každej farby je rovnako veľa
+šervítok. Mišovia z nich poškladali veľký rovnoštranný trojuholník šo
+štranou dĺžky $n$. Napr. pre $n=4$ by veľký trojuholník vyzeral takto:
+Keď boli hotoví, zištili, že nech ho ľubovoľne otočia (v rovine, kde
+trojuholník leží, teda bez zrkadlového preklopenia), pričom bude
+pokrývať tú ištú oblašť ako pôvodne, zafarbenie trojuholníka bude
+vyzerať štále rovnako. Určte všetky ušporiadané dvojice číšel
+$(n,\  k)$, pre ktoré ša taký trojuholník poškladať dá.
+","Zo zadania vieme, že počet servítok $s$ je rovnaký pre každú z $k$
+farieb, teda musí platiť, že $k \cdot s = n^2$, teda $k \mid n^2$.
+
+Všetky rotácie pravidelného trojuholníka v rovine (okolo ťažiska) sú
+práve tri otočenia $\rho$: o $120^\circ$, $240^\circ$ a $360^\circ = id$
+čo sa nazýva aj identita, lebo nám to transformuje náš trojuholník do
+pôvodného stavu.
+
+Poďme konštruovať náš trojuholník nasledovne. Keďže vieme, že
+trojuholník má vyzerať po každom otočení rovnako, tak vlastne môžeme
+poskladať jednu jeho tretinu, ktorou otočením o naše rotácie $\rho$
+dostaneme celý trojuholník, viď obrázok. Lenže máme dva typy
+trojuholníkov. Také ktoré majú $3t$ častí, s tými nemáme problém, a
+také, ktoré majú $3t +1$ častí.
+
+Lebo keď si rozdelíme všetky prirodzené čísla $n$ podľa zvyškov po
+delení $3$, teda zvyšky $0$, $1$ a $2$, tak dostaneme, že $n^2$ môže mať
+zvyšky len $0$, $1$: $$\begin{align*}
+        0^2 = 0, && 1^2 = 1, && 2^2 = 4 \equiv 1.
+    
+\end{align*}$$
+
+Ak $n^2$ má zvyšok $1$ po delení $3$, vyfarbime $x$ políčok (pre nejaké
+$x$) v jednej tretine jednou vybranou farbou, potom v ostatných
+tretinách musíme tiež vyfarbiť prislúchajúce políčka rovnako, a teda
+celkovo vyfarbených políčok bude $3x$. Stredové políčko musí tiež byť
+zafarbené nejakou farbou menom $\varphi$. Stredové políčko je jediné,
+ktoré sa zobrazí samo na seba, takže počet servítok farby $\varphi$ bude
+$3m+1$ (pre $m \in \mathbb{N}$), čo nie je deliteľné $3$, takže sa to
+nemôže rovnať $3x$. Máme dve farby s rôznymi počtami políčok, čo nemôže
+nastať, takže $n$ musí byť deliteľné $3$.
+
+V našej počiatočnej tretine máme teraz presne $\frac{n^2}{3}$ častí.
+Keďže počet servítok $s$ je rovnaký v celom trojuholníku tak aj v jednej
+tretine, takže $k\mid\frac{n^2}{3}$.
+
+Naopak ak sú splnené podmienky $3$ delí $n$, $n, k > 1$ a $k$ delí
+$\frac{n^2}{3}$, tak vieme trojuholník zafarbiť tak, aby vyzeral rovnako
+po každej rotácii. Spravíme to tak, že počiatočnú tretinu zafarbíme
+ľubovoľne tak, že v nej bude rovnako veľa políčok z každej farby a
+zvyšné dve tretiny zafarbíme príslušne podľa rotácií prvej tretiny. Teda
+takéto trojuholníky vieme vytvoriť pre také usporiadané dvojice $(n,k)$,
+kde platí, že $3\mid n$, $n, k > 1$ a $k\mid\frac{n^2}{3}$. Príklady:
+$(3,3)$, $(6,3)$, $(6,4)$, $(6,6)$, $(6,12)$. To sa dá čarovne zapísať
+ako nižšie uvedená množina, no neľakajte sa jej, je to len iný zápis.
+
+$$\left\{(n,k);\ n,k \in \mathbb{N},\ 3 \mid n ,\ n, k > 1,\ k\mid\frac{n^2}{3} \right\}$$
+",6
+4b092da82416b4cf,kms,"Prečo sa chce kružnica vpísaná hrať s trojuholníkom? Lebo je do neho.
+
+V trojuholníku $ABC$ označme $D$ priesečník osi uhla $BAC$ a strany
+$BC$. Os úsečky $AD$ pretína osi uhlov $CBA$ a $ACB$ postupne v bodoch
+$K$ a $L$. Dokážte, že stred vpísanej kružnice trojuholníka $ABC$ je
+priesečníkom výšok trojuholníka $KLD$.
+","Jeden z kľúčových krokov k vyriešeniu úlohy bolo poradiť si s bodmi $K$
+a $L$. V tom nám mohlo pomôcť známe tvrdenie, že v trojuholníku sa os
+strany a os uhla pri vrchole oproti tejto strane pretínajú na kružnici
+opísanej tomuto trojuholníku v tzv. *Švrčkovom bode*. Z toho vyplýva, že
+$K$ leží na kružnici opísanej trojuholníku $ABD$ a $L$ zas na kružnici
+opísanej trojuholníku $ACD$.
+
+Označme si $I$ stred vpísanej kružnice trojuholníka $ABC$, ktorý, ako je
+známe, je priesečníkom osí vnútorných uhlov trojuholníka. Všimnime si,
+že priamka $DI$ je kolmá na $KL$ zo zadania, keďže priamka $KL$ je os
+úsečky $AD$. Následne nám stačí ukázať, že priamka $LI$ je kolmá na
+$DK$, pretože priamky $LI$ a $DI$ budú potom výšky v trojuholníku $KLD$
+postupne z vrcholov $L$ a $D$, pričom $I$ bude ich priesečník, čo je
+presne to, čo chceme dokázať.
+
+Tak poďme dokázať, že $LI$ je kolmá na $DK$, čo vieme dosiahnuť
+prenesením zopár uhlov. Konkrétne dokážeme, že uhol v bode $M$, ktorý si
+zadefinujme ako priesečník priamok $LC$ a $KD$, je pravý. Uhly v
+trojuholníku si označíme klasicky $\alpha,\beta,\gamma$. Najprv
+využijeme už spomenutý fakt, že $KABD$ je tetivový štvoruholník, teda
+platí, že $|\sphericalangle{AKD}|=180^\circ-\beta$. Analogicky aj
+$|\sphericalangle{ALD}|=180^\circ-\gamma$. Ďalej si všimnime, že
+trojuholníky $KLD$ a $KLA$ sú osovo súmerné podľa priamky $KL$. Teda
+priamka $KL$ je aj osou uhlov $AKD$ a $ALD$. Teraz môžeme smelo určiť
+hodnotu
+$$|\sphericalangle{KAL}|=180^\circ-|\sphericalangle{ALK}|-|\sphericalangle{AKL}|=180^\circ-\frac{1}{2}\cdot(|\sphericalangle{AKD|}+|\sphericalangle{ALD}|)=\frac{\beta+\gamma}{2}.$$
+Z osovej súmernosti vieme aj, že
+$|\sphericalangle{KAL}|=|\sphericalangle{KDL}|$. Ďalej z obvodových
+uhlov si všimnime, že
+$$|\sphericalangle{DAC}|=|\sphericalangle{DLC}|=\frac{\alpha}{2}.$$ Nič
+nám teraz nebráni vyrátať
+$$|\sphericalangle{LMD}|=180^\circ-|\sphericalangle{DLM}|-|\sphericalangle{LDM}|=180^\circ-\frac{\alpha+\beta+\gamma}{2}=90^\circ,$$
+čiže priamka $LI$ je kolmá na $DK$, čo je ako už bolo vyššie popísané
+všetko potrebné na vyriešenie tejto úlohy.
+",8
+d344a24b3bcca132,kms,"Po krásnej svadbe nasleduje návšteva katastrálneho portálu (KaPor), aby
+novomanželia úspešne spojili svoje majetky. Tarzan má v rovine pole v
+tvare rovnostranného trojuholníka s obsahom $S_1$ a Jane pole v tvare
+rovnostranného trojuholníka s obsahom $S_2$. Skonštruujte pomocou
+pravítka a kružidla[^1] pole v tvare rovnostranného trojuholníka,
+ktorého obsah bude $S_1 + S_2$.
+
+[^1]: Ak ste sa s podobným typom úloh ešte nestretli, môže vám pomôcť
+    krátky text na stránke:
+    <https://kms.sk/ako_riesit/konstrukcne_ulohy/>.
+","Na narysovanie rovnostranného trojuholníka by sme ideálne chceli poznať
+dĺžku jeho strany. My však máme informáciu o jeho obsahu. Na začiatok sa
+teda pokúsime vyjadriť podmienku zo zadania pomocou strany trojuholníka.
+
+Majme teda rovnostranný trojuholník so stranou $a$. Jeho obsah bude
+$\frac{1}{2} a \cdot v$, kde $v$ je výška tohto trojuholníka. Keďže je
+však rovnostranný, jeho výška je zároveň ťažnicou. Dostávame teda
+pravouhlý trojuholník s odvesnami $\frac{1}{2}a,\, v$ a preponou $a$.
+Potom podľa Pytagorovej vety
+$$v^2 = a^2 - \frac{1}{4}a^2 = \frac{3}{4}a^2,$$
+$$v = \frac{\sqrt{3}}{2}a.$$ Obsah teraz už ľahko vyjadríme ako
+$$S = \frac{\sqrt{3}}{4}a^2.$$
+
+Teraz prepíšeme podmienku zo zadania pomocou strán. Strany trojuholníkov
+s obsahom $S_1$ a $S_2$ budú postupne $a_1$ a $a_2$, stranu
+trojuholníka, ktorý chceme skonštruovať označíme $a_3$. Podmienka teda
+hovorí
+$$\frac{\sqrt{3}}{4}a_1^2 + \frac{\sqrt{3}}{4}a_2^2 = \frac{\sqrt{3}}{4}a_3^2,$$
+$$a_1^2 + a_2^2 = a_3^2.$$ Pri úprave sme celú rovnicu vydelili číslom
+$\frac{\sqrt{3}}{4}$. Strany trojuholníkov teda spĺňajú podmienku
+Pytagorovej vety. Na narysovanie strany $a_3$ nám stačí skonštruovať
+pravouhlý trojuholník s odvesnami $a_1,\, a_2$. Pustime sa do toho.
+
+Na začiatok si pripomeňme veci, ktoré vieme robiť, a ktoré sa nám zídu.
+Samozrejme vieme rysovať kružnice, priamkou spojiť dva body, ale aj
+prenášať dĺžky úsečiek a rysovať kolmice cez nejaký bod.
+
+Ako prvé si teda spravme priamku $p$ a prenesme na ňu dĺžku $a_1$ -
+úsečka $AB$. Teraz spravíme kolmicu na $p$ cez bod $B$ (priamka $q$). Na
+ňu prenesieme dĺžku $a_2$ (úsečka $BC$) a nový bod $C$ spojíme s bodom
+$A$. Teraz sme dostali dĺžku $a_3$ (úsečka $AC$). Na nájdenie zvyšného
+bodu trojuholníka so stranou $a_3$ spravíme kružnice z krajných bodov
+úsečky $AC$ s polomerom $a_3$. Ich priesečník (bod $D$) bude zvyšným
+bodom hľadaného trojuholníka s obsahom $S_1+S_2$. A máme hotovo.
+",3
+fd75e2aba7cf3cd6,kms,"Keď sa Krtkovi šťastne podarilo otvoriť okno, celý natešený vyskočil
+von, nehľadiac kam padá. Dopadne do piesku, kde kúzelník Merlin ráta
+zapeklitý príklad a celý mu ho rozpráši. Merlina to úplne napajedí, ale
+Krtko sa hneď ponúkne, že rovnice zaňho vyrieši.
+
+V obore kladných celých čísel vyriešte sústavu rovníc $$\begin{align*}
+    2x^2 &= 4y^2 + 3z^2 + 2,\\
+    13x &= 4y + 3z + 29.
+\end{align*}$$
+","Pozrime sa najskôr na paritu. V prvej rovnici sú všetky členy okrem
+$3z^2$ párne, takže aby táto rovnica platila, musí byť párne aj $3z^2$,
+a teda aj $z$. Pravá strana druhej rovnice potom bude nepárna, a preto
+$13x$, a teda aj $x$, musí byť nepárne.
+
+Mohli by sme skúmať aj deliteľnosť ďalšími číslami, no výhodnejšie môže
+byť pokúsiť sa ohraničiť hodnoty, ktoré môžu premenné nadobúdať. V prvej
+rovnici vieme s využitím $y^2,z^2>0$ ohraničiť pravú stranu dvomi
+spôsobmi $$\begin{align*}
+2x^2&=4y^2+3z^2+2>2y^2,\\
+2x^2&=4y^2+3z^2+2>2z^2.
+\end{align*}$$ Keďže $x,y,z$ sú kladné, tak z toho vyplýva $x>y$ a
+$x>z$. Tieto ohraničenia môžeme využiť v druhej rovnici:
+$$4y+3z+29=13x=6x+4x+3x>6x+4y+3z.$$ Odčítaním $4y+3z$ od oboch strán
+dostaneme $$6x<29,$$ čiže $x<\frac{29}6<5$. Zároveň $x>y\ge1$. Vieme
+teda, že $1<x<5$ a zároveň $x$ je nepárne, a tak $x$ môže byť len $3$.
+Nakoľko $z$ je párne a $z<x$, jediná možnosť pre $z$ je $z=2$. Potom z
+druhej rovnice v zadaní dostaneme $y=1$. Sústava rovníc zo zadania tak
+má nanajvýš jedno riešenie a zostáva nám už len overiť, že
+$(x,y,z)=(3,1,2)$ naozaj vyhovuje. To overíme jednoducho dosadením do
+oboch rovníc -- v prvej nám vyjdú obe strany rovné $18$ a v druhej $39$,
+čiže obe rovnice platia. Jediným riešením sústavy rovníc zo zadania tak
+je $(x,y,z)=(3,1,2)$.
+",7
+033540bd2468eded,kms,"Keďže Krtko zdolal skúšku ľavou zadnou, tak mu kráľ potajme hodil do
+vrecka príklad, ktorým sa už dlho trápil. Keď sa Krtko ospravedlnil, že
+sa pôjde prejsť do záhrady, rukou vo vrecku našmátral dáky papierik.
+Avšak nebol to žiaden zamilovaný odkaz, ale matematický príklad!
+
+Máme danú priamku $p$ a úsečku $AB$, ktoré sa pretínajú v bode $P$
+rôznom od bodov $A,B$. Navyše vzdialenosť bodu $A$ od priamky $p$ je
+dvakrát väčšia ako vzdialenosť bodu $B$ od priamky $p$. Zostrojte[^1] na
+priamke $p$ body $X$ a $Y$ tak, aby bol trojuholník $AXY$ rovnoramenný
+so základňou $AY$ a zároveň aby priamka $BX$ bola osou uhla $AXY$.
+
+[^1]: Ak ste sa s podobným typom úloh ešte nestretli, môže vám pomôcť
+    krátky text na stránke:
+    <https://kms.sk/ako_riesit/konstrukcne_ulohy/>.
+","Chceme zostrojiť rovnoramenný trojuholník, o ktorom vieme, že os uhla
+$AXY$ prechádza cez bod $B$. Vieme, že množina bodov rovnako vzdialených
+od dvoch rôznych bodov je priamka, konkrétne os úsečky. Ďalej si môžeme
+všimnúť, že v rovnoramennom trojuholníku je táto os základne totožná s
+osou uhla oproti základni.
+
+Konštrukcia: Spravíme kružnicu so stredom v bode $B$ a s polomerom
+$|AB|$. Tam, kde sa nám pretne s priamkou $p$, dostaneme dva body,
+označme ich $Y_1$ a $Y_2$. Tieto teraz s spojíme s bodom $A$ a s bodom
+$B$. Dostávame dva rovnoramenné trojuholníky $ABY_1$ a $ABY_2$. Nech
+BUNV $Y=Y_1$ (pre druhý z bodov je pokračovanie analogické).
+
+Teraz zostrojme os uhla $ABY$. Táto os nám kolmo pretne základňu $AY$ v
+jej strede, označme $S$, a pretne sa aj s priamkou $p$, označme $X$.
+Môžeme si skontrolovať, že to naozaj je ten náš hľadaný bod $X$. Keď
+spojíme $A$ s $X$, dostávame dva trojuholníky, $AXS$ a $XYS$, ktoré majú
+spoločnú jednu stranu $XS$, rovnaký (pravý) uhol pri vrchole $S$ a
+veľkosť úsečiek $AS$ a $SY$ je rovnaká, teda tieto trojuholníky sú
+zhodné. Nakoniec trojuholník $AXY$ je rovnoramenný a priamka $BX$ je
+osou strany $AY$, a teda aj osou uhla $AXY$.
+",3
+f8740262a5b7a174,kms,"Krtko sa nachádzal v konzervatívnom poli, v ktorom sa prechádzal po
+svojich obľúbených chodníčkoch. Po chvíli zastal a uvedomil si, že
+práca, ktorú pole vykonalo, je nulová. Po bližšej analýze svojej trasy
+zistil, že je to preto, že išiel po obvode kosoštvorca.
+
+Majme trojuholník $ABC$. Jeho vpísaná kružnica so stredom $I$ sa dotýka
+strán $AB$ a $AC$ postupne v bodoch $E$, $F$. Označme $M$ a $N$ postupne
+ťažiská kružníc opísaných trojuholníkom $AIC$ a $AIB$. Veďme z bodu $M$
+dotyčnice ku kružnici vpísanej trojuholníka $ABC$, ktoré sa jej dotýkajú
+v bodoch $K$, $G$. Analogicky veďme aj z bodu $N$, ktoré sa dotýkajú zas
+v bodoch $J$, $L$. Priamky $KG$ a $JL$ sa pretínajú v bode $X$. Dokážte,
+že $EFXI$ je kosoštvorec.
+","Na začiatok si uvedomme, že $I$ ako stred kružnice vpísanej trojuholníku
+$ABC$ leží na osi úsečky $EF$. Ak si jeho obraz v osovej súmernosti
+podľa $EF$ označíme ako $I'$, bude platiť, že $II'$ a $EF$ sú na seba
+kolmé a polia sa, teda tvoria kosoštvorec. Stačí teda dokázať, že body
+$I$ a $X$ sú osovo súmerné podľa priamky $EF$.
+
+Ďalej si všimneme, že priamka $MN$ je z definície stredov opísaných
+kružníc osou úsečky $AI$. Označme si teda stred $AI$ ako $S$. Následne
+označme $U$ stred $EF$. Nahliadneme, že body $A$,$S$,$I'$, $U$ a $I$
+ležia na priamke $AI$. Následne je rovnako ľahko vidieť, že $EAFI$ je
+tetivový deltoid.
+
+Bystré oko geometra už tuší, že nám stačí len dokázať, že priamka $MN$
+je polárou[^1] bodu $I'$ vzhľadom ku kružnici vpísanej, z čoho už z *La
+Hire Theorem* vyplýva, že body $I'$ a $X$ sú jeden a ten istý bod a tým
+vyhráme. To vyplýva z toho, že priamka, na ktorej ležia body dotyku
+dotyčníc vedených z jedného bodu, je polárou tohto bodu. Dá sa to
+nahliadnuť tým, že kolmý priemet bodu na túto priamku je práve jeho
+obraz v kružnicovej inverzii. To je presne prípad priamky $KG$ a bodu
+$M$ a $LJ$ a $N$.
+
+Využijeme teraz fakt, že pre pól $P$ a jeho priemet $P'$ na jeho poláru
+platí, že $$|OP|\cdot|OP'|=r^2,$$ kde $O$ a $r$ sú stred a polomer
+kružnice, vzhľadom ku ktorej je polára určená. V našom prípade $P$, $P'$
+a $O$ sú postupne $I'$, $S$ a $I$. Teda chceme dokázať, že
+$$|I'I|\cdot|IS|=r^2=|IE|^2=|IF|^2.$$ To sa podobá na nejakú mocnosť
+bodu $I$ k vhodnej kružnici, pre ktorú platí, že jedna z priamok $IE$
+alebo $IF$ je k nej dotyčnicou. Teraz už len nájsť takúto kružnicu.
+Ľahko si z tetivovosti $AEIF$ vieme napísať nasledovnú rovnosť uhlov
+$$|\sphericalangle{UAE}|=|\sphericalangle{IAF}|=|\sphericalangle{IEF}|,$$
+čo znamená, že podľa vety o úsekovom uhle je priamka $IE$ dotyčnicou ku
+kružnici opísanej trojuholníku $AUE$. Mocnosť bodu $I$ k tejto kružnici
+teda je
+$$|IE|^2=|IA|\cdot|IU|=\frac{1}{2}\cdot|II'|\cdot2\cdot|IS|=|I'I|\cdot|IS|,$$
+čo je presne to, čo sme chceli teda dokázať. Teda os $AI$ je polárou
+bodu $I'$, teda body $X$ a $I'$ sú ten istý bod a z toho vieme, že
+$EXFI$ je kosoštvorec, čím je dôkaz hotový.
+
+[^1]: Ak si o polárach v živote nepočul, môžeš sa o nich dočítať
+    napríklad v nasledovnom materiáli
+    <https://prase.cz/library/iKS-DvoupomeraPolaryPT/iKS-DvoupomeraPolaryPT.pdf>
+",10
+6362d26c2472903b,kms,"Maťko si predsavzal, že spraví niečo pre svoje zdravie a prejde chôdzou
+$30$ kilometrov. Ba čo viac, nielen že ich prejde, on ich rovno zabehne!
+Aby však trafil do cieľa a nešiel zbytočne okľukou, bude musieť bežať
+rovno.
+
+Je daný trojuholník $ABC$, v ktorom $|AB|\neq |AC|$. Stred jeho vpísanej
+kružnice označme $I$. Nech $D$ je stred strany $BC$. Dotyčnica z bodu
+$D$ ku vpísanej kružnici (rôzna od strany $BC$) sa jej dotýka v bode
+$E$. Dokážte, že $DI$ je rovnobežné s $AE$.
+","Označme $V$ bod dotyku $BC$ a vpísanej kružnice. Nech $V'$ je druhý
+priesečník priamky $VI$ a vpísanej kružnice, takže $VV'$ je jej priemer.
+Ďalej označme bod dotyku $BC$ a $A$-pripísanej kružnice $P$.
+($A$-pripísaná kružnica je taká, ktorá sa dotýka $BC$ z vonkajšej strany
+a priamok $AB$ a $AC$.)
+
+Ukážeme, že $A,$ $V'$ a $P$ ležia na jednej priamke.
+
+Veďme rovnobežku s $BC$ cez bod $V'$ a označme priesečníky s
+$\triangle ABC$ postupne $B'$ a $C'$. Platí, že
+$\triangle ABC \simeq \triangle AB'C'$. Všimnime si, že úsečka $BC$ sa
+dotýka vpísanej kružnice v bode $V'$, lebo bod $V'$ je na vpísanej
+kružnici, a teda vpísaná kružnica $\triangle ABC$ je zároveň pripísanou
+kružnicou $\triangle AB'C'$. Vďaka tomu sa $\triangle AB'C'$ zobrazí v
+rovnoľahlosti so stredom v $A$ na $\triangle ABC$ a vpísaná kružnica na
+$A$-pripísanú. Bod $V'$ sa takto zobrazí na $P$. Z toho plynie, že body
+$A,V'$ a $P$ ležia na jednej priamke.
+
+Nech $E'$ je druhý priesečník priamky $AV'$ s vpísanou kružnicou. Naším
+cieľom teraz bude ukázať, že $E=E'$.
+
+O bodoch dotyku pripísanej a vpísanej kružnice platí známe tvrdenie, a
+to že $|BV|= |PC|$, z čoho dostávame, že aj $|VD|=|DP|$, lebo $D$ je
+stred strany $BC$.
+
+Ak toto tvrdenie nepoznáte, tak si ho môžete skúsiť dokázať: Nakreslite
+si všetky body dotyku vpísanej a pripísanej kružnice a skúste vyjadriť
+$|BV|$ a $|PC|$ pomocou dĺžok strán trojuholníka $ABC$. Obe sú rovné
+$(|AB|+|BC|-|AC|)/2$. Využite, že ak z ľubovoľného bodu spustíme dve
+dotyčnice ku kružnici, tak vzdialenosť k dvom bodom dotyku je rovnaká.
+
+Keďže $VV'$ je priemer vpísanej kružnice, na ktorej leží aj $E'$, tak
+uhol $V'E'V$ je pravý (Tálesova veta). Z toho máme, že $VE'P$ musí byť
+tiež pravý, teda $\triangle V'EP$ je pravouhlý. Platí, že v pravouhlom
+trojuholníku je stred opísanej kružnice zároveň stredom prepony. Preto
+je $D$ stred opísanej kružnice $\triangle VE'D$ a z toho
+$|VD|=|DE'|=|DP|$. To znamená, že $V$ a $E'$ sú dva body ležiace na
+vpísanej kružnici, ktoré sú rovnako vzdialené od bodu $D$ a takéto body
+môžu byť len dva. Keďže $VD$ je dotyčnica vpísanej kružnice, tak aj
+$DE'$ musí byť dotyčnica. Z toho už vyplýva rovnosť $E=E'$.
+
+Posledným krokom je ukázať rovnobežnosť $DI$ a $AE$. Už sme ukázali, že
+body $A,V',E,P$ ležia na jednej priamke a tiež, že $D$ je stred $VP$.
+Ďalej vieme, že $I$ je stredom $VV'$. Preto je $DI$ stredná priečka
+$\triangle VPV'$, čiže $DI$ je rovnobežná z $AE$. Tým je dôkaz hotový.
+",10
+bb74d1cfab1a2f28,kms,"Maťko po šokujúcich zisteniach Kiky a Joža o rovnobežiacich Dánoch a
+Belgičanoch, začal svoj výskum na Nemcoch. Vo štvoruholníku $ABCD$,
+ktorému vieme vpísať kružnicu, platí navyše, že $|AB| = |CD|$,
+$|BC| < |AD|$ a strany $BC$ a $AD$ sú rovnobežné. Dokážte, že os uhla
+$BCD$ rozpoľuje plochu štvoruholníka $ABCD$.
+","Štvoruholník zo zadania si nakreslíme, a dostaneme nasledujúci obrázok:
+
+Aby sme naň mohli lepšie odkazovať, označme si stred vpísanej kružnice
+$S$, ďalej priesečník osi uhla $BCD$ a úsečky $DA$ označíme $E$, a
+vyznačme ešte os uhla $ABC$ a jej priesečník s úsečkou $DA$ označme $F$.
+
+Chceme ukázať, že trojuholník $DEC$ (zelená) a štvoruholník $EABC$
+(modrá) majú rovnaký obsah.
+
+Lichobežník, ktorý máme zo zadania, je rovnostranný. Preto uhly, pri
+vrcholoch $A$ a $B$ sú rovnaké ako uhly pri vrcholoch $D$ a $C$.
+Lichobežník je teda osovo symetrický. Preto aj os uhla $ABC$ ho delí
+rovnako ako os $BCD$. Keď máme nakreslené obe tieto osi a vieme že
+lichobežník je osovo symetrický, je ľahké všimnúť si, že štvoruholníky
+$EABS$ (tmavomodrá) a $DFSC$ (tmavozelená) majú rovnaký obsah. Keď sa
+teraz pozrieme na naše pôvodné oblasti, ktorých rovnosť chceme dokázať,
+a odmyslíme si tieto dva štvoruholníky, ostáva nám ukázať rovnosť
+obsahov trojuholníkov $FES$ (bledomodrá) a $SBC$ (bledozelená).
+
+Bod $S$ je v strede medzi rovnobežkami $BC$ a $AD$, a teda úsečky $CE$ a
+$BF$ delí na polovicu. Okrem toho, uhly $CSB$ a $ESF$ sú vrcholové, a
+teda majú rovnakú veľkosť. Z toho už vidíme, že naše trojuholníky sú
+zhodné, a teda majú rovnaký obsah.
+",3
+6546bcddb3228888,kms,"Vďaka Konštrukčnému Mirovmu Semináru mesto ustálo všetky útoky Kazisveta
+Matúša Strašného a jeho Katapultu Monštruóznej Sily. O chvíľu obom
+stranám došlo, že priamym útokom nikto túto vojnu nevyhrá a tak Matúš
+zahájil blokádu mesta. Aby sa kráľovná Kika vyhla hladomoru, povolala
+svoju najmúdrejšiu komornú Magdu a dala jej za úlohu nájsť všetky zásoby
+jedla. Zásoby sú však poschovávané po celom meste podľa veľmi
+sofistikovaného vzorca tak, aby ich Ákos nenašiel a nezjedol ich. Magda
+vďaka svojmu umu hravo našla všetky zásoby jedla v meste. Nájdete ich aj
+vy?
+
+Nájdite všetky trojice kladných celých čísel $(a,b,n)$, pre ktoré platí:
+$$a!+b!=2^n$$
+","Máme nájsť všetky trojice kladných celých čísel$(a,b,n)$, čiže
+$a,b,n \in \mathbb{N}$, že $a! + b! = 2^n$. Keďže vidíme, že tam máme
+dva faktoriály a $2^n$ tak sa pokúsime nájsť tieto trojice pomocou
+prvočíselného rozkladu.
+
+Faktoriál je také číslo ktoré vieme zapísať ako
+$n! = n \cdot (n-1) \cdot (n-2) \cdot \cdots \cdot 3 \cdot 2 \cdot 1$,
+čo už samo o sebe vyzerá podobne ako prvočíselný rozklad. Číslo $2^n$
+zas vieme napísať ako $2^n = 2\cdot2\cdot2\cdot \cdots \cdot2$, čo je
+prvočíselný rozklad čísla $2^n$.
+
+Zoberme si dva veľké faktoriály, také že $a,b \geq 3$. Tie vieme napísať
+do rovnice ako $a!+b!=1\cdot2\cdot3\cdot o + 1\cdot2\cdot3\cdot s = 2^n$
+kde $o$ a $s$ sú zvyšné činitele faktoriálu. Z toho vieme vyňať $3$ a
+dostaneme $3\cdot(1\cdot2\cdot o + 1\cdot2\cdot s) = 2^n$, z čoho ale
+vyplýva, že číslo $2^n$ by malo byť deliteľné tromi. To ale nie je
+pravda, lebo v prvočíselnom rozklade má len dvojky. Takže nám z tohto
+vyplýva, že $a$,$b$ nemôžu byť naraz obidve väčšie ako $2$.
+
+Teraz sa pozrime na prípad, že BUNV [^1] $a \geq 4$, $b < 3$. Pre
+$b = 2$ dostaneme rovnicu $a! + 2! = 2^n$, túto môžeme predeliť $2$.
+Dostaneme $\frac{a!}{2} + 1 = 2^{n-1}$. O $\frac{a!}{2}$ vieme, že je
+párne, keďže obsahuje ešte minimálne $4$-ku v rozklade na súčin. Z toho
+vyplýva, že $\frac{a!}{2}+1$ je nepárne, a teda sa nemôže rovnať
+$2^{n-1}$ ($2^{n-1}$ je nepárne len keď $n = 1$, čo nemá žiadne
+riešenie, lebo súčet dvoch prirodzených čísel je minimálne $2$). Pre
+$b = 1$ tiež nesedí parita, dokonca ak je jedno z čísel $a$, $b$ rovné
+$1$, tak kvôli parite musí byť aj to druhé $1$.
+
+Takže sme zistili, že obe $a,b \leq 3$, ale nemôžu byť obe naraz rovné
+$3$, a že keď sa len jedno rovná $1$ tak to nemá riešenie. Z toho máme
+$4$ možné kombinácie $a$ a $b$, a to $(1,1)$, $(2,2)$, $(2,3)$ a
+$(3,2)$. Tieto vieme dosadiť a dostaneme z toho trojice $(1,1,1)$,
+$(2,2,2)$, $(2,3,3)$ a $(3,2,3)$.
+
+Našli sme štyri trojice $(1,1,1)$, $(2,2,2)$, $(2,3,3)$ a $(3,2,3)$,
+ktoré spĺňajú našu rovnosť a dokázali sme, že žiadne iné neexistujú.
+
+[^1]: Bez ujmy na všeobecnosti si môžeme vybrať, ktoré z čísel $a$, $b$
+    je menšie. Ak by to bolo naopak, tak len vymeníme značenie, pretože
+    $a$, $b$ hrajú rovnakú úlohu v našej rovnici (rovnica je symetrická
+    vzhľadom na výmenu $a$, $b$).
+",3
+b71e2596c8e4e318,kms,"V trojsten stánku na Náboji sa vyzbieral nepárny počet mincí na pokrytie
+výrobných nákladov. Keďže decká na Náboji počítajú, tak Slavo a Miro
+nemajú čo robiť. Vysypali teda mince na stôl, pričom niektoré zostali
+otočené hlavou hore a iné znakom hore. V každom ťahu otočili toľko
+mincí, koľký je to práve ťah, teda v prvom jednu mincu, v druhom dve
+atď. Ukážte, že je možné otáčať mince tak, aby v jednom momente boli
+mince otočené tou istou stranou, bez ohľadu na to, ako boli pootáčané na
+začiatku.
+","### Ako prísť na riešenie
+
+Pozrime sa na mince na stole. Pre jednoduchšie vyjadrovanie sa si
+označme mince otočené hlavou nahor písmenom $H$, mince otočené znakom
+nahor písmenom $Z$. V $k$-tom ťahu zmeníme písmenko $k$ minciam, naším
+cieľom je dosiahnuť stav, že majú všetky mince rovnaké písmeno.
+
+Všimnime si, že nezáleží na poradí mincí na stole, zaujímavé sú len
+počty $H$ a $Z$. Povedzme, že je viac mincí otočených hlavou hore (to
+vieme povedať bez ujmy na všeobecnosti -- ak by neboli, vymeňme si
+označenia $H$ a $Z$). Pokúsme sa docieliť, nech sú na konci všetky mince
+otočené hlavou hore. Ak máme spolu $2n+1$ mincí, stačí nám otočiť
+nanajvýš $n$ mincí.
+
+Skúsme mince otáčať úplne priamočiaro. V prvom kole otočme $1$ mincu zo
+$Z$ na $H$, v druhom kole otočme $2$ mince zo $Z$ na $H$, $\dots$ Keď
+budeme takto pokračovať, dôjdeme do stavu, keď už v $k$-tom kole budeme
+mať menej ako $k$ mincí otočených znakom hore. V tomto momente
+pokračovaním v priamočiarom otáčaní sa nám počet znakov môže dokonca
+zvyšovať. Čo teraz? Treba to nejak opraviť.
+
+Všimnime si, že ak sa nám to v jednom ťahu pri otáčaní $k$ mincí pokazí,
+tak v nasledujúcom ťahu pri otáčaní $k+1$ mincí môžeme tých $k$ mincí
+otočených v predchádzajúcom kole dostať do pôvodného stavu a okrem nich
+otočiť jednu mincu.
+
+Ak toto spravíme, pomocou dvoch po sebe idúcich kôl otočení vieme otočiť
+práve jednu (ľubovoľnú) mincu. Tým pádom, ak sme v $k$-tom kole a ostalo
+nám $l$ mincí $Z$ na stole ($l<k$), pomocou ťahov $k$ a $k+1$ otočíme
+jednu z daných mincí, pomocou ťahov $k+2$ a $k+3$ otočíme druhú z daných
+mincí, $\dots$ poslednú ($l$-tú) mincu otočíme v ťahoch $k+2(l-1)$ a
+$k+2l-1$. Už to takmer máme hotové. K úplnosti riešenia treba ešte
+ukázať, že sa nám nestane, že by sme v nejakom ťahu mali otočiť viac
+mincí ako je na stole. To by nastalo, keby $k+2l-1>2n+1$. Ako na to?
+Číslo $l$ ide odhadnúť pomocou $k$ vďaka $l<k$, taktiež $k$ ide odhadnúť
+pomocou $n$ ako $k\sim \binom{n}{2}$ (rozmyslite si), avšak takýmto
+výpočtom sa vieme vyhnúť. Celkovo máme $2n+1$ otočení, potrebujeme
+otočiť nanajvýš $n$ mincí. Ak budeme už od začiatku párovať po sebe
+idúce kolá otočení, stačí nám vykonať nanajvýš $n$ párov otočení, t.j.
+vieme po nanajvýš $2n$ kolách dosiahnuť rovnaké symboly.
+
+### Stručné riešenie
+
+Vzorové riešenie napísané vyššie obsahuje intuíciu, ako prísť na
+riešenie. To vo vašom riešení písať nemusíte, na zisk plného počtu bodov
+stačí iba dôkaz, prečo to tak je. Osnova stručného riešenia môže vyzerať
+nasledovne:
+
+Popárujme si kolá otáčania mincí, v pároch majme spolu kolá $2k-1$ a
+$2k$. Ak v tých kolách otočíme mince nasledovne ($\dots$), tak po danom
+páre kôl otočení vieme dosiahnuť otočenú práve jednu (ľubovoľnú) mincu.
+Keďže celkovo nám stačí otočiť nanajvýš $n$ mincí, lebo ($\dots$),
+otočenie všetkých mincí na rovnakú stranu vieme docieliť po nanajvýš $n$
+pároch otočení, t.j. v nanajvýš $2n$-tom kole. Teda nenastane prípad, že
+by sme mali otočiť viac mincí, ako je na stole.
+",2
+c0ab9613ba5041d0,kms,"Keď sa vedúci KMSka konečne vrátili na chatu, už sa im nechcelo variť.
+Namiesto toho si zahrali hru OhNoStroje. Lukáš a Teri si občas čítajú
+myšlienky, čím v hre OhNoStroje občasne vynikajú. V tento večer sa
+rozhodli staviť na svoje šťastie a vyzvali Jožka na súboj. Balíček
+kariet hry OhNoStroje pozostáva z $50$ kariet. Každá karta je jednej z
+piatich farieb (červená, žltá, zelená, modrá alebo biela) a má
+celočíselnú hodnotu od $1$ do $5$. Z každej farby je v balíčku $10$
+kariet: $3$ jednotky, $2$ dvojky, $2$ trojky, $2$ štvorky a $1$ päťka.
+Farba a číslo sa nachádzajú na lícovej strane karty. Všetky karty majú
+rovnakú rubovú stranu.
+
+Na začiatku Jožko vyberie z balíku $4$ karty (podľa svojej voľby) a dá
+ich Lukášovi do ruky tak, aby Lukáš videl z nich len rubovú stranu a aby
+Teri videla lícovú stranu (zoradenie Lukášových kariet si tiež zvolí
+Jožko). Potom Jožko napíše na papier jednu z kariet, ktoré dal Lukášovi,
+a papier ukáže Teri tak, aby ho Lukáš nevidel. Následne Teri dá Lukášovi
+nápovedu o jeho kartách nasledovne: vyberie si buď hodnotu alebo farbu,
+**povie ju Lukášovi** a ukáže na všetky jeho karty vybranej hodnoty
+alebo farby. Teri pri tom musí ukázať na aspoň jednu kartu. Na záver
+Lukáš vyberie jednu kartu z ruky a vyloží ju pred seba.
+
+Pokiaľ Lukáš vyloží kartu, ktorá bola napísaná na papieri, tak Teri s
+Lukášom vyhrávajú. V opačnom prípade vyhráva Jožko. V prípade, že má
+Lukáš na ruke dve alebo tri totožné karty (teda s rovnakou farbou aj
+hodnotou), môže vyložiť ľubovoľnú z nich. Rozhodnite, či si Teri s
+Lukášom vie dohodnúť stratégiu, ktorá im zaručí výhru nad Jožkom.
+","Označme si pozície kariet na Lukášovej ruke z Lukášovho pohľadu zľava
+doprava indexami $1$ až $4$. Teda, keď povieme, že Lukáš zahral kartu na
+pozícii $2$, myslíme tým, že zahral druhú zľava.
+
+Ukážeme, že Lukáš s Teri nemajú proti Jožkovi žiadnu šancu. Pôjdeme na
+to sporom. Budeme teda predpokladať, že Lukáš s Teri majú víťaznú
+stratégiu, ktorá im umožní vyhrať bez ohľadu na to, aké karty dá Jožko
+Lukášovi na ruku a taktiež bez ohľadu na to, akú kartu napíše na papier
+pre Teri.
+
+Nech má Lukáš na ruke zľava doprava postupne červenú jednotku, červenú
+dvojku, žltú jednotku a žltú dvojku (ďalej to budeme značiť symbolicky
+ako $\text Č1 \mid \text Č2 \mid \text Ž1 \mid \text Ž2$). V takom
+prípade mu Teri môže dať štyri rôzne nápovede[^1]:
+
+- na indexoch 1, 2 máš červenú kartu
+
+- na indexoch 3, 4 máš zelenú kartu
+
+- na indexoch 1, 3 máš jednotky
+
+- na indexoch 2, 4 máš dvojky
+
+Nápovede budeme odteraz značiť symbolicky ako $(\text Č, 12)$,
+$(\text Ž, 34)$, $(1, 13)$, $(2, 24)$. Keďže pre spor predpokladáme, že
+Lukáš s Teri majú víťaznú stratégiu, musí Lukáš vedieť vyložiť
+ktorúkoľvek z kariet (keďže všetky štyri sú rôzne). Keďže mu však Teri
+vie dať iba štyri nápovede, každou z nich musí cieliť na iný index
+karty, ktorú vyložiť.
+
+Nech teda $i_1$ označuje index karty, ktorú má Lukáš vyložiť po nápovede
+$(\text Č, 12)$. Toto budeme odteraz symbolicky značiť
+$(\text Č, 12) \Rightarrow i_1$. Analogicky si označme
+$(\text Ž, 34) \Rightarrow i_2$, $(1, 13) \Rightarrow i_3$ a
+$(2, 24) \Rightarrow i_4$. Aby išlo o víťaznú stratégiu, očividne musí
+platiť $\{i_1,i_2,i_3,i_4\}=\{1,2,3,4\}$, a teda indexy $i_1$ až $i_4$
+musia byť po dvoch rôzne.
+
+Predpokladajme teraz, že Lukáš má na ruke
+$\text Č1 \mid \text Č2 \mid \text Z1 \mid \text Z2$. Teri mu vie dať
+nápovede $(\text Č, 12)$, $(\text Z, 34)$, $(1, 13)$, $(2, 24)$. My už
+však vieme, že pri troch z nich už Lukáš vie, čo vykladať -- konkrétne
+$(\text{Č}, 12) \Rightarrow i_1$, $(1, 13) \Rightarrow i_3$ a
+$(2, 24) \Rightarrow i_4$. Lukáš však musí vedieť vyložiť aj kartu na
+indexe $i_2$, a preto nutne $(\text Z, 34)\Rightarrow i_2$. Nie je
+náročné si domyslieť, že podobne ukážeme aj
+$(\text M, 34)\Rightarrow i_2$, $(\text B, 34)\Rightarrow i_2$ a
+$(\text Z, 12)\Rightarrow i_1$, $(\text M, 12)\Rightarrow i_1$,
+$(\text B, 12)\Rightarrow i_1$.
+
+Začína sa to javiť, že $(\text{farba},34)\stackrel ? \Rightarrow i_2$
+platí bez ohľadu na to, na akú farbu ukážeme. Už to aj skoro máme
+ukázané, ešte by sme potrebovali
+$(\text Č, 34)\stackrel ? \Rightarrow i_2$. To sa však dá ľahko
+nahliadnuť z kariet
+$\text Z1 \mid \text Z2 \mid \text Č1 \mid \text Č2$. Máme teda, že
+$(\text{farba},34)\Rightarrow i_2$ bez ohľadu na farbu a analogicky
+vieme ukázať aj $(\text{farba},12)\Rightarrow i_1$,
+$(\text{číslo},13)\Rightarrow i_3$ a $(\text{číslo},24)\Rightarrow i_4$.
+
+Toto však ešte vieme rozšíriť. Totiž, pri ruke
+$f_11 \mid f_22 \mid f_21 \mid f_12$ pre farby $f_1\neq f_2$ vidíme, že
+$(1,13)\Rightarrow i_3$, $(2,24)\Rightarrow i_4$, a teda $(f_1,14)$,
+$(f_2,23)$ musia v nejakom poradí napovedať pozície $i_1,i_2$. Potom ale
+z ruky $f_11 \mid f_21 \mid f_22 \mid f_12$ vidíme, že keďže $(f_1,14)$,
+$(f_2,23)$ napovedajú v nejakom poradí $i_1,i_2$, tak nápovede
+$(1, 12), (2, 34)$ musia v nejakom poradí napovedať $i_3,i_4$. Nakoniec
+sa ešte pozrime na ruku $f_11 \mid f_21 \mid f_12 \mid f_22$. Nápovede
+$(1, 12), (2, 34)$ v nejakom poradí napovedajú $i_3,i_4$, čo ale
+znamená, že $(f_1,13),(f_2,24)$ musia v nejakom poradí napovedať
+$i_1, i_2$. Všimnime si, že nech dávame farebnú nápoveď na dve karty na
+akýchkoľvek pozíciách, vždy napovedá na kartu buď na pozícii $i_1$ alebo
+na pozícii $i_2$. Symbolicky,
+$(\text{farba}, \text{dve karty})\Rightarrow i_1/i_2$. Analogicky vieme
+ukázať, že $(\text{číslo}, \text{dve karty})\Rightarrow i_3/i_4$.
+
+V tomto momente by nám už intuícia mohla začať hovoriť, že víťazná
+stratégia existovať nebude. Totiž, ukázali sme, že keď Teri ukáže na dve
+karty, tak nezáleží, akú farbu (ak povie farbu), resp. číslo (ak povie
+číslo) k nim povie -- tým pádom by akákoľvek víťazná stratégia bola dosť
+oklieštená.
+
+Pozrime si teraz ruku, kde na pozíciách $i_1, i_2$ sú karty $F1$ a na
+pozíciách $i_3, i_4$ sú karty $F2$ pre farbu $F$. Už vieme, že
+$(1, i_1i_2)$, $(2, i_3i_4)$ napovedajú v nejakom poradí karty na
+pozíciách $i_3,i_4$. Znamená to, že obe číselné nápovede napovedajú
+kartu $F2$. Lukáš však musí vedieť zahrať aj kartu $F1$, čiže nápoveď
+$(F, 1234)$ musí napovedať niektorú z pozícii $i_1,i_2$. Analogicky
+vieme ukázať, že $(\text{číslo}\neq5,1234)\Rightarrow i_3/i_4$[^2].
+
+Označme $j$ pozíciu, ktorú napovedá nápoveď $(\text Č, 1234)$. Vieme, že
+$j=i_1$ alebo $j=i_2$. Označme ďalej druhú z týchto pozícii $j'$.
+
+Nech teraz máme ruku, kde na pozíciách $j,i_3,i_4$ je karta $\text Č1$ a
+na pozícii $j'$ zas karta $\text Č2$. Vieme, že
+$(\text Č,1234)\Rightarrow j$. Potom ale aspoň jedna z nápovedí
+$(1, ji_3i_4)$, $(2,j')$ napovedá pozíciu $j'$.
+
+Zoberme ďalej ruku, kde na $j,i_4$ je karta $\text Č1$, na $j'$ je karta
+$\text Z2$ a na $i_3$ je karta $\text Z1$. Vieme, že
+$(\text Č, ji_4)\Rightarrow j/j'$, $(\text Z,j'i_3)\Rightarrow j/j'$ a
+aspoň jedna z nápovedí $(1,ji_3i_4),(2,j')$ napovedá pozíciu $j'$. Keďže
+ale Lukáš musí byť schopný zahrať aj $\text Z1$ na $i_3$, musí ju
+napovedať druhá z tých nápovedí -- a teda $(1,ji_3i_4),(2,j')$
+napovedajú v nejakom poradí pozície $j',i_3$.
+
+Nakoniec už vyskúšajme iba takú ruku, kde vymeníme $\text Č1$ so Z1 -- a
+teda $\text Č1$ je na $j,i_3$, $\text Z1$ na $i_4$ a $\text Z2$ na $j'$.
+Vieme, že $(\text Č,ji_3)\Rightarrow j/j'$,
+$(\text Z,j'i_4)\Rightarrow j/j'$ a nápovede $(1,ji_3i_4), (2,j')$
+napovedajú v nejakom poradí pozície $j',i_3$. Všimnime si, že Teri nevie
+Lukášovi napovedať pozíciu $i_4$, a teda Lukáš nie je schopný z tejto
+ruky zahrať kartu $\text Z1$. To je však očividne spor s tým, že Lukáš a
+Teri majú víťaznú stratégiu.
+
+### Zaujímavosť na záver {#zaujímavosť-na-záver .unnumbered}
+
+Hra OhNoStroje nie je tak úplne vymyslená. Totiž, rovnaký balíček kariet
+má aj kooperatívna hra Hanabi, v ktorej je cieľom tímu korektne vyložiť
+čo najviac farebných ohňostrojov. Ak teda hľadáte tip na vianočný
+darček, tu jeden máte.
+
+[^1]: Ak vám to znie divne, vedzte, že nápoveda je čechizmus a správne
+    slovenské slovo je nápoveď (ktoré má mimo iného rovnaký koreň slova
+    ako slová odpoveď, spoveď, predpoveď, výpoveď, ... .
+
+[^2]: Totiž, pre číslo $=5$ nemáme v balíčku dve päťky rovnakej farby, a
+    teda by sme takú ruku zostaviť nevedeli.
+",10
+80d7587b46e30f2a,kms,"Keď sa po prehliadke Bordu Slováci vrátili na internát, rozhodli sa, že
+si zahrajú spoločenské hry. Vyšli teda na chodbu a sadli si na kružnicu
+okolo stola. Potom si však všimli, že okolo stola na druhom konci chodby
+tiež na kružnici sedí nejaká skupinka. Rozhodli sa teda riadiť slovami
+klasika a kružnice spojili. Majo si všimol, že nech na kružnici sedel
+kdekoľvek, vždy bolo ich skóre priemerné. Nešlo mu však do hlavy, prečo
+je to tak.
+
+Kružnice $k,\, l$ sa pretínajú v bodoch $P \neq Q$. Na kružnici $k$ si
+zvoľme bod $M$. Priamky $MP,\, MQ$ pretínajú kružnicu $l$ postupne v
+bodoch $B,\, C$ rôznych od $P,\, Q$. Označme $X$ priesečník priamok $BQ$
+a $CP$. Dokážte, že to, či $X$ leží na kružnici $k$, nezávisí od voľby
+bodu $M$ (tzn. je to dané iba polohou kružníc $k,\ l$). V prípade, že
+$X$ leží na kružnici $k$, dokážte navyše, že $BC$ je priemerom $l$.
+","Predtým, ako začneme úlohu riešiť, sa najprv musíme pozrieť na to, aké
+rôzne konfigurácie bodov z úlohy môžu nastať, lebo v rôznych
+konfiguráciach sa môžu odôvodnenia platnosti tvrdení líšiť.
+
+Pre jednoduchosť odkazovania si označme oblúk $PQ$ kružnice $k$ ležiaci
+vnútri kruhu ohraničeného kružnicou $l$ ako vnútorný oblúk $PQ_k$ a
+oblúk $PQ$ kružnice $k$ neležiaci vnútri kruhu ohraničeného kružnicou
+$l$ ako vonkajší oblúk $PQ_k$. Podobne si rozdelíme aj oblúk $PQ$
+kružnice $l$ ako vnútorný oblúk $PQ_l$ (ležiaci vnútri kruhu
+ohraničeného kružnicou $k$) a ako vonkajší oblúk $PQ_l$ (neležiaci
+vnútri kruhu ohraničeného kružnicou $k$).
+
+Body $P$ a $Q$ sú fixne dané pre každú polohu kružníc $k$ a $l$, a teda
+sa nám stačí zaoberať polohami ostatných bodov. Keďže bod $M$ ovplyvňuje
+polohu všetkých ostatných bodov (vynímajúc body $P,Q$), tak sa nám stačí
+pozrieť na prípad, keď $M$ leží na vnútornom oblúku $PQ_k$, a na prípad,
+keď $M$ leží na vnútornom oblúku $PQ_k$.
+
+Ak $M$ leží na vonkajšom oblúku $PQ_k$, tak môžu nastať tri prípady:
+
+1.  body $B,C$ ležia obidva na vonkajšom oblúku $PQ_l$,
+
+2.  body $B,C$ ležia obidva na vnútornom oblúku $PQ_l$,
+
+3.  jeden z bodov $B,C$ leží na vnútornom oblúku $PQ_l$ a druhý leží na
+    vonkajšom oblúku $PQ_l$ (pričom je jedno, ktorý z týchto dvoch bodov
+    leží na vnútornom a ktorý na vonkajšom -- tieto dve situácie sú
+    symetrické, a teda sa nám stačí zaoberať len jednou z nich).
+
+Iné prípady v tejto možnosti nemôžu nastať, lebo body $B,C$ sú zo
+zadania rôzne od bodov $P,Q$.
+
+Ak $M$ leží na vnútornom oblúku $PQ_k$, tak body $B,C$ musia nutne ležať
+na vonkajšom oblúku $PQ_l$. Je to preto, lebo v tomto prípade bod $M$
+leží vnútri kruhu ohraničeného kružnicou $l$, a teda polpriamka $MQ$,
+ktorá vychádza z vnútorného bodu kruhu, pretína kružnicu najviac
+jedenkrát (a to práve v bode $Q$) a polpriamka $QM$, ktorá vychádza z
+bodu na kružnici $l$, leží celá v polrovine určenej priamkou $PQ$, ktorá
+obsahuje vonkajší oblúk $PQ_l$, a teda kružnicu $l$ nevie preťať v bode
+ležiacom v druhej polrovine určenej priamkou $PQ$ (tá polrovina, ktorá
+obsahuje vnútorný oblúk $PQ_l$), a teda musí kružnicu $l$ preťať na
+vonkajšom oblúku $PQ_l$. Podobne je to s priesečníkmi polpriamok $PM$ a
+$MP$ s kružnicou $l$.
+
+Musíme teda preriešiť $4$ rôzne prípady polohy bodov $M,B,C$.
+
+Predtým, než sa pozrieme na jednotlivé prípady, si zavedieme ešte jedno
+označenie. Pre danú konfiguráciu kružníc $k,l$ má tetiva $PQ$ v obidvoch
+kružniciach fixnú dĺžku. Preto aj obvodové uhly v kružniciach $k,l$ nad
+tetivou $PQ$ budú mať fixnú veľkosť. Pre kružnicu $k$ a jej vonkajší
+oblúk $PQ_k$ si označíme obvodový uhol k tetive $PQ$ ako $\alpha$.
+Podobne pre kružnicu $l$ a jej vonkajší oblúk $PQ_l$ si označíme
+obvodový uhol k tetive $PQ$ ako $\beta$.
+
+Teraz sa už môžeme pustiť do rozoberania jednotlivých konfigurácií.
+
+### 1. konfigurácia - bod $M$ leží na vonkajšom oblúku $PQ_k$, body $B,C$ ležia obidva na vonkajšom oblúku $PQ_l$ {#konfigurácia---bod-m-leží-na-vonkajšom-oblúku-pq_k-body-bc-ležia-obidva-na-vonkajšom-oblúku-pq_l .unnumbered}
+
+Uhol $PMQ$ má veľkosť $\alpha$, lebo je to obvodový uhol nad tetivou
+$PQ$ v kružnici $k$ a bod $M$ leží na vonkajšom oblúku $PQ_k$. Ďalej
+vieme, že $|\measuredangle PCQ|=|\measuredangle PBQ|=\beta$, lebo je to
+obvodový uhol nad tetivou $PQ$ v kružnici $l$ a body $B,C$ ležia na
+vonkajšom oblúku $PQ_l$. Zo súčtu veľkostí vnútorných uhlov trojuholníka
+$MQB$ vieme, že $$\begin{equation*}
+    |\measuredangle MQB|=180^{\circ}-|\measuredangle QMB|-|\measuredangle QBM|=180^{\circ}-|\measuredangle QMP|-|\measuredangle QBP|=180^{\circ}-\alpha-\beta.
+\end{equation*}$$ Podobne zo súčtu veľkostí vnútorných uhlov
+trojuholníka $MPC$ vieme, že $$\begin{equation*}
+     |\measuredangle MPC|=180^{\circ}-|\measuredangle PMC|-|\measuredangle PCM|=180^{\circ}-|\measuredangle PMQ|-|\measuredangle PCQ|=180^{\circ}-\alpha-\beta.
+ 
+\end{equation*}$$ Zo súčtu vnútorných uhlov v štvoruholníku $MPXQ$
+dostávame, že $$\begin{align*}
+     |\measuredangle QXP|&=360^{\circ}-|\measuredangle XQM|-|\measuredangle QMP|-|\measuredangle MPX|=360^{\circ}-|\measuredangle BQM|-|\measuredangle QMP|-|\measuredangle MPC|=\\&=360^{\circ}-(180^{\circ}-\alpha-\beta)-\alpha-(180^{\circ}-\alpha-\beta)=\alpha+2\beta.
+ 
+\end{align*}$$ Získavame, že $|\measuredangle QXP|=\alpha+2\beta$, čo je
+hodnota, ktorá nie je závislá na polohe bodu $M$, ale len na polohe
+kružníc $k,l$. Tým sme dokázali prvú časť zadania pre možnosť túto
+konfiguráciu.
+
+Predpokladajme teda, že bod $X$ leží na kružnici $k$. Potom je
+štvoruholník $MPXQ$ tetivový, a teda
+$|\measuredangle MQX|+|\measuredangle MPX|=180^{\circ}$. Z toho vyplýva,
+že: $$\begin{align*}
+     180^{\circ}-\alpha-\beta+180^{\circ}-\alpha-\beta&=180^{\circ},\\
+     180^{\circ}&=2\cdot(\alpha+\beta),\\
+     90^{\circ}&=\alpha+\beta.
+ 
+\end{align*}$$ Keďže uhol $\measuredangle MQX$ je susedný uhol s uhlom
+$\measuredangle XQC$, tak dostávame, že platí
+$|\measuredangle BQC|=|\measuredangle XQC|=180^{\circ}-(180^{\circ}-\alpha-\beta)=\alpha+\beta=90^\circ$.
+Uhol $\measuredangle BQC$ je teda pravý, z čoho vyplýva, že tetiva $BC$,
+nad ktorou je tento uhol obvodovým uhlom, je priemer kružnice $l$. Tým
+sme dokázali pre túto konfiguráciu aj druhú časť zadania.
+
+### 2. konfigurácia - bod $M$ leží na vonkajšom oblúku $PQ_k$, body $B,C$ ležia obidva na vnútornom oblúku $PQ_l$ {#konfigurácia---bod-m-leží-na-vonkajšom-oblúku-pq_k-body-bc-ležia-obidva-na-vnútornom-oblúku-pq_l .unnumbered}
+
+V tomto prípade sa nikdy nemôže stať, že by bod $X$ ležal na kružnici
+$k$. Je to preto, lebo bod $X$ bude ležať v polrovine určenej priamkou
+$QP$, ktorá obsahuje bod $M$, a teda by bod $X$ mohol ležať na kružnici
+$k$ len vtedy, ak by ležal na vonkajšom oblúku $PQ_k$. To však nie je
+možné, keďže poradie bodov $Q,C,B,P$ na kružnici $l$ je presne takéto,
+kvôli tomu, že body $C,Q$ ležia v jednej polrovine určenej osou uhla
+$QMP$ a body $B,P$ ležia v druhej polrovine určenej touto osou, a
+zároveň body $B,C$ ležia na vnútornom oblúku $PQ_l$. Preto body
+$Q,C,B,P$ tvoria štvoruholník v tomto poradí a bod $X$ leží na
+priesečníku jeho uhlopriečok. Tento priesečník uhlopriečok musí byť
+vnútri štvoruholníka, lebo tento štvoruholník je konvexný, a keďže $X$
+leží vnútri tohto štvoruholníka, tak leží aj vnútri kruhu ohraničeného
+kružnicou $l$. Tým pádom nevie ležať na vonkajšom oblúku $PQ_k$, lebo
+ten bol definovaný ako ten oblúk $k$, ktorý neleží vnútri kruhu
+ohraničeného kružnicou $l$.
+
+### 3. konfigurácia - bod $M$ leží na vonkajšom oblúku $PQ_k$, bod $B$ leží na vonkajšom oblúku $PQ_l$ a bod $C$ leží na vnútornom oblúku $PQ_l$ {#konfigurácia---bod-m-leží-na-vonkajšom-oblúku-pq_k-bod-b-leží-na-vonkajšom-oblúku-pq_l-a-bod-c-leží-na-vnútornom-oblúku-pq_l .unnumbered}
+
+Uhol $PMQ$ má veľkosť $\alpha$, lebo je to obvodový uhol nad tetivou
+$PQ$ v kružnici $k$ a bod $M$ leží na vonkajšom oblúku $PQ_k$. Ďalej
+vieme, že $|\measuredangle PCQ|=180^{\circ}-\beta$ a
+$|\measuredangle PBQ|=\beta$, lebo sú to obvodové uhly nad tetivou $PQ$
+v kružnici $l$, bod $B$ leží na vonkajšom oblúku $PQ_l$ a bod $C$ leží
+na vnútornom oblúku $PQ_l$. Zo súčtu veľkostí vnútorných uhlov
+trojuholníka $MQB$ vieme, že $$\begin{equation*}
+    |\measuredangle MQB|=180^{\circ}-|\measuredangle QMB|-|\measuredangle QBM|=180^{\circ}-|\measuredangle QMP|-|\measuredangle QBP|=180^{\circ}-\alpha-\beta.
+\end{equation*}$$ Podobne zo súčtu veľkostí vnútorných uhlov
+trojuholníka $MPC$ vieme, že $$\begin{equation*}
+     |\measuredangle MPC|=180^{\circ}-|\measuredangle PMC|-|\measuredangle PCM|=180^{\circ}-|\measuredangle PMQ|-(180^{\circ}-|\measuredangle PCQ|)=180^{\circ}-\alpha-\beta.
+ 
+\end{equation*}$$ Zo súčtu vnútorných uhlov v trojuholníku $XCQ$
+dostávame, že $$\begin{align*}
+     |\measuredangle QXC|&=180^{\circ}-|\measuredangle XQC|-|\measuredangle XCQ|=180^{\circ}-(180^{\circ}-|\measuredangle BQM|)-|\measuredangle PCM|=\\&=180^{\circ}-(180^{\circ}-(180^{\circ}-\alpha-\beta))-\beta)=180^{\circ}-\alpha-2\beta.
+ 
+\end{align*}$$ Získavame, že
+$|\measuredangle QXP|=180^{\circ}-\alpha-2\beta$, čo je hodnota, ktorá
+nie je závislá na polohe bodu $M$, ale len na polohe kružníc $k,l$. Tým
+sme dokázali prvú časť zadania pre túto konfiguráciu.
+
+Predpokladajme teda, že bod $X$ leží na kružnici $k$. Potom je
+štvoruholník $MPQX$ tetivový, a teda
+$|\measuredangle PMQ|=|\measuredangle PXQ|$, lebo sú to obvodové uhly
+nad jednou tetivou. Z toho vyplýva, že: $$\begin{align*}
+     \alpha&=180^{\circ}-\alpha-2\beta,\\
+     2\cdot(\alpha+\beta)&=180^{\circ},\\
+     \alpha+\beta&=90^{\circ}.
+ 
+\end{align*}$$ Keďže uhol $\measuredangle MQX$ je susedný uhol s uhlom
+$\measuredangle MQB$, tak dostávame, že platí
+$|\measuredangle BQM|=|\measuredangle BQC|=180^{\circ}-\alpha-\beta=90^{\circ}$.
+A teda je uhol $\measuredangle BQC$ pravý, z čoho vyplýva, že tetiva
+$BC$, nad ktorou je tento uhol obvodovým uhlom, je priemer kružnice $l$.
+Tým sme dokázali pre túto konfiguráciu aj druhú časť zadania.
+
+### 4. konfigurácia - bod $M$ leží na vnútornom oblúku $PQ_k$, body $B,C$ ležia obidva na vonkajšom oblúku $PQ_l$ {#konfigurácia---bod-m-leží-na-vnútornom-oblúku-pq_k-body-bc-ležia-obidva-na-vonkajšom-oblúku-pq_l .unnumbered}
+
+Uhol $PMQ$ má veľkosť $180^{\circ}-\alpha$, lebo je to obvodový uhol nad
+tetivou $PQ$ v kružnici $k$ a bod $M$ leží na vnútornom oblúku $PQ_k$.
+Ďalej vieme, že $|\measuredangle PCQ|=|\measuredangle PBQ|=\beta$, lebo
+je to obvodový uhol nad tetivou $PQ$ v kružnici $l$ a body $B,C$ ležia
+na vonkajšom oblúku $PQ_l$. Zo súčtu veľkostí vnútorných uhlov
+trojuholníka $MQB$ vieme, že $$\begin{equation*}
+    |\measuredangle MQB|=180^{\circ}-|\measuredangle QMB|-|\measuredangle QBM|=180^{\circ}-|\measuredangle QMP|-|\measuredangle QBP|=180^{\circ}-\alpha-\beta.
+\end{equation*}$$ Podobne zo súčtu veľkostí vnútorných uhlov
+trojuholníka $MPC$ vieme, že $$\begin{equation*}
+     |\measuredangle MPC|=180^{\circ}-|\measuredangle PMC|-|\measuredangle PCM|=180^{\circ}-|\measuredangle PMQ|-|\measuredangle PCQ|=180^{\circ}-\alpha-\beta.
+ 
+\end{equation*}$$ Zo súčtu vnútorných uhlov v štvoruholníku $MPXQ$
+dostávame, že $$\begin{align*}
+     |\measuredangle QXP|&=360^{\circ}-|\measuredangle XQM|-|\measuredangle QMP|-|\measuredangle MPX|=360^{\circ}-(180^{\circ}-|\measuredangle BQM|)-|\measuredangle QMP|-(180^{\circ}-|\measuredangle MPC|)=\\&=360^{\circ}-(\alpha+\beta)-(180^{\circ}-\alpha)-(\alpha+\beta)=180^{\circ}-\alpha-2\beta.
+ 
+\end{align*}$$ Získavame, že
+$|\measuredangle QXP|=180^{\circ}-\alpha-2\beta$, čo je hodnota, ktorá
+nie je závislá na polohe bodu $M$, ale len na polohe kružníc $k,l$. Tým
+sme aj pre túto konfiguráciu dokázali prvú časť zadania.
+
+Predpokladajme teda, že bod $X$ leží na kružnici $k$. Potom je
+štvoruholník $MPXQ$ tetivový, a teda
+$|\measuredangle MQX|+|\measuredangle MPX|=180^{\circ}$. Z toho vyplýva,
+že: $$\begin{align*}
+     \alpha+\beta+\alpha+\beta&=180^{\circ},\\
+     2\cdot(\alpha+\beta)&=180^{\circ},\\
+     \alpha+\beta&=90^{\circ}.
+ 
+\end{align*}$$ Keďže uhol $\measuredangle MQX$ je susedný uhol s uhlom
+$\measuredangle MQB$, tak dostávame, že platí
+$|\measuredangle MQB|=|\measuredangle BQC|=180^{\circ}-(\alpha+\beta)=180^{\circ}-\alpha-\beta$.
+A teda je uhol $\measuredangle BQC$ pravý, z čoho vyplýva, že tetiva
+$BC$, nad ktorou je tento uhol obvodovým uhlom, je priemer kružnice $l$.
+Tým sme dokázali pre túto konfiguráciu aj druhú časť zadania.
+
+Vyššie sme pre všetky konfigurácie dokázali vlastnosti zo zadania, a
+teda sme vyriešili celú úlohu.
+
+Alternatívne sa dala úloha riešiť za pomoci orientovaných uhlov, čo by
+nám umožnilo vyhnúť sa rozpisovaniu všetkých konfigurácií.
+
+### Poznámka {#poznámka .unnumbered}
+
+Viacerí z vás ste si správne všimli, že priamky $QB$ a $PC$ môžu byť v
+posledných dvoch konfiguráciách (pre $\alpha+2\beta=180^\circ$)
+rovnobežné, a teda nám nevzniká bod $X$. V zadaní sme však zabudli
+napísať, že týmto okrajovým prípadom sa nemáte venovať, keďže v nich
+skúmané tvrdenie vlastne vôbec nedávalo zmysel. Za chybu sa
+ospravedlňujeme.
+",8
+75f2fdff148565f8,kms,"Všetci boli veľmi potešení z výkonu sušičky, a teda začali riadne
+oslavovať. Malá miestnosť však nie je ideálna na oslavy, a tak sa stalo,
+že nejaký Adam zhodil pokladničku z bufetu na zem. Následne bufetár Kubo
+pokojným hlasom vyhnal všetkých okrem Niny z miestnosti, aby niektorý z
+tých žobrákov neukradol rozsypané peniaze. Namiesto rýchleho upratania
+mincí späť do kasičky sa však Kubo s Ninou začali hrať finančnú hru.
+Pochopiteľne, iné semináre využili túto situáciu a sušička pri tom
+nepozorovane zmizla\...
+
+Na čistom FKSáckom koberci[^1] sú dve kôpky -- každá obsahuje nenulový
+počet mincí. Kubo začína hru, a potom sa s Ninou striedajú v ťahoch.
+Hráč si vo svojom ťahu vyberie kôpku s párnym počtom mincí a presunie z
+nej polovicu mincí na druhú kôpku. Hru prehráva hráč, ktorý už nemôže
+urobiť ďalší ťah. Pomôžte Kubovi v závislosti od úvodného počtu mincí na
+kôpkach určiť či má víťaznú stratégiu[^2] on alebo Nina.
+
+[^1]: na rozdiel od toho v KMS tento sa občas aj povysáva a dokonca ho
+    Marcel už tepoval
+
+[^2]: Hráč má v hre víťaznú stratégiu, ak vie vyhrať bez ohľadu na to,
+    ako hrá jeho protivník
+","Ešte predtým, než sa začneme hrať, si uvedomme, že nezáleží na poradí
+kôpok. Je jedno, ktorá kôpka je prvá a ktorá je druhá. Nás zaujímajú len
+počty mincí na kôpkach.
+
+Na začiatku hry môžu nastať dve situácie. Celkový súčet mincí na oboch
+kôpkach môže byť párny alebo nepárny. Ak je nepárny, znamená to, že na
+jednej kôpke je párny počet mincí a na druhej nepárny, lebo akokoľvek
+rozdelím nepárne číslo na dve čísla, vždy bude jedno z nich párne a
+jedno nepárne. Keďže ťahmi sa celkový súčet mincí nemení, vždy bude na
+jednej kôpke párny a na jednej nepárny počet mincí a hrať sa bude
+donekonečna.
+
+Hra je zaujímavejšia, keď je súčet párny. Na počty mincí sa odteraz
+budeme pozerať trochu inak. Každý počet mincí $N$ vieme zapísať ako
+$2^x Z$, kde $Z$ je nepárne číslo. Namiesto každého $N$ teda budeme
+uvažovať $x$, kde $x$ je najväčšia mocnina $2$, ktorá delí $N$. Odteraz
+sa budeme zaoberať len týmito mocninami ($x$-kami) a počty mincí na
+kôpkach budeme značiť len pomocou nich, pretože v tejto hre sa kôpky s
+rôznym počtom mincí, ale s rovnakým $x$ správajú úplne identicky.
+Aritmetika s takýmito číslami funguje inak, ako s bežnými číslami. Keď
+takéto číslo $x$ rozdelím napoly, dostanem $x-1$. Keď sčítam $x+y$, kde
+$(x<y)$, výsledok bude $x$. Pozrime sa aj podrobne, čo sa pri takomto
+sčitovaní deje: $$2^xZ_1+2^yZ_2=2^x(2^{y-x}Z_2+Z_1)$$ Keďže
+$2^{y-x}Z_2+Z_1$ je nepárne číslo, tak $2^x(2^{y-x}Z_2+Z_1)=2^xZ_3$ je v
+našom systéme $x$.
+
+To však platí iba keď $x<y$. Čo keď $x=y$? V tomto prípade výsledok bude
+buď $x+1$ alebo $x+2$, alebo $x+k$, kde $k$ je prirodzené číslo. Iba
+podľa $x$ a $y$ sa nedá povedať, ktoré z toho. Napríklad pre bežné čísla
+$4+4=8$ dostaneme $2+2=3$ a pre bežné čísla $4+12=16$ dostaneme $2+2=4$.
+Pre bežné čísla $124 + 4 = 128$ máme $2+2=7$. Neskôr si však ukážeme, že
+to vôbec nevadí a podstatné je iba to, že sčítaním dvoch rovnakých
+mocnín dostaneme väčší výsledok.
+
+Pozrime sa teraz v kontexte tohto nového zápisu čísel na hru s mincami.
+Dve kôpky s počtom mincí $N$ a $M$ si reprezentujeme usporiadanou
+dvojicou čísel $(x, y)$, kde $N=2^xZ_1$; $M=2^yZ_2$; $x\leq y$. Hra sa
+skončí, keď na kôpkach sú čísla $(0,0)$. Vtedy sú obe čísla nepárne,
+žiadna kôpka sa nedá rozdeliť a hráč na ťahu prehráva. Na začiatku sme
+si ukázali, že hra $(0, 1)$ sa bude hrať donekonečna. (Dokonca hra
+$(0, k)$, $k>0$ sa bude hrať donekonečna.)
+
+Rozoberme si najprv prípady, keď $x=y$, teda situácie tvaru $(x,x)$. Tu
+vôbec nezáleží na tom, ktorý hráč rozdelí ktorú kôpku, hra bude
+postupovať vždy rovnako. Po rozdelení kôpky $x$ sa z nej stane kôpka
+$x-1$ a k druhej kôpke sa pripočíta $x-1$. Keďže $x-1<x$, dostaneme
+kôpky $(x-1,x-1)$. Takto to bude pokračovať až k $(0,0)$, kedy niektorý
+hráč prehrá. Keďže hra postupuje stále rovnako, kto prehrá závisí jedine
+od parity $x$. Pre nepárne $x$ vyhrá prvý hráč (Kubo) a pre párne druhý
+hráč (Nina).
+
+Čo však, keď $x\neq y$? Keďže platí $x<y$ a pri \""sčítavaní\"" čísel
+určuje výsledok to menšie, všetko závisí od $x$. Ak je $x$ nepárne, prvý
+hráč rozdelí kôpku $x$. Je jedno, aké veľké bolo $y$, druhý hráč proste
+dostane situáciu $(x-1, y+(x-1))=(x-1,x-1)$ a prehrá, lebo už nemá na
+výber. Takýmto spôsobom hráč dokáže situáciu $(x,y)$ premeniť na
+$(x,x)$, ak mu to vyhovuje.
+
+Ak je $x$ párne, ten hráč, ktorý rozdelí $x$, prehrá. Druhý hráč vtedy
+totiž dostane $(x-1,x-1)$, čo sú dve rovnaké nepárne čísla, a preto
+vyhrávajúca pozícia. Prvý hráč teda rozdelí $y$ a nastane situácia
+$(x+(y-1), y-1)=(x,y-1)$. Druhý hráč je teraz postavený pred rovnakú
+situáciu ako predtým prvý. Ak by rozdelil $x$, prehrá. Musí teda
+rozdeliť $y-1$, čím sa presunieme k $(x+(y-2),y-2)=(x,y-2)$. Vidíme, že
+$y$ sa bude zmenšovať, až kým nedostaneme situáciu $(x, x+1)$. Stále
+platí, že ten, čo rozdelí $x$, prehrá, preto hráč na ťahu rozdelí $x+1$.
+Posunieme sa do $(x+x, x)$. Tu môžu nastať dva prípady. Prvý prípad
+nastane, keď $x+x=x+1$. Vtedy máme situáciu $(x+1, x)$, vymeníme kôpky
+na $(x, x+1)$ a sme v tej istej pozícii, ale pre iného hráča. Ten nechce
+prehrať, takže spraví to isté, čo jeho súper a hra bude takto pokračovať
+donekonečna. Ak zrovna pre naše $x$ platí $x+x=x+k$, dostaneme
+$(x+k, x)$, znova vymeníme kôpky na $(x, x+k)=(x, y')$. Odtiaľto bude
+priebeh znova rovnaký, $y'$ sa bude zmenšovať až ku $x+1$ a celý cyklus
+sa zopakuje. Pre párne $x$ teda hra bude trvať donekonečna.
+
+### Zhrnutie
+
+Keď si počty mincí na kôpkach preložíme do nášho formátu čísel $(x,y)$,
+kde $x \leq y$, platia nasledovné podmienky:
+
+- Ak $x=y$ a $x$ je nepárne, vyhrá prvý hráč (Kubo).
+
+- Ak $x=y$ a $x$ je párne, vyhrá druhý hráč (Nina).
+
+- Ak $x\neq y$ a $x$ je nepárne, vyhrá prvý hráč (Kubo).
+
+- Ak $x\neq y$ a $x$ je párne, hra sa nikdy neskončí.
+",4
+17b015cc176caa4f,kms,"Tarzan a snúbenica sa vybrali za kanianskou vešticou, aby im poradila so
+svadbou. Tá im povedala, že ich svadba bude krásna, len ak bude spĺňať
+veľmi špeciálne podmienky. O počte hostí ($h$), počte chodov ($c$) a
+počte svadobných darov ($d$) musí platiť: $$\begin{gather*}
+    h + c + d = 47,\\
+    h \cdot c = d,
+\end{gather*}$$ pričom všetky tri čísla sú kladné a celé. Nájdite všetky
+možné hodnoty $(h,\  c,\  d)$ tak, aby Tarzan a snúbenica mali krásnu
+svadbu.
+","Jeden zo spôsobov ako riešiť sústavu rovníc je vyjadriť si neznámu z
+jednej rovnice a dosadiť ju do druhej. Môžeme si všimnúť, že $d$ je v
+druhej rovnici vyjadrené ako $$\begin{equation*}
+    d = h \cdot c.
+\end{equation*}$$ Môžeme ho teda dosadiť do prvej, $$\begin{align*}
+    h + c + d &= 47,\\
+    h + c + h \cdot c &= 47.
+\end{align*}$$ Ak zmeníme poradie členov v rovnici, mohlo by nám to
+začať niečo pripomínať, $$\begin{equation*}
+    h \cdot c + h + c = 47.
+\end{equation*}$$ Ak si však ešte stále nie sme istý, čo by sme s tým
+vedeli robiť, môžeme sa pohrať s členmi rovnice a skúsiť niečo
+vymyslieť. Na začiatok by sme mohli skúsiť vyňať $h$:
+$$\begin{equation*}
+    h \cdot (c + 1) + c = 47.
+\end{equation*}$$ Teraz si môžeme všimnúť, že ak by sme na obe strany
+pripočítali $1$, tak by sme mali dve zátvorky $(c+1)$: $$\begin{align*}
+    h \cdot (c + 1) + c &= 47,\\
+    h \cdot (c + 1) + c + 1 &= 48.
+\end{align*}$$ Toto ďalej upravíme na $$\begin{align*}
+    h \cdot (c + 1) + 1 \cdot (c + 1) &= 48,\\
+    (h + 1) \cdot (c + 1) &= 48.
+\end{align*}$$
+
+Keďže $h$, $c$, $d$ majú byť celé kladné čísla, číslo $48$ máme napísané
+v tvare súčinu dvoch prirodzených čísel. Rozložíme si číslo $48$ na jeho
+všetky možné súčiny: $$\begin{align*}
+    48 &= 1 \cdot 48\\
+    &= 2 \cdot 24\\
+    &= 3 \cdot 16\\
+    &= 4 \cdot 12\\
+    &= 6 \cdot 8.
+\end{align*}$$
+
+Keďže $h$ a $c$ predstavujú rôzne špeciálne podmienky, možnosti
+$$\begin{align*}
+    (h + 1, c + 1)&=(2,24) & &\text{a} &
+    (h + 1,c + 1)&=(24,2)
+\end{align*}$$ považujeme za rôzne. Teraz môžeme jednotivé kombinácie
+čísiel dosadiť za zátvorky a dorátať $h$, $c$ a $d$: $$\begin{align*}
+    1 \cdot 48 &= 48 &
+    (h + 1)&=1 & (c + 1)&=48 &
+    h &= 0 & c &= 47 & d &= h \cdot c = 0 \cdot 47 = 0\\
+    & & (h + 1)&=48 & (c + 1)&=1 &
+    h &= 47 & c &= 0 & d &= h \cdot c = 47 \cdot 0 = 0
+\end{align*}$$ Keďže $h$, $c$, $d$ majú byť celé kladné čísla, tak pre
+$1 \cdot 48 = 48$ neexistuje riešenie, pre ostatné štyri súčiny budeme
+postupovať analogicky. Výsledkom bude osem trojíc hodnôt pre $h$, $c$,
+$d$:
+
+  ----- ---- ---- ---- ---- ---- ---- ---- ----
+    h+1  2    24   3    16   4    12   6    8
+    c+1  24   2    16   3    12   4    8    6
+      h  1    23   2    15   3    11   5    7
+      c  23   1    15   2    11   3    7    5
+      d  23   23   30   30   33   33   35   35
+  ----- ---- ---- ---- ---- ---- ---- ---- ----
+",2
+bd926014096d3c43,kms,"Keď prišiel Sheriff Sgt. Pepper spolu s Mocným Sysľom do indiánskej
+osady, zbadal komančského šamana, známeho Bieleho Šuma, ako so svojím
+šarmantným Bizónom predvádza kúzlo. Na začiatku Biely Šum odíde z
+javiska. Bizón uloží na stôl do radu $k \ge 2$ identických kariet,
+bielych z oboch strán. Následne Bizón zavolá dobrovoľníka z publika a
+požiada ho, aby na každú kartu napísal číslo od $1$ do $2021$ vrátane.
+Čísla sa môžu aj opakovať. Bizón potom všetky karty otočí číslom nadol
+až na jednu kartu, ktorú ponechá číslom nahor. Poradie kariet meniť
+nesmie. Potom sa vráti na scénu šaman Biely Šum a pozrie sa na karty na
+stole. Následne ukáže na jednu kartu a povie číslo, ktoré sa nachádza na
+jej spodnej strane. Nakoniec kartu víťazoslávne otočí a zožne obrovský
+potlesk, keďže sa to číslo na karte naozaj nachádza.
+
+Určte najmenšie celé číslo $k \ge 2$, pre ktoré si šaman Biely Šum vie
+so svojím Bizónom dohodnúť stratégiu, ktorá im zaručí úspešný priebeh
+kúzla.
+","Najskôr si ujasníme, čo od nás vlastne chce zadanie a zavedieme si pár
+pojmov na jednoduchší popis. Počiatočná konfigurácia kariet je určená
+tým, aké číslo je na každej karte. Spolu máme $2021$ možností pre každú
+z $k$ kariet, teda $2021^k$ konfigurácií. Biely Šum uvidí karty po tom,
+čo Bizón nechal otočenú len jednu z nich. Takúto situáciu budeme volať
+náhľad $(a, x)$, keď jediná viditeľná karta je na pozícii $a$ a má číslo
+$x$. Šum si v takejto situácii musí byť istý, aké číslo má nejaká iná
+karta. Ak by si bol istý viacerými inými kartami, môže si dopredu vrámci
+stratégie určiť pre každý náhľad len jednu takúto kartu, ktorú
+víťazoslávne otočí. Takže Šum sa riadi pravidlami
+$(a, x) \rightarrow (b, y)$, čo znamená, že pri náhľade $(a, x)$ otočí
+kartu na pozícii $b$ a tá má číslo $y$. Z vyššie uvedeného vyplýva, že
+pre každý náhľad máme len jedno pravidlo. Súbor všetkých týchto
+pravidiel budeme volať stratégia. Stratégia je úspešná, keď pre každú
+konfiguráciu dokáže Bizón pripraviť taký náhľad, aby Šumovo pravidlo
+fungovalo, to znamená, že každá konfigurácia obsahuje dvojicu kariet
+$(a, x), (b, y)$ takú, že $(a, x) \rightarrow (b, y)$ je pravidlo z
+našej stratégie.
+
+Rozdeľme si konfigurácie do skupín podľa toho, ktoré pravidlo v každej z
+nich môžeme použiť. Pre každý náhľad máme jedno pravidlo a počet možných
+náhľadov je $2021k$, takže najviac $2021k$ pravidiel, a teda aj toľko
+skupín. Koľko je konfigurácií v jednej skupine, ktorá je daná pravidlom
+$(a, x)\rightarrow(b, y)$? Na pozícii $a$ musí byť číslo $x$ a na
+pozícii $b$ číslo $y$. Na ostatných $k-2$ pozíciách môže byť ľubovoľné
+číslo, čo dáva $2021^{k-2}$ možností. Vo všetkých skupinách spolu máme
+najviac $2021k \cdot 2021^{k-2}$ konfigurácií, ale aby bola stratégia
+úspešná, každá konfigurácia musí byť v niektorej skupine, takže
+$$\begin{align*}
+    2021k \cdot 2021^{k-2} &\geq 2021^k, \qquad (1) \\
+    k &\geq 2021.
+\end{align*}$$
+
+Dostali sme, že $k \geq 2021$, takže pre menšie $k$ nemôže existovať
+úspešná stratégia. Po chvíľke skúšania a hrania sa objavíme, že pre
+$k \geq 2022$ existuje pekná jednoduchá stratégia. Bizón si len pozrie
+číslo $2022.$ karty, ktoré bude chcieť prezradiť Šumovi. Následne ho
+zakóduje pomocou prvých $2021$ kariet, a to tak, že nechá otočenú toľkú
+kartu, aké číslo je na $2022.$ karte. V reči pravidiel nám stačia
+pravidlá $(a, *) \rightarrow (2022, a)$, pre každú pozíciu $a$, pričom
+$*$ môže byť hocijaké číslo. Šum uhádne, že na $2022.$ karte je číslo
+$a$.
+
+Prípad $k=2021$ vyzerá ťažšie. V dokázanej nerovnosti $(1)$ by musela
+nastať rovnosť. V takomto prípade sa oplatí uvažovať aké podmienky a
+obmedzenia by musela spĺňať naša stratégia, aby mohla nastať rovnosť.
+Pri takomto postupe buď zistíme, že všetky obmedzenia sa nedajú splniť a
+prídeme k sporu, alebo nám obmedzenia povedia ako bude vyzerať výsledná
+stratégia.
+
+Rovnosť v $(1)$ nastane len vtedy, keď každá konfigurácia bude v
+niektorej skupine, a keď sme každú konfiguráciu započítali len raz, teda
+každá konfigurácia musí byť v práve jednej skupine. Ešte raz to isté v
+zelenom, žiadna konfigurácia nie je v dvoch skupinách, teda na žiadnu
+konfiguráciu sa nedajú použiť dve pravidlá.
+
+V prvom rade si uvedomme, že v pravidle $(a, x) \rightarrow (b, y)$ sú
+pozície $a, b$ rôzne, lebo Šum nemôže otočiť kartu, ktorá už je otočená.
+Urobíme zopár pozorovaní.
+
+1.  Nemôžeme mať dve pravidlá $(a, x)\rightarrow(b, y)$ a
+    $(c, z)\rightarrow(d, w)$, kde všetky pozície $a, b, c, d$ sú
+    navzájom rôzne. Ak by sme mali, tak existuje konfigurácia, ktorá
+    obsahuje na všetkých štyroch pozíciách príslušné karty
+    $(a, x), (b, y), (c, z), (d, w)$ a spĺňa obe pravidlá.
+
+2.  Nemôžeme mať pravidlá $(a, x)\rightarrow(b, y)$ a
+    $(b, y)\rightarrow(c, z)$, kde pozície $a, c$ sú rôzne. V opačnom
+    prípade máme konfiguráciu s kartami $(a, x), (b, y), (c, z)$
+    spĺňajúcu obe pravidlá.
+
+3.  Nemôžeme mať pravidlá $(a, x)\rightarrow(c, z)$ a
+    $(b, y)\rightarrow(c, z)$, kde pozície $a, b$ sú rôzne. Zdôvodnenie
+    je rovnaké ako v predchádzajúcom bode.
+
+4.  Nemôžeme mať pravidlá $(a, x)\rightarrow(b, y)$ a
+    $(b, y)\rightarrow(a, x)$. Znovu existuje konfigurácia, ktorá spĺňa
+    obe pravidlá.
+
+Aby nastala v $(1)$ rovnosť, pre každý možný vstup $(a, x)$ musíme mať
+nejaké pravidlo. BUNV [^1] predpokladajme, že pre vstup $(1, 1)$ máme
+pravidlo $P=(1, 1) \rightarrow (2, 1)$. Podľa $a)$ musí pravidlo pre
+každý vstup $(a, *), a\geq3$ ukazovať na pozíciu $1$ alebo $2$, aby sme
+nemali $4$ rôzne pozície. Povedzme nech to je pre vstup $(3, 1)$ pozícia
+$1$, máme pravidlo $Q=(3, 1) \rightarrow (1, *)$. Teraz pre ľubovoľný
+vstup $(a, *), a \geq 4$ musí mať výstup pozíciu $1$ alebo $2$ kvôli $P$
+a zároveň pozíciu $1$ alebo $3$ kvôli $Q$, takže jedine pozíciu $1$.
+
+Pozrime sa, ktoré pravidlá môžu mať výstup $(1, x)$ pre každé $x$ od $1$
+do $2021$. Podľa $c)$ musia mať všetky takéto pravidlá rovnakú pozíciu
+na vstupe. Povieme, že táto pozícia na vstupe zaberá číslo $x$ na
+výstupe. Uvažujeme pozície na vstupe od $4$ do $2021$, ktorých je
+$2018$, aby pozícia na výstupe bola určite $1$. Niektorá pozícia $p$
+zaberá najviac $1$ výstup $(1, y)$, lebo pozícií je $2018$ a výstupov
+najviac $2021$. To znamená, že pre každý vstup $(p, *)$ máme pravidlo
+$(p, *) \rightarrow (1, y)$.
+
+Nech pre vstup $(1, y)$ máme pravidlo $(1, y) \rightarrow (b, z)$. Podľa
+$b)$ platí $b=p$. Teraz máme dve pravidlá $$\begin{align*}
+    (1, y) \rightarrow (p, z), \\
+    (p, z) \rightarrow (1, y),
+\end{align*}$$ čo je spor s $d)$. Takže pre $k=2021$ neexistuje úspešná
+stratégia. Najmenšie vyhovujúce $k$ je $2022$.
+
+[^1]: Bez ujmy na všeobecnosti
+",10
+0be73cbb3a825ab7,kms,"Ako sa tak Krtko prechádzal po T2, zrazu sa pred ním zjavil portál,
+ktorý ho vcucol a vypľul priamo v paláci cisára Caligulu. Ten si ho
+zavolal, pretože stratil prehľad o preferenciách rímskeho ľudu v
+gladiátorských zápasoch.
+
+Krtko zistil, že v Ríme sú dva tímy, a to Kolosálne Matické Slizniaky a
+Katastrofálne Mizerné Salamandry. Oproti minulému roku 3% fanúšikov
+Kolosálne Matických Slizniakov prešli ku Katastrofálne Mizerným
+Salamandrám a 5% pôvodných fanúšikov Katastrofálne Mizerných Salamandier
+prešlo ku Kolosálne Matickým Slizniakom. Avšak počet fanúšikov ani
+jedného tímu sa oproti minulému roku nezmenil. Koľko fanúšikov má ktorý
+tím, ak Rím má $5$ miliónov obyvateľov?
+","Začnime tým, že zaznamenáme zmeny v počte fanúšikov jednotlivých tímoch
+do sústavy rovníc, ktorú si aj upravíme, pričom tím Kolosálnych
+Matických Slizniakov označíme ako $a$, zatiaľ čo tím Katastrofálne
+Mizerných Salamandier ako $b$:
+$$a-0,03\cdot a + 0,05 \cdot b = 0,97 \cdot a + 0,05 \cdot b = a,$$
+$$b-0,05\cdot b + 0,03 \cdot a = 0,95 \cdot b + 0,03 \cdot a = b.$$
+Prenásobením oboch rovníc $100$ a odrátaním pravých strán od oboch
+rovníc dostaneme 2 identické rovnice v tvare
+$$-3 \cdot a + 5 \cdot b = 0.$$ Táto rovnica nám v podstate hovorí o
+pomere, v ktorom sa fanúšikovia budú deliť. Vidno, že z tejto sústavy 2
+informácie, ktoré by nám zaručili riešenie úlohy nedostaneme. Chceme
+teda nájsť ďalšiu rovnicu, ktorá by nám pomohla túto úlohu vyriešiť. Je
+ňou rovnica $a + b = 5\ 000\ 000$, keďže fanúšikov je spolu $5$
+miliónov. V tomto momente niektoré riešenia pripustili aj, že
+$a + b \leq 5\ 000\ 000$, čo je tiež pekná úvaha, ktorú tu v krátkosti
+rozoberieme tiež.
+
+Ak $a + b \leq 5\ 000\ 000$, tak podľa $-3 \cdot a + 5 \cdot b = 0$
+vieme, že $a:b=5:3$, teda počet fanúšikov bude v tvare $8k$, kde
+$k\in \mathbb{N}:8k\leq 5\ 000\ 000$. Potom riešenie bude v tejto
+situácií také, že tím Kolosálnych Matických Sliziniakov má $5k$ a tím
+Katastrofálne Mizerných Salamandier má $3k$ fanúšikov, pričom
+$k\in \mathbb{N}:8k\leq 5\ 000\ 000$.
+
+Vráťme sa však späť ku situácií, ktorá sa vyskytovala výrazne častejšie
+a tiež je správnym riešením, teda že $a + b = 5\ 000\ 000$. Zostáva nám
+v tom momente vyriešiť len sústavu rovníc $$a + b = 5\ 000\ 000,$$
+$$5 \cdot b = 3 \cdot a.$$ Vynásobením prvej rovnice piatimi a následným
+dosadením za $5 \cdot b$ z druhej rovnice dostaneme, že $a=3\ 125\ 000$
+a následným dosadením do jednej z pôvodných rovníc dostaneme, že
+$b=1\ 875\ 000$. Môžeme ešte skontrolovať, či máme správne riešenie,
+teda
+$3\ 125\ 000 - 3\ 125\ 000 \cdot 0,03 + 1\ 875\ 000 \cdot 0,05=3\ 125\ 000 - 93\ 750 +93\ 750=3\ 125\ 000$
+a
+$1\ 875\ 000 - 1\ 875\ 000 \cdot 0,05 + 3\ 125\ 000 \cdot 0,03=3\ 125\ 000 - 93\ 750 +93\ 750=1\ 875\ 000$.
+",1
+4bd4c4af07ff4866,kms,"Bea si vytlačila v KMS-ku skriptá, ktoré majú $2003$ strán s číslami
+$1,\ 2,\ \dots ,\ 2003$. Skriptá však nedávajú zmysel, preto si musí z
+nich vybrať tie správne strany.
+
+Nájdite najväčšiu takú množinu $A$, ktorá je podmnožinou množiny
+$\{1, 2, \dots , 2003\}$ a neexistujú dva prvky $a$, $b$ množiny $A$,
+pre ktoré je číslo $a + b$ deliteľné číslom $a - b$.
+","Začnime v malom. Môže hľadaná množina obsahovať dve po sebe idúce čísla?
+Keby mohla, ich rozdiel by bol $1$. Problém je, že $1$ delí všetky
+prirodzené čísla, a teda bude určite deliť aj ich súčet, preto žiadne
+dve po sebe idúce čísla v hľadanej množine nebudú.
+
+Poďme ďalej -- môže hľadaná množina obsahovať dve čísla s rozdielom $2$?
+Keby áno, ich súčet by nesmel byť deliteľný dvomi. Lenže dve čísla s
+rozdielom $2$ sú buď obe párne, alebo obe nepárne. Keď ich sčítame,
+výsledok bude vždy párny. Takže nie, ani dve čísla s rozdielom $2$ v
+hľadanej množine nebudú.
+
+Ďalšia rečnícka otázka asi nikoho neprekvapí -- môže hľadaná množina
+obsahovať dve čísla s rozdielom $3$? Rozoberme si tak ako doteraz ich
+deliteľnosti. Ak by boli tieto čísla deliteľné tromi, aj ich súčet by
+bol deliteľný tromi a delil by ho potom aj ich rozdiel (ktorý je rovný
+$3$). Vyskúšajme zvyšok po delení trojkou rovný $1$, teda čísla $3k+1$ a
+$3k+4$. Ich súčet bude $6k+5$, čiže nebude deliteľný tromi. Hurá, našli
+sme konečne nejaké čísla, ktoré môžu byť v hľadanej množine!
+
+V prvých dvoch odsekoch sme zistili, že najlepšie, čo vieme dosiahnuť,
+je množina obsahujúca každé tretie číslo z pôvodnej množiny. Každé
+tretie číslo znamená, že ostanú čísla vo forme $3k$, $3k+1$ alebo
+$3k+2$. V treťom odseku sme zahodili možnosť $3k$ a v možnosti $3k+1$
+sme zistili, že po sebe nasledujúce dvojice čísel fungujú. Vedeli by ale
+fungovať všetky? Poďme to zistiť -- keď odčítame čísla $3k+1$ a $3l+1$
+ich rozdiel bude deliteľný tromi (zvyšky $1$ po delení tromi sa navzájom
+zrušia). Ich súčet bude $3(k+l)+2$, preto určite nebude deliteľný tromi,
+teda ani ich rozdielom. Podmnožina pôvodnej množiny obsahujúca čísla
+$3k+1$ bude preto celá vyhovovať podmienke zo zadania (rovnako viete
+ukázať, že bude fungovať aj podmnožina s číslami $3k+2$). Ľahko si už
+teraz dopočítame koľko prvkov má táto podmnožina. Je to počet všetkých
+prirodzených čísel zo zvyškom po delení tromi rovným $1$. Tých je $668$
+a to je aj maximum, ktoré sa dá dosiahnuť.
+",4
+56364c157cfbeeb8,kms,"Nakoniec sa v kráľovstve rozhodli pre mierumilovné riešenie a vyslali
+Kubka aj s jeho úžasnými trikmi za Matúšom, aby mu roztopil srdiečko a
+našiel dobro v jeho duši. Keby mal Matúš nejakých kamarátov, tak by
+nemal potrebu si nič dokazovať a z vlastných rozmarov plieniť polku
+uhorského kráľovstva. Nakoniec sa Kubko zjavil v Matúšovom stane a začal
+s čelným útokom na možného nového priateľa.
+
+Kubko si napíše na čelo $n$ reálnych čísel vrátane nuly. Potom sa s nimi
+hrá. V jednom kroku si zoberie nenulový mnohočlen, ktorý má za
+koeficienty čísla, ktoré sú napísané na čele[^1], a pripíše si na čelo
+všetky jeho korene. Koľko najmenej čísel si musí Kubko napísať na čelo,
+aby po konečnom počte krokov vedel na čele dostať čísla
+$-2019,\, -2018,\ \dots,\ -2,\ -1,\ 0,\ 1,\ 2,\ \dots,\ 2018,\ 2019$?[^2]
+
+[^1]: Každé z čísel na čele môže byť použité ľubovoľný počet krát,
+    nemusia byť použité všetky.
+
+[^2]: Okrem týchto čísel sa tam môžu nachádzať aj iné.
+","### Predhovor
+
+Skôr, ako sa pustíme do riešenia úlohy sa skúsme zamyslieť, čo chceme
+robiť. Potrebujeme nájsť konštrukciu, ako napísať správne čísla na
+Kubkovo čelo a potrebujeme ukázať, že s menším počiatočným počtom čísel
+to nie je možné. Ako však pristúpime k tej druhej časti? Ak začneme už
+len s dvomi číslami na tabuli, tak úloha má veľmi veľkú voľnosť. Môžeme
+si totiž zvoliť veľké množstvo kadejakých mnohočlenov, ktoré budú mať
+kadejaké, často veľmi nepekné korene. S každými ďalšími koreňmi sa nám
+možnosti len zväčšujú a zväčšujú a nájsť v nich poriadok sa zdá byť
+priam až nemožné. Neschodnosť tejto cesty by nás mohla naviesť k tomu,
+že by sme sa mohli posnažiť potiahnuť riešenie úlohy poriadne nízko.
+Teda využiť veľkú voľnosť úlohy v náš prospech a vystačiť si aj s malým
+počtom čísel na začiatku.
+
+### Cesta k riešeniu
+
+Pre lepšie zoznámenie sa s úlohou sa skúsme pozrieť, aké čísla vieme
+dostať, keď si na Kubkovo čelo napíšeme nejaký malý počet čísel. V
+jednom kroku si zoberieme mnohočlen $p(x)$ a dostaneme z neho koreň $r$.
+Takéto kroky budeme skrátene zapisovať $p(x) \rightarrow r$. Síce podľa
+pravidiel úlohy sa na Kubkovovm čele ocitnú aj ďalšie korene, no tie,
+ktoré nebudeme potrebovať budeme takto ignorovať.
+
+Keďže iba s nulou toho moc nespravíme, tak začnime s tým, že si napíšeme
+dve čísla: $0$, $a$. Priamočiaro vieme spraviť kroky
+$ax + a \rightarrow -1$, $ax - 1 \rightarrow 1/a$. Lineárne rovnice nás
+ďalej nezavedú. Môžeme si skúsiť kvadratické, kde sa nám však začnú
+objavovať škaredé čísla. Preto sa oplatí skúsiť hľadať nejaké rozumné
+kroky. Ak už máme na Kubkovom čele napísané číslo $a$, tak by bolo fajn,
+ak by sme vedeli dostať aj $-a$. Potom by nám stačilo nájsť spôsob ako
+napísať Kubkovi na čelo iba kladné čísla. Záporné by sme si potom
+dorobili. Priamočiaro by to išlo v kroku $$x + a \rightarrow -a.$$ Na to
+však musí mať Kubko na čele $1$. Môžeme ju mu tam napísať aj rovno na
+začiatok -- je to veľmi užitočné číslo. Nevieme si ju však nejako
+vyrobiť? Ak je $a$ celé číslo, tak si ho vieme rozložiť na $a$
+jednotiek: $a = 1 + 1 + \dots + 1$. Keďže sa jednotky pri umocňovaní
+nemenia, tak ju vieme dostať v kroku
+$$-x^a - x^{a-1} - \dots - x^2 - x + a \rightarrow 1.$$
+
+Keďže jednotku vieme dostať vždy, keď začíname s nulou a kladným celým
+číslom, tak sa môžeme pozrieť na dvojku. Aké musí byť číslo $a$, aby sme
+vedeli dostať číslo $2$ na Kubkovo čelo? Skúsme spraviť podobnú úvahu
+ako pri jednotke. Za konštantný člen mnohočlenu zvolíme $a$ a zvyšok
+vyskladáme ako $- k_nx^n - \dots -k_2x^2 - k_1x$. Chceme teda, aby $2$
+bola koreňom rovnice $$k_nx^n + \dots + k_2x^2 + k_1x = a,$$ pričom za
+čísla $k_1,\, k_2,\, \dots,\, k_n$ si môžeme voliť čísla z Kubkovho
+čela, teda zatiaľ tam máme $0,\, 1,\, -1$ (a ešte ďalšie). Nepripomína
+vám to niečo? Kde sa umocňuje dvojka a násobí nejakými koeficientmi? Tu
+prichádzame k hlavnej myšlienke riešenia -- niečo také vieme stretnúť v
+dvojkovej sústave. Ak dosadíme za $x = 2$, tak máme zápis čísla $a$ v
+dvojkovej sústave, teda len ak $a$ je párne. Napríklad ak $a = 42$, tak
+$$1 \cdot 2^5 + 0\cdot 2^4 + 1\cdot 2^3 + 0\cdot 2^2 + 1 \cdot 2 = 42,$$
+$$\text{teda}\qquad - x^5 - x^3 - x + 42 \rightarrow 2.$$ Táto myšlienka
+s číselnými sústavami nám stačí pre dokončenie riešenia. Takto si vieme
+na Kubkovo čelo dopisovať ďalšie čísla. Potrebujeme začať s takým
+číslom, ktoré je deliteľné každým číslom od $1$ po $2019$ (aby malo v
+každej sústave na mieste jednotiek nulu). Dobrým kandidátom je $2019!$.
+Aby sme to sformalizovali, dôkaz dokončíme matematickou indukciou.
+
+### Riešenie
+
+Na Kubkovo čelo si napíšeme $2$ čísla: $0$ a $a = 2019!$. Na začiatok si
+dopíšeme čísla $$\begin{align*}
+    2019!x + 2019! &\rightarrow -1,\\
+    -x^{2019!} - \dots - x^2 - x + 2019! &\rightarrow 1,\\
+    x + 2019! &\rightarrow -2019!.
+\end{align*}$$ Ďalej dokážeme, že pre všetky celé čísla
+$2 \le n \le 2019$ platí nasledovné tvrdenie: Ak máme na Kubkovom čele
+napísané čísla $-2019!,\, 0,\, 1,\, \dots,\, n - 1$, tak vieme na
+Kubkovo čelo dopísať číslo $n$.
+
+Číslo $2019!$ si vieme v sústave so základom $n$ zapísať ako
+$$2019! = k_rn^r + \dots + k_2n^2 + k_1n + 0,$$ kde $r \in \mathbb{N}$,
+$k_1,\, k_2,\, \dots,\, k_r \in \{ 0, 1, \dots, n - 1 \}$ (to, že
+posledný člen je $0$ máme vďaka tomu, že $n \mid 2019!$). Všetky
+koeficienty $k_i$ sú menšie ako $n$, a teda ich Kubko má na čele. Preto
+$n$ vieme dostať v kroku
+$$k_rx^r + \dots + k_2x^2 + k_1x - 2019! \rightarrow n$$ Tým sme
+ukázali, že s dvomi číslami vieme požadované čísla dostať. Iba s nulou
+to nie je možné, keďže pomocou nej nevieme vytvoriť žiaden nenulový
+mnohočlen.
+",9
+2541f57b4e5b7c01,kms,"Po vystátí radu sa začalo divadelné predstavenie o Syzifovi. Bohovia
+udelili Syzifovi za trest tlačenie kameňa do kopca. V nultý deň vytlačil
+Syzifos kameň do nejakej výšky, no na konci dňa sa mu skotúľal o kus
+nadol. V prvý deň znovu vytlačil kameň do nejakej výšky a večer sa mu
+opäť skotúľal. Takto Syzifos pokračoval do nekonečna...
+
+Máme danú nekonečnú postupnosť $a_0,\,a_1,\,a_2,\, \dots$ reálnych čísel
+takú, že pre každé kladné celé číslo $n$ platí\
+$(a_{n-1}+a_{n+1})/2\geq a_n$. Dokážte, že pre všetky kladné celé čísla
+$n$ platí $$\frac{a_0+a_{n+1}}{2}\geq \frac{a_1+a_2+...+a_n}{n}.$$
+","Zo zadania vieme, že platia nasledovné vzťahy: $$\begin{align*}
+2a_1&\leq  a_0+a_2, \\ 
+2a_2&\leq  a_1+a_3, \\
+ &\vdots\\
+ 2a_n&\leq  a_{n-1}+a_{n+1}. 
+\end{align*}$$
+
+Sčítajme všetky nerovnice, dostaneme
+$2(a_1+\dots+a_n)\leq a_0+a_1+a_n+a_{n+1}+2(a_2+\dots+a_{n-1})$, odkiaľ
+odčítaním rovnakých členov dostávame $a_1+a_n\leq a_0+a_{n+1}$. To je
+cool nerovnosť. S touto nerovnosťou už máme prakticky vyhraté, zároveň
+hlavný trik už máme za sebou.
+
+Uvedomme si, že platí aj $a_2+a_n\leq a_1+a_{n+1}$, ktorú dostaneme tak,
+že v pôvodnom veľkom súčte nevezmeme prvý riadok. Všeobecnejšie, rovnako
+aj $a_k+a_l\leq a_{k-1}+a_{l+1}$ pre ľubovoľné $k \leq l \leq n$, čo
+dostaneme tak, že vezmeme iba súčet rovníc $$\begin{align*}
+2a_k&\leq  a_{k-1}+a_{k+1}, \\ 
+&\vdots\\
+ 2a_l&\leq  a_{l-1}+a_{l+1}.
+\end{align*}$$
+
+Intuitívne, čím ďalej sú od seba dva indexy, tým väčší súčet dávajú. A
+nás zaujíma $a_0+a_{n+1}$. Skúsme pomocou nerovností z minulého kroku
+dosiahnuť súčet $a_1+\dots + a_n$. Už stačí iba ľahká úvaha a dostaneme
+nasledovné nerovnosti (pre nepárne $n$ je rozdiel iba v tom, že v strede
+nebude \""stredný\"" člen): $$\begin{align*}
+a_{0}+a_{n+1}&\geq  a_1+a_n, \\ 
+a_{0}+a_{n+1}\geq   a_1+a_n &\geq a_{2}+a_{n-1},\\ 
+&\vdots\\
+a_{0}+a_{n+1}\geq a_1+a_n \geq \dots &\geq a_{k}+a_{n-k+1},\\
+&\vdots\\
+a_{0}+a_{n+1}\geq a_1+a_n \geq \dots &\geq a_{n/2}+a_{n/2},\\
+a_{0}+a_{n+1}\geq a_n+a_1\geq \dots &\geq a_{n/2+1}+a_{n/2-1},\\
+&\vdots\\
+a_{0}+a_{n+1} &\geq a_{n}+a_{1}.
+\end{align*}$$ Po sčítaní všetkých nerovností dostávame
+$n(a_0+a_{n+1})\geq 2(a_1+\dots +a_n)$ , čo je skutočne to, čo sme
+chceli dokázať.
+
+**Iný postup:** Iba v rýchlosti spomenieme iné, netradičné riešenie. Ak
+si body $a_0, a_1, a_2, \dots$ usporiadame do grafu funkcie, ktorej
+$f(0)=a_0,\ f(1)=a_1,\ f(2)=a_2,\ \dots$ a spojíme tieto body úsečkami
+(tj. interpolujeme lineárnymi funkciami), tak plocha nad grafom je z
+predpokladov *konvexná* (stačí si to nakresliť, aby to bolo uveriteľné,
+no tento krok si treba poriadne rozmyslieť a zdôvodniť). Z vlastností
+konvexných útvarov plynie aj to, že úsečka spájajúca body
+$[0, a_0], [n+1, a_{n+1}]$ leží celá nad všetkými bodmi
+$[1, a_1], \dots, [n, a_{n}]$, teda jej stred leží nad ich priemerom
+(body priemerujeme tak, že zvlášť spriemerujeme $x$-ové súradnice, a
+zvlášť $y$-ové súradnice). Požadovanú nerovnosť dostaneme ako nerovnosť
+medzi $y$-ovými súradnicami spomínaného stredu úsečky a priemeru.
+",7
+4e1e87f6f887c80b,kms,"Nad starovekými Grékmi bdelo nespočetné množstvo bohov. Zapamätať si
+všetky tie ich mená je priam nemožné. Ani my si ich nepamätáme. Preto
+miesto mien ich budeme volať číslami. Taký Zeus, vládca Olympu, mal
+číslo $5$, ktoré má nasledovnú zaujímavú vlastnosť. Vieme ho vyjadriť
+ako súčet aj súčin piatich celých čísel, ktoré sú v oboch prípadoch
+rovnaké
+$5 = 5 \cdot 1 \cdot 1 \cdot (-1) \cdot (-1) = 5 + 1 + 1 - 1 - 1$. Z
+toho dôvodu Zeus býval na Olympe len s bohmi, ktorí mali túto vlastnosť
+tiež.
+
+Nájdite všetky prirodzené čísla $n$, pre ktoré existuje $n$ (nie nutne
+rôznych) celých čísel, ktorých súčet aj súčin je rovný $n$.
+","Označme si hľadanú množinu čísel $x_1,\ x_2, \dots,\ x_n$. Má nám platiť
+$x_1 + x_2 + \dots + x_n=n$ a $x_1 \cdot x_2 \cdot \dots \cdot x_n=n$.
+
+Môžeme si všimnúť, že ak máme nejakú množinu čísel a pridáme k nej
+jednotku, súčin sa nezmení, ale súčet (ktorý očakávame, že zvyčajne bude
+menší), sa zväčší o $1$. Ďalšia užitočná vec, ktorá sa môže hodiť pri
+konštrukcii, je, že pridaním štyroch čísel $-1,\ -1,\ 1,\ 1$ sa nezmení
+ani súčet, ani súčin. Teda keď sa nám podarí zapísať nejaké číslo $n$
+ako súčin aj súčet tých istých $t$ čísel, vieme ho zapísať aj ako súčet
+$t+4,\ t+8, \dots$ čísel atď.
+
+Keďže $x_1 \cdot x_2 \cdot \dots \cdot x_n=n$, musia byť všetky $x_i$
+deliteľmi čísla $n$. Keďže chceme v tomto tvare zapísať čo najviac
+čísel, a to aj prvočísla, či čísla, ktoré sú súčinom len málo prvočísel
+a ťažko sa rozkladajú, bolo by dobré nájsť taký rozklad, ktorý obsahuje
+čo najviac $\pm 1$ a čo najmenej iných čísel.
+
+Keďže pridanie štvorice $1,\ 1,\ -1,\ -1$ k nejakému zápisu nezmení ani
+súčet, ani súčin, pre čísla $n=4k+1$ vieme jednoducho za čísla $x_i$
+zobrať číslo $n$, $2k$ jednotiek a $2k$ mínus jednotiek.
+
+$$n=n \cdot (-1)^{2k} \cdot 1^{2k}$$ $$n=n+(-1) \cdot 2k+1 \cdot 2k$$
+
+Ak máme párne číslo, musí vo svojom rozklade obsahovať párny počet
+párnych sčítancov, a teda aj činiteľov. Je to kvôli tomu, že keby ich
+bol nepárny počet, ich súčet by bol párny a k nemu by sme pridali ešte
+nepárny počet nepárnych čísel (zvyšné sčítance) a dokopy by sme mali
+nepárny súčet. My ale potrebujeme dostať párny súčet rovný $n$.
+
+Z toho vidno, že čísla tvaru $n=4k+2$ v požadovanom tvare zapísať
+nemožno. Sú párne, musíme použiť aspoň jedno párne $x_i$, ale zároveň
+takých musí byť párny počet, čiže musíme mať aspoň dve. Avšak vtedy už
+súčin bude deliteľný $4$ a je jedno, čo k tomu prinásobíme, nikdy
+nedostaneme číslo tvaru $4k+2$.
+
+Ak máme číslo $4$, musíme tiež použiť aspoň dva párne činitele, takže
+musíme použiť čísla $1,\ 1,\ 2,\ 2$ s nejakými znamienkami. Záporných
+musí byť vždy párny počet. Ak budú všetky kladné, dostaneme súčet $6$,
+ak budú aspoň dve záporné, dostaneme najviac $2+2-1-1=2$. Ani štvorku
+teda zapísať nevieme.
+
+Ak však budeme mať väčšie číslo deliteľné štyrmi, rozklad na súčin
+$n=\frac{n}{2} \cdot 2$ nám už pomôže, len sa musíme pohrať so
+znamienkami tak, aby sme dostali správny súčet. Znamienko pri dvojke
+dokonca závisí od zvyšku $n$ po delení ôsmimi, teda pre $n$, ktoré je
+násobkom $4$, rozlíšime dva prípady:
+
+1.  $n=8k$, $k \geq 1$:
+    $$n=2 \cdot (4k) \cdot (-1)^{2k} \cdot 1^{6k-2},$$
+    $$n=2 + 4k + (-1) \cdot (2k) + 1\cdot(6k-2),$$
+
+2.  $n=8k+4$, $k \geq 1$:
+    $$n=(-2) \cdot (4k+2) \cdot (-1)^{2k-1} \cdot 1^{6k+3},$$
+    $$n=(-2) + (4k+2) + (-1) \cdot (2k-1) + 1 \cdot (6k+3).$$
+
+Číslo $4$ by patrilo do prípadu $2.$, lenže $k$ by bolo $0$ a počet
+mínus jednotiek by musel byť $2k-1 = -1$, čo nie je možné.
+
+Napokon nám ostávajú čísla $n$ tvaru $4k+3$. Tie sú tvrdý oriešok. Ak
+skúšame takéto čísla zapísať v požadovanom tvare, nijak sa nám to
+nedarí, takže by sme mohli skúsiť dokázať, že sa to nedá. Z toho, čo sme
+zistili doteraz, zrejme budú dôležité zvyšky po delení $4$. Keďže máme
+$n$ nepárne, všetky $x_i$ musia byť nepárne, teda mať zvyšok $1$ alebo
+$3$ po delení $4$ (inak dostaneme párny súčin).
+
+Použijeme dôkaz sporom. Pre spor predpokladajme, že sme našli vyhovujúce
+čísla $x_i$ a roztrieďme ich podľa zvyškov a znamienok.
+
+Označme $A$ počet tých, ktoré majú zvyšok $1$ a sú kladné (napr. $1$,
+$5$, ...), $B$ počet tých, ktoré majú zvyšok $3$ a sú kladné ($3$, $7$,
+...), pre záporné označme $C$ počet tých, ktoré majú v absolútnej
+hodnote zvyšok $1$ ($-1$, $-5$, ...) a $D$ počet tých v absolútnej
+hodnote so zvyškom $3$ ($-3$, $-7$, ...).
+
+Musí platiť, že všetkých $x_i$ so zvyškom abs. hodnoty $3$ je nepárny
+počet, inak bude mať celkový súčin absolútnych hodnôt zvyšok $1$
+(dvojica čísel so zvyškom $3$ má súčin so zvyškom $1$), takže $B$ a $D$
+majú rôznu paritu.
+
+Ďalej máme $n=A+B+C+D \equiv 3 \pmod 4$, pretože počet všetkých $x_i$ je
+dohromady $n$.
+
+Poďme sa pozrieť na to, aký zvyšok má súčet čísel $x_i$ a porovnať ho s
+$n$:
+
+$$n = x_1 + \dots + x_n \equiv A \cdot 1 + B \cdot 3 - C \cdot 1 - D \cdot 3 \equiv A-B-C+D \equiv n \equiv A+B+C+D \pmod 4,$$
+$$A-B-C+D \equiv A+B+C+D \pmod 4.$$
+
+Všetkých záporných čísel musí byť párny počet, aby bol súčin kladný,
+teda $$\begin{align*}
+    C+D &\equiv 0 \pmod 2,\\
+    2C+2D &\equiv 0 \pmod 4.
+\end{align*}$$
+
+Keď túto kongruenciu odčítame od pravej strany, dostaneme
+$$\begin{align*}
+    A-B-C+D &\equiv A+B-C-D \pmod 4,\\
+    -B+D &\equiv B-D \pmod 4,\\
+    2B-2D &\equiv 0 \pmod 4,\\
+    B-D &\equiv 0 \pmod 2,
+\end{align*}$$
+
+čo je ale spor, pretože $B$ a $D$ musia mať rôznu paritu (ako sme už
+ukázali vyššie).
+
+Aby sme si to zhrnuli, čísla $n$, ktoré sa dajú zapísať ako súčin aj
+súčet tých istých $n$ celých čísel, sú práve všetky čísla so zvyškom $0$
+alebo $1$ po delení $4$ okrem samotného čísla $4$.
+",10
+10c689eba82aefc2,kms,"Vysušení FKSáci započali valné zhromaždenie. No nemohli hneď riešiť
+umiestnenie sušičky, keďže Majo si všimol na zemi jeden zabudnutý
+trojuholník z tých, ktoré vznikli v tretej úlohe. Vo FKS tak znova
+zavládla panika. A vtedy sa pred nich všetkých postavil ich Hovorca a
+povedal, že trojuholníku sa báť nemusia, lebo nemôže byť predsa väčší
+ako $k$.
+
+Nájdite najväčšiu reálnu konštantu $k$ takú, že pre každý trojuholník s
+obsahom $S$ a stranami dlhými $a$, $b$, $c$ platí
+$$12a^2+b^2+c^2 \geq k \cdot S.$$ Pre túto hodnotu $k$ nájdite všetky
+trojuholníky, pre ktoré nastáva rovnosť.
+","Chceli by sme, aby ľavá strana nerovnosti bola čo najmenšia, zatiaľ čo
+tá pravá čo najväčšia, pretože tak dosiahneme čo najväčšie obmedzenie na
+$k$. Chceli by sme teda nájsť také trojuholníky, pre ktoré je
+$12a^2+b^2+c^2$ čo najmenšie, zatiaľ čo $S$ je čo najväčšie.
+Trojuholníkov existuje nesmierne veľa, bolo by teda dobré nejakým
+spôsobom sa obmedziť na tie, ktoré čo najviac minimalizujú ľavú stranu
+nerovnosti a maximalizujú obsah trojuholníka.
+
+Ukážeme, že zaujímavé sú práve rovnoramenné trojuholníky s $b=c$. Ak sa
+pozrieme na všetky trojuholníky pre konkrétne $a$ a $S$, máme pevne danú
+aj ich výšku na stranu $a$, ktorá sa dá vypočítať zo vzťahu
+
+$$\begin{align*}
+S=\frac{av_a}{2}.
+\end{align*}$$
+
+Ďalej budeme používať len výšku na stranu $a$, takže ju budeme značiť už
+iba $v$. Keď máme takto zafixované $a$ a $S$, ostáva už len
+minimalizovať $b^2+c^2$. Oba sčítance vieme vypočítať z Pytagorovej
+vety.
+
+Nech $x$ označuje vzdialenosť päty výšky na stranu $a$ od jej krajného
+bodu $B$. Ak päta leží vnútri strany $a$ alebo je zhodná s niektorým
+krajným bodom, z Pytagorovej vety platí:
+
+$$\begin{align*}
+b^2 &= (a-x)^2 + v^2,\\
+c^2 &= x^2 + v^2.
+\end{align*}$$
+
+Ak päta neleží vnútri strany $a$, nech BUNV[^1] leží na polpriamke
+opačnej k $BC$ (ak máme $BC$ vodorovne smerom doprava, tak leží naľavo
+od $B$). Prípad, kedy leží napravo od $C$ je symetrický. Potom opäť
+použijeme Pytagorovu vetu a máme
+
+$$\begin{align*}
+b^2 &= (a+x)^2 + v^2,\\
+c^2 &= x^2 + v^2.
+\end{align*}$$
+
+Vidíme, že sme si vôbec nepomohli, práve naopak. Hodnota $b^2$ sa
+zväčšila, namiesto $(a-x)^2$ máme v súčte $(a+x)^2$. Hodnota $c^2$ sa
+nezmenila. Keďže chceme $b^2+c^2$ minimalizovať, tento prípad nebudeme
+ďalej uvažovať.
+
+Ak je trojuholník rovnoramenný, potom
+$b^2 = c^2 = v^2 + (\frac{a}{2})^2$. Chceme dokázať, že v tomto prípade
+je $b^2 + c^2$ najmenšie možné, teda:
+
+$$\begin{align*}
+((a-x)^2 + v^2) + (x^2 + v^2) &\geq 2\left(v^2 + \left(\frac{a}{2}\right)^2\right),\\
+a^2 - 2ax + 2x^2 + 2v^2 &\geq 2v^2 + \frac{a^2}{2}.
+\end{align*}$$
+
+Prenásobíme dvomi:
+
+$$\begin{align*}
+a^2 - 4ax + 4x^2 &\geq 0,\\
+(a-2x)^2 &\geq 0.
+\end{align*}$$
+
+Druhá mocnina vždy bude nezáporná a postupovali sme ekvivalentnými
+úpravami, takže toto tvrdenie je dokázané. Navyše pre iné $x$ ako
+$\frac{a}{2}$ rovnosť nenastáva. Stačí uvažovať rovnoramenné
+trojuholníky. Vyjadrenie $b$, $c$ a $S$ pomocou $a$ a $v$ teraz dosadíme
+do pôvodnej nerovnosti a opäť prenásobíme dvomi:
+
+$$\begin{align*}
+12a^2 + 2v^2 + \frac{a^2}{2} &\geq k \frac{av}{2},\\
+25a^2 + 4v^2 &\geq kav,\\
+25a^2 - kav + 4v^2 &\geq 0.
+\end{align*}$$
+
+Toto nám nápadne pripomína roznásobenie druhej mocniny rozdielu,
+konkrétne
+
+$$\begin{align*}
+(5a-2v)^2 = 25a^2 - 20av + 4v^2.
+\end{align*}$$
+
+Vidíme, že ak zvolíme $k=20$, dostaneme opäť druhú mocninu, ktorá má byť
+väčšia alebo rovná nule, nerovnosť je splnená. Ak by však $k$ bolo
+väčšie ako $20$, mali by sme
+
+$$\begin{align*}
+25a^2 - kav + 4v^2 = (5a-2v)^2 + 20av - kav = (5a-2v)^2 + av(20 - k)\geq 0,
+\end{align*}$$
+
+čo už platiť nemusí, stačí ak $(5a-2v)^2$ bude $0$ a $av$ kladné.
+
+Hľadané $k$ je teda $20$. Rovnosť nastáva vtedy, kedy nastáva v
+uvedených nerovnostiach, teda $5a=2v$ a $b=c$, čiže
+
+$$\begin{align*}
+b^2 = c^2 = v^2 + \left(\frac{a}{2}\right)^2 = \left(\frac{5a}{2}\right)^2 + \left(\frac{a}{2}\right)^2 = \frac{26a^2}{4}.
+\end{align*}$$
+
+Z toho vyplýva
+
+$$\begin{align*}
+b = c = \sqrt{\frac{13}{2}}a.
+\end{align*}$$
+
+Pre všetky takéto trojuholníky v zadanej nerovnosti pre $k=20$ nastáva
+rovnosť.
+
+[^1]: bez ujmy na všeobecnosti; značí, že iné prípady skúmať nemusíme,
+    pretože sú podobné
+",9
+c26cf89fc3bb0254,kms,"Jožo na letisku narazil na zaujímavý amulet ako na obrázku. Pozostával
+z dvoch rovnostranných trojuholníkov. Predavačka mu prezradila, že
+vzdialenosť každého bodu obvodu malého trojuholníčka k najbližšiemu bodu
+obvodu veľkého trojuholníka je $\sqrt{3}$. Určte rozdiel medzi dĺžkami
+strán malého a veľkého trojuholníka.
+","Pri riešení geometrických úloh je dobré nakresliť si obrázok a uvedomiť
+si všetky informácie, ktoré máme k dispozícii. Zo zadania vieme, že
+vzdialenosť každého bodu obvodu malého trojuholníka je vzdialená od
+veľkého trojuholníka $\sqrt{3}$. V praxi to znamená, že ak spravíme
+kolmicu, z ktoréhokoľvek bodu malého trojuholníka na najbližšiu stratnu
+veľkého trojuholníka, tak jej dĺžka bude $\sqrt{3}$. Ďalšia dôležitá
+vec, ktorú vieme zo zadania, je, že oba trojuholníky sú rovnostranné.
+Takže ich vnútorné uhly majú veľkosti $60^\circ$, a teda tieto dva
+trojuholníky sú podobné podľa vety $uuu$. Keďže, vzdialenosť malého
+trojuholníka od veľkého je na všetky smery rovnaká, nachádza sa presne
+uprostred veľkého trojuholníka, a teda majú tieto trojuholníky aj
+spoločné ťažisko (bod, v ktorom sa pretínajú ťažnice, pri rovnostrannom
+trojuholníku aj výšky). Označme si veľký trojuholník písmenami $ABC$ a
+malý $DEF$. Dĺžku strany malého trojuholníka označíme písmenom $a$.
+Urobíme kolmý priemet strany $EF$ malého trojuholníka na stranu $BC$
+veľkého trojuholníka, túto úsečku si označíme písmenami $M$ a $N$ a jej
+dĺžka je rovná $a$. Zvyšné dve časti strany $BC$ veľkého trojuholníka,
+ktoré nám vznikli, teda úsečky $CM$ a $NB$, majú rovnakú veľkosť, ktorú
+si označíme $x$.
+
+Teraz si treba uvedomiť, čo chceme vypočítať. Chceme rozdiel dĺžky
+strany veľkého trojuholníka od dĺžky strany malého trojuholníka. Vidíme,
+že obe strany obsahujú dĺžku strany $a$, takže po odčítaní sa tieto
+dĺžky vyrušia a ostane nám len dvakrát dĺžka $x$. A to teraz potrebujeme
+vypočítať. Ak spravíme výšku na stranu $AB$ z bodu $C$ nášho veľkého
+trojuholníka, rozdelí sa nám uhol pri vrchole $C$ na polovicu, a teda na
+dva $30^\circ$ uhly. Platí to vďaka tomu, že trojuholník je
+rovnostranný. Táto výška prechádza rovnako aj cez vrchol $F$ (vďaka
+spoločnému ťažisku trojuholníkov). Vznikol nám pravouhlý trojuholník
+$FMC$, s pravým uhlom pri vrchole $M$ (keďže z vrcholu $F$ sme viedli
+kolmicu) a s $30^\circ$ uhlom pri vrchole $C$. Rovnako tento postup
+vieme aplikovať aj na ostatné vrcholy trojuholníka vďaka symetrii.
+Ukážeme si teraz dva možné postupy výpočtu, prvý čo využíva
+goniometrické funkcie a druhý s použitím Pytagorovej vety.
+
+### Riešenie cez goniometrické funkcie
+
+Keďže máme pravouhlý trojuholník, vieme použiť goniometrické funkcie na
+výpočet dĺžky $x$. Máme zadanú dĺžku jednej odvesny trojuholníka $FMC$ a
+potrebujeme zistiť dĺžku druhej odvesny. Takže môžeme využiť
+goniometrickú funkciu tangens alebo kotangens. Tangens uhla je
+definovaný ako pomer protiľahlej a priľahlej odvesny. Vezmeme si uhol
+$FCM$. Protiľahlá odvesna k nemu má dĺžku $\sqrt{3}$ a priľahlá odvesna
+je naša neznáma $x$. Dostaneme rovnicu:
+
+$$\tan(30^\circ) = \frac{\sqrt{3}}{x}.$$
+
+Po úprave:
+
+$$\begin{align*}
+x &= \frac{\sqrt{3}}{\tan (30^\circ)},\\
+x &= 3.
+\end{align*}$$
+
+### Riešenie cez Pytagorovu vetu
+
+Ak preklopíme trojuholník $FMC$ v osovej súmernosti podľa úsečky $MC$ na
+opačnú stranu, dostaneme trojuholník, ktorého základňa bude mať
+dvojnásobok dĺžky strany $FM$, teda dĺžku $2\cdot \sqrt{3}$. Uhol $CFM$,
+ktorý ma $60^\circ$, sa prenesie rovnako na druhú stranu. V tomto našom
+vzniknutom trojuholníku majú teda všetky uhly $60^\circ$, takže
+trojuholník je rovnostranný. Z toho vyplýva, že aj strana $FC$ má dĺžku
+$2\cdot \sqrt{3}$ rovnako ako základňa. Keďže teraz poznáme dĺžky dvoch
+strán v pravouhlom trojuholníku $FMC$, pomocou Pytagorovej vety si ľahko
+dopočítame aj tretiu stranu. Prepona $FC$ má dĺžku $2\cdot \sqrt{3}$ a
+odvesna $FM$ dĺžku $\sqrt{3}$. Dostaneme rovnicu:
+
+$$\begin{align*}
+|MC|^2 &= |FC|^2 - |FM|^2,\\
+|MC|^2 &= (2\cdot\sqrt{3})^2 - (\sqrt{3})^2,\\
+|MC|^2 &= 4\cdot 3 - 3,\\
+|MC|^2 &= 9,\\
+|MC| &= 3.
+\end{align*}$$
+
+Takže dĺžka časti $x$ je teda $3$ jednotky dĺžky a keďže máme také dve
+časti na strane tak náš rozdiel bude $2\cdot x$, čo je $6$. Rozdiel
+dĺžky strany väčšieho trojuholníka od dĺžky strany menšieho trojuholníka
+je $6$ jednotiek dĺžky.
+",2
+312153a394787255,kms,"Po výdatných raňajkách sa všetci presunuli na otvárací ceremoniál.
+Jednými zo súťažiacich boli aj Izraelčania, ktorých bolo tento rok
+hojne. Ich delegácia pozostávala z $25$ členov, pričom každý mal svoj
+unikátny dres s číslom od $1$ po $25$. Keď prišli na ceremoniál, sadli
+si na ľavý kraj prázdneho radu s $n$ sedadlami tak, že ich čísla boli
+usporiadané vzostupne zľava doprava. Potom však zistili, že pri
+predstavovaní ich budú vyvolávať sprava doľava, a preto sa chceli
+presadiť tak, aby sedeli tesne vedľa seba, ale zľava doprava zostupne.
+Aby to nebolo také nudné, rozhodli sa premiestňovať tak, že v každom
+kroku sa niektorý Izraelčan buď posunie o 1 sedadlo doprava, ak je
+voľné, alebo prekročí človeka sediaceho tesne napravo a sadne si na
+nasledujúce sedadlo, ak je voľné. Kým predseda komisie Johnny rozprával
+o histórií Blagogradu, Majo sa z nudy zamyslel nad tým, či sa to
+Izraelčanom takto vôbec môže podariť. Nájdite najmenšie $n$, pre ktoré
+si Izraelčania vedia v rade s $n$ sedadlami takto presadnúť.
+","Najprv si uvedomíme, že $n$ musí byť najmenej $49$. Žiaden z Izraelčanov
+sa nemôže posunúť doľava, teda Izraelčan s číslom $25$ musí určite
+zostať na svojom mieste alebo sa posunúť doprava. Ak by zostal na svojom
+mieste tak budeme potrebovať ďalších $24$ miest pre ostatných, teda
+spolu $49$ miest. Ak by sa sa posunul doprava, tak by sme potrebovali
+navyše počet miest, o ktoré sa posunul a ešte 24 navrch.
+
+Skúsme sa teda pozrieť či by sa boli schopní preusporiadať, ak by sa
+$25.$ Izraelčan nepohol. Jediný pohyb, ktorý vedia podľa pravidiel
+spraviť, je poslať Izraelčana číslo $24$ na $26.$ miesto. Potom im
+ostávajú dve možnosti:
+
+- $24.$ Izraelčan zostane na $26.$ mieste
+
+- $24.$ Izraelčan sa posunie doprava na $27.$ miesto.
+
+Ak by nastala prvá možnosť, tak spolu s $25.$ Izraelčanom by vytvorili ,
+ktorý by Izraelčania s menším číslom neboli schopní prekonať. V druhej
+možnosti by Izraelčania s číslami 1 až 23 museli sedieť napravo od neho,
+a teda by zaberali ďalších 23 miest -- teda v súčte 50. Resp. by sa
+$25.$ Izraelčan musel niekedy posunúť doprava.
+
+Teda sme práve ukázali, že miest musí byť viac ako 49.
+
+Skúsme sa teraz pozrieť, či by to náhodou nefungovalo pre 50 miest. Prvý
+pohyb zostáva rovnaký, teda presunieme $24.$ Izraelčana na $26.$ miesto,
+teraz však presunieme $24.$ Izraelčana na $27.$ miesto, aby sme
+vytvorili prechod pre menšie čísla. A zároveň je $24.$ Izraelčan už na
+svojom mieste.
+
+Takto sa postupne popresúvajú všetci párni Izraelčania od najväčšieho po
+najmenšieho (Izraelčan s číslom $24-2k$ sa presunie na miesto $27+2k$
+pre $0\leq k\leq 11$). Uvedomme si, že od Izraelčana s párnym číslom,
+ktorým aktuálne chceme pohnúť, sa napravo nachádzajú len doposiaľ
+nepohnutí Izraelčania s nepárnymi číslami (a teda aj pozíciami) a
+Izraelčania s párnymi číslami, ktorí sa pohli na pozície s nepárnymi
+číslami. Čiže všetky pozície s párnymi číslami sú voľné, a preto nami
+vybraný Izraelčan vie cez ne preskákať až na svoje miesto.
+
+Potom sa presúvajú všetci nepárni Izraelčania od najmenšieho po
+najväčšieho (Izraelčan s číslom $2k+1$ sa presunie na miesto $50-2k$ pre
+$0\leq k\leq 12$). Opäť si môžeme uvedomiť, že Izraelčan sa tam vie
+popresúvať, lebo všetci Izraelčania od jeho pôvodnej až po jeho finálnu
+pozíciu sa nachádzajú na nepárnych pozíciach.
+
+Postup je ilustrovaný na obrázku
+[\[fig:3\]](#fig:3){reference-type=""ref"" reference=""fig:3""}.
+
+Vyššie uvedenou konštrukciou postupných presunov Izraelčanov sme
+ukázali, že pre 50 miest v rade sa vedia Izraelčania popresúvať tak, aby
+spĺňali podmienky zo zadania. Keďže sme ukázali, že pre menej ako 50
+miest v rade sa Izraelčania nevedia popresúvať tak, aby spĺňali
+podmienky zo zadania, tak 50 je najmenšie možné $n$, pre ktoré sa
+Izraelčania vedia popresúvať podľa zadania.
+",3
+0916120a35053e85,kms,"Na Merlina zapôsobí, ako rýchlo Krtko vyrieši sústavu rovníc, a preto ho
+pozve k sebe na obed. Po obede Merlin vytiahne hru, aby po toľkom jedle
+aj trochu rozhýbali mozgy.
+
+Merlin rozdelí čísla $1,\ 2,\ \dots, \ 2n$ do $n$ disjunktných dvojíc
+(teda každé z $2n$ čísel bude v práve jednej dvojici). Krtko si vyberie
+práve jedno číslo z každej dvojice, ktorú Merlin vytvoril. Ak súčet
+čísel, ktoré si Krtko vybral, je násobok $2n$, Krtko vyhrá. Inak vyhrá
+Merlin. V závislosti od $n$ rozhodnite, ktorý z hráčov má vyhrávajúcu
+stratégiu[^1].
+
+[^1]: Vyhrávajúca stratégia je taká, vďaka ktorej hráč vyhrá bez ohľadu
+    na to, ako bude hrať súper.
+","Začnime jednoduchým pozorovaním o celkovom súčte čísel. Platí
+$$1 + 2 + \ldots + 2n = \dfrac{2n(2n+1)}{2} = n(2n+1) = 2n^2 + n.$$
+Môžeme si všimnúť, že súčet všetkých čísel dáva po delení $2n$ zvyšok
+$n$. Teda ak sa Krtkovi podarí vybrať čísla tak, aby bol ich súčet
+deliteľný $2n$, súčet ostatných bude mať zvyšok $n$. Vo všeobecnosti
+Krtko rozdelí čísla na $2$ kôpky -- tú, ktorú si vezme, a tú, ktorú
+nechá tak. Môžeme si všimnúť, že ak je súčet na jednej kôpke násobkom
+$n$, na druhej je tiež. Zvyšky daných súčtov po delení $2n$ teda musia
+byť $0$ a $n$, aby sedel celkový súčet.
+
+Rozdeľme si príklad na $2$ časti, podľa toho, či je $n$ párne alebo
+nepárne. Z predošlého odseku vieme, že Krtko vyhrá práve vtedy, keď
+rozdelí čísla na dve kôpky tak, že súčet čísel na hociktorej z nich je
+násobkom $n$. Pre jednoduchosť počítajme miesto s pôvodnými číslami, s
+ich zvyškami po delení $n$.
+
+Začnime s párnym $n$. Ľahko si všimneme, že Merlin dokáže popárovať
+čísla tak, aby tie s rovnakým zvyškom po delení $n$ boli spolu. (Každé
+číslo od $1$ po $n$ bude v dvojici s číslom o $n$ väčším.) Nech bude
+Krtko robiť čokoľvek, nakoniec si vezme z každého zvyšku po jednom. V
+takom prípade však prehrá, lebo $0 + 1 + \ldots + (n-1) = n(n-1)/2$.
+Keďže $n-1$ je nepárne, výsledné číslo nebude deliteľné $n$. Merlin má
+teda vyhrávajúcu stratégiu.
+
+Prejdime k nepárnemu $n$. Veľmi ľahko vidíme, že Merlinova stratégia,
+ktorá fungovala pre párne $n$, teraz nefunguje. Po chvíli skúšania si
+všimneme, že Krtkovi sa aj pre iné rozdelenia vcelku darí voliť čísla
+dosť šikovne na to, aby vyhral. Skúsme teda dokázať, že to tak bude pre
+každé nepárne $n$. Opäť využijeme, že Krtkovo víťazstvo závisí na tom,
+či dokáže čísla rozdeliť tak, aby mala každá kôpka súčet deliteľný $n$.
+Pre jednoduchosť rozlíšme červenú a modrú kôpku. Krtko rozdelí každú
+dvojicu od Merlina medzi tieto dve kôpky. Ak budú mať obe súčet
+deliteľný $n$, jedna bude mať súčet deliteľný dokonca $2n$ a jej voľbou
+Krtko vyhrá. My ukážeme niečo ešte silnejšie, a to dokonca, že Krtko vie
+zariadiť, aby aj červená aj modrá kôpka obsahovali každý zvyšok po
+delení $n$ práve raz. To mu pomôže, pretože súčet čísel od $0$ do $n-1$
+je pre nepárne $n$ deliteľný $n$.
+
+Nech si teda Krtko na začiatku zvolí nejakú dvojicu $a,b$, ktorú
+vytvoril Merlin. Keďže ešte nie je nič zaradené, môže dať $a$ na červenú
+kopu a nič tým nepokazí. Číslo s rovnakým zvyškom ako $a$ po delení $n$
+potom zaradí do modrej. Ak toto číslo bolo $b$, môže začať so zvyšnými
+číslami, keďže zaradené čísla nemajú na zvyšok vplyv. Inak je to
+$c \neq b$ z dvojice $c,d$. Krtko zaradí $d$ do červenej a pokračuje s
+novým zvyškom ďalej rovnako. Prejde do novej dvojičky a číslo s daným
+zvyškom zaradí do modrej. Takto nenarazí znovu na zvyšok, ktorý už je
+zaradený. Keďže má k dispozícii len konečne veľa čísel, raz sa dostane k
+číslu, ktorého dvojička už zaradená je. Toto číslo zaradené ešte nebolo,
+takže je to $b$. To zaradí do modrej kôpky, čo sedí, keďže $a$ je v
+červenej. Zaradené dvojičky ani zvyšky už nemajú vplyv na zvyšné čísla,
+a tak môže Krtko začať svoj postup znovu.
+
+Ako môžeme vidieť, Krtko dokáže rozdeliť zvyšky na modrú a červenú kôpku
+a udržať sa pritom v medziach stanovených zadaním. Následne si už len
+vyberie jednu tak, aby vyhral. Krtko má teda víťaznú stratégiu.
+",8
+78d2233d73fe32c2,kms,"Unavený Féro sa nudí, a tak sa pozerá na polarizáciu fotónov.
+Polarizácia je kvantový jav, ktorý môže skolabovať do horizontálneho
+alebo vertikálneho stavu s rovnakou pravdepodobnosťou. Teda funguje ako
+férová minca. Féro si povedal, že skončí, keď dvakrát po sebe uvidí
+vertikálne polarizované fotóny. V závislosti od $n$ určte, aká je
+pravdepodobnosť, že skončí po pozretí sa na presne $n$ fotónov.
+","Preformulujme si úlohu pomocou hodov mincou. Nech hlava (pozorovanie
+vertikálne polarizovaného fotónu) je reprezentovaná jednotkou a orol
+(pozorovanie horizontálne polarizovaného fotónu) je reprezentovaný
+nulou. Platná séria hodov môže vyzerať nasledovne:
+$$01001(0{\color{red}\underline{11}})$$
+
+Najprv skúsime spočítať počet možností pre série hodov, ktoré končia
+práve $n$-tým hodom. Pozrieme sa na to, ako taká séria hodov musí
+vyzerať.
+
+Môžeme si všimnúť, že pre $n \geq 3$ sú posledné tri hody pevne dané.
+Posledné dva hody (hod $n-1$ a hod $n$) musia byť dve $1$, aby sa séria
+hodov ukončila práve $n$-tým hodom a $(n-3)$-tí hod musela byť $0$, ináč
+by sme skončili na $(n-1)$-vom hode. Každá séria $n \geq 3$ hodov je
+preto jednoznačne daná prvými $n-3$ hodmi.
+
+Zamerajme sa na spočítanie sérií týchto $m = n-3$ hodov, keďže ich počet
+je rovnaký ako počet sérii $n$ hodov so zakončením $(011)$.
+
+Každá séria hodov sa môže začínať $0$ alebo $1$, teda celkový počet
+sérii hodov dĺžky $m$ (ďalej označených $P_m$) je rovný súčtu
+
+- počtu takýchto sérií hodov začínajúcich s $0$ (označených
+  $P^{(0)}_m$),
+
+- a počtu takýchto sérii hodov začínajúcich s $1$ (označených
+  $P^{(1)}_m$).
+
+Zapíšeme si to rovnicou ako $$P_m = P^{(0)}_m + P^{(1)}_m.$$
+
+Pozrime sa teraz na série hodov s dĺžkou $m+1$. Všimneme si, že ich
+vieme vytvoriť zo sérií hodov s dĺžkou $m$.
+$$01001(0{\color{red}\underline{11}}) \rightarrow ({\color{blue}\underline{0/1}})01001(0{\color{red}\underline{11}})$$
+
+Ak sa nejaká séria hodov dĺžky $m$ začína $1$, tak na začiatok vieme
+pridať len $0$ (ináč by sme dostali dve za sebou idúce $1$) a ak sa
+nejaká séria hodov dĺžky $m$ začína $0$, tak na začiatok vieme pridať aj
+$0$ aj $1$. Z toho dostávame, že $$\begin{align*}
+    P^{(0)}_{m+1} &= P^{(0)}_m + P^{(1)}_m = P_m,\\
+    P^{(1)}_{m+1} &= P^{(0)}_m,\\
+    P_{m+1} &= P^{(0)}_{m+1} + P^{(1)}_{m+1} = P_m + P^{(0)}_m.
+\end{align*}$$
+
+To isté vieme urobiť pre série hodov dĺžky $m+2$, čím dostaneme
+$$P_{m+2} = P^{(0)}_{m+2} + P^{(1)}_{m+2} = P_{m+1} + P^{(0)}_{m+1}.$$
+
+Už sme ale zistili, že $P^{(0)}_{m+1} = P_m$, teda
+$$P_{m+2} = P_{m+1} + P^{(0)}_{m+1} = P_{m+1} + P_m,$$
+
+čo je identické predpisu Fibonacciho postupnosti
+$$F_{n+2} = F_{n+1} + F_{n},\ F_0 = 0,\ F_1 = 1.$$
+
+Na to, aby sme mohli povedať, že sú úplne totožné, overíme $P_3$ a
+$P_4$. Očividne existuje jediná séria hodov, ktorá skončí úspechom po
+troch hodoch, a to $011$. Po štyroch hodoch môžeme skončiť dvomi
+spôsobmi, a to $0011$ a $1011$. Vidíme teda, že
+$P_3 = 1 = F_2, P_4 = 2 = F_3$, čiže vo všeobecnosti dostávame
+$P_n = F_{n-1}$.
+
+Samozrejme, vynechali sme $n = 1$ a $n = 2$, kde si ale všimneme, že náš
+predpis platí:
+
+$n = 1\rightarrow$ nevieme ukončiť hádzanie, teda $P_1 = 0 = F_0$.
+
+$n = 2$: $11 \rightarrow P_2 = 1 = F_1$.
+
+Spočítali sme počty možností sérií hodov pre $n$ hodov, teraz z toho
+spočítame hľadanú pravdepodobnosť.
+
+Pravdepodobnosť, že nastane nejaká konkrétna séria hodov dĺžky $n$ je
+$\frac{1}{2^n}$, pretože pravdepodobnosť, že konkrétny samostatný hod
+dopadne tak, ako dopadol v danej sérii, je $\frac{1}{2}$. Hľadaných
+sérií dĺžky $n$ je $F_{n-1}$, teda hľadaná pravdepodobnosť je
+$$F_{n-1} \cdot \cfrac{1}{2^n} = \cfrac{F_{n-1}}{2^n}.$$
+
+*Poznámka*: Uznávali sme aj riešenia, ktoré výsledok reprezentovali
+prehľadnou a dobre odôvodnenou rekurenciou, ak rekurencia výsledok
+jednoznačne udávala, nakoľko aj samotná Fibonacciho postupnosť je
+reprezentovaná rekurenciou.
+",5
+eb1d293295711ff6,kms,"Môj problém spočíva v tom, že neviem, kedy ukončiť vetu, pretože sa v
+nej vždy točím do kruhu, ako v prípade trojuholníka $ABC$, ktorého
+vpísaná kružnica sa dotýka strán $AB$ a $AC$ postupne v bodoch $D$ a $E$
+a ktorého pripísaná kružnica k strane $BC$ sa priamok $AB$ a $AC$ dotýka
+postupne v bodoch $F$ a $G$, pričom osi vnútorných uhlov
+$\sphericalangle CBA$ a $\sphericalangle ACB$ pretínajú priamku $DE$ v
+bodoch $X$ a $Y$, a osi tých istých vonkajších uhlov pretínajú priamku
+$FG$ v bodoch $Z$ a $W$, čo ma núti dať vám za úlohu dokázať, že
+$X,\, Y,\, Z$ a $W$ ležia na kružnici.
+","V zadaní máme kružnicu vpísanú a pripísanú trojuholníku $ABC$, ako aj
+osi uhlov tohto trojuholníka, na ktorých stredy spomínaných kružníc
+ležia. Vyzerá to tak, že budú pomerne dôležité v riešení, poďme si ich
+teda označiť -- stred kružnice vpísanej trojuholníku $ABC$ označme ako
+$I$ a stred kružnice pripísanej k strane $BC$ trojuholníka $ABC$ označme
+ako $E_a$.
+
+Všimnime si, že naše body nám tvoria dve skupinky, a to
+
+1.  body týkajúce sa kružnice vpísanej -- $A, B, C, I, D, E, X, Y$,
+
+2.  body týkajúce sa kružnice pripísanej -- $A, B, C, E_a, F, G, Z, W$,
+
+pričom tieto dve skupinky nemajú medzi sebou až tak veľa prepojení.
+Skúsme teda skúmať tieto skupinky oddelene -- obrázky budú prehľadnejšie
+a ľahšie budeme vidieť, čo sa nám v nich deje.
+
+### Body súvisiace s vpísanou kružnicou {#body-súvisiace-s-vpísanou-kružnicou .unnumbered}
+
+Keďže kružnica vpísaná $ABC$ sa dotýka strany $AB$ v bode $D$, musí byť
+$DI$ kolmé na $AB$. To ale znamená, že si bod $D$ vieme predefinovať
+tak, že ide o pätu kolmice z bodu $I$ na stranu $AB$. Analogicky vieme
+$E$ predefinovať ako pätu kolmice z $I$ na $AC$. To ale pre nás znamená,
+že vpísanú kružnicu môžeme úplne zahodiť, čím si opäť sprehľadníme
+obrázok.
+
+Keďže $|\sphericalangle ADI|=|\sphericalangle AEI|=90^\circ$, je
+štvoruholník $ADIE$ tetivový. Potom ale z obvodových uhlov nad tetivami
+$DI$ a $EI$ a faktu, že $I$ leží na osi uhla $\sphericalangle BAC$ máme,
+že
+$|\sphericalangle IED|=|\sphericalangle IAD|=|\sphericalangle IAE|=|\sphericalangle IDE|$.
+Ďalej si všimnime, že zo súčtu uhlov trojuholníka $ABC$ vieme dostať
+$2\textcolor[RGB]{74, 111, 216}{\sphericalangle}+2\textcolor[RGB]{227, 159, 60}{\sphericalangle}+2\textcolor[RGB]{129, 143, 61}{\sphericalangle}=180^\circ\iff\textcolor[RGB]{74, 111, 216}{\sphericalangle}+\textcolor[RGB]{227, 159, 60}{\sphericalangle}+\textcolor[RGB]{129, 143, 61}{\sphericalangle}=90^\circ$.
+
+Pozrime sa ďalej na trojuholník $BDX$. Aby sa jeho uhly nasčítali na
+$180^\circ$, musí platiť $$\begin{equation*}
+    |\sphericalangle BXD| = 180^\circ - |\sphericalangle BDX| - |\sphericalangle DBX| = 180^\circ - (90^\circ + \textcolor[RGB]{74, 111, 216}{\sphericalangle}) - \textcolor[RGB]{227, 159, 60}{\sphericalangle} = 90^\circ - \textcolor[RGB]{74, 111, 216}{\sphericalangle} - \textcolor[RGB]{227, 159, 60}{\sphericalangle} = \textcolor[RGB]{129, 143, 61}{\sphericalangle}.
+\end{equation*}$$
+
+To ale znamená, že
+$|\sphericalangle EXI|=\textcolor[RGB]{129, 143, 61}{\sphericalangle}=|\sphericalangle ECI|$,
+a teda z obvodových uhlov nad tetivou $EI$ máme, že $EICX$ je tetivový.
+Potom ale
+$|\sphericalangle BXC| = |\sphericalangle IXC|=|\sphericalangle IEC|=90^\circ$,
+a teda $X$ leží na Tálesovej kružnici nad priemerom $BC$.
+
+To, že aj $Y$ leží na Tálesovej kružnici nad $BC$, ukážeme obdobne.
+Pozrime sa na trojuholník $CEY$. Aby sa jeho uhly nasčítali na
+$180^\circ$, musí platiť $$\begin{equation*}
+    |\sphericalangle CYE| = 180^\circ - |\sphericalangle CEY| - |\sphericalangle ECY| = 180^\circ - (90^\circ + \textcolor[RGB]{74, 111, 216}{\sphericalangle}) - \textcolor[RGB]{129, 143, 61}{\sphericalangle} = 90^\circ - \textcolor[RGB]{74, 111, 216}{\sphericalangle} - \textcolor[RGB]{129, 143, 61}{\sphericalangle} = \textcolor[RGB]{227, 159, 60}{\sphericalangle}.
+\end{equation*}$$
+
+To ale znamená, že
+$|\sphericalangle DYI|=180^\circ-\textcolor[RGB]{227, 159, 60}{\sphericalangle}=180^\circ-|\sphericalangle DBI|$,
+a teda z obvodových uhlov nad tetivou $DI$ máme, že $BDYI$ je tetivový.
+Potom ale
+$|\sphericalangle BYC| = |\sphericalangle BYI|=|\sphericalangle BDI|=90^\circ$,
+a teda aj $Y$ leží na Tálesovej kružnici nad priemerom $BC$.
+
+No, a tým padli už skoro všetky podstatné myšlienky riešenia. Síce sme
+sa ešte nepozreli na body pripísanej kružnice, no vpísaná a pripísaná
+kružnica majú veľmi podobné vlastnosti. Môžeme sa teda domnievať, že ak
+sa pokúsime zduplikovať vyššie uvedený postup aj pre body pripísanej
+kružnice, podarí sa nám úlohu doriešiť. Poďme sa o to pokúsiť.
+
+### Body súvisiace s pripísanou kružnicou {#body-súvisiace-s-pripísanou-kružnicou .unnumbered}
+
+Keďže kružnica pripísaná k strane $BC$ sa dotýka priamky $AB$ v bode
+$F$, musí byť $FE_a$ kolmé na $AB$. To ale znamená, že si bod $F$ vieme
+predefinovať tak, že ide o pätu kolmice z bodu $E_a$ na stranu $AB$.
+Analogicky vieme $G$ predefinovať ako pätu kolmice z $E_a$ na $AC$. To
+ale pre nás znamená, že pripísanú kružnicu môžeme úplne zahodiť, čím si
+opäť sprehľadníme obrázok.
+
+Keďže $|\sphericalangle AFE_a|=|\sphericalangle AGE_a|=90^\circ$, je
+štvoruholník $AFE_aG$ tetivový. Potom ale z obvodových uhlov nad
+tetivami $FE_a$ a $GE_a$ a faktu, že $E_a$ leží na osi uhla
+$\sphericalangle BAC$ máme, že
+$|\sphericalangle E_aGF|=|\sphericalangle E_aAF|=|\sphericalangle E_aAG|=|\sphericalangle E_aFG|$.
+Ďalej si všimnime, že zo súčtu uhlov trojuholníka $ABC$ vieme dostať
+$2\textcolor[RGB]{74, 111, 216}{\sphericalangle}+(180^\circ-2\textcolor[RGB]{227, 159, 60}{\sphericalangle})+(180^\circ-2\textcolor[RGB]{129, 143, 61}{\sphericalangle)}=180^\circ\iff\textcolor[RGB]{227, 159, 60}{\sphericalangle}+\textcolor[RGB]{129, 143, 61}{\sphericalangle}-\textcolor[RGB]{74, 111, 216}{\sphericalangle}=90^\circ$.
+
+Pozrime sa ďalej na trojuholník $BFZ$. Aby sa jeho uhly nasčítali na
+$180^\circ$, musí platiť $$\begin{equation*}
+    |\sphericalangle BZF| = 180^\circ - |\sphericalangle BFZ| - |\sphericalangle FBZ| = 180^\circ - (90^\circ - \textcolor[RGB]{74, 111, 216}{\sphericalangle}) - \textcolor[RGB]{227, 159, 60}{\sphericalangle} = 90^\circ + \textcolor[RGB]{74, 111, 216}{\sphericalangle} - \textcolor[RGB]{227, 159, 60}{\sphericalangle} = \textcolor[RGB]{129, 143, 61}{\sphericalangle}.
+\end{equation*}$$
+
+To ale znamená, že
+$|\sphericalangle GZE_a|=\textcolor[RGB]{129, 143, 61}{\sphericalangle}=|\sphericalangle GCE_a|$,
+a teda z obvodových uhlov nad tetivou $E_aG$ máme, že $CGE_aZ$ je
+tetivový. Potom ale
+$|\sphericalangle BZC| = 180^\circ-|\sphericalangle E_aZC|=180^\circ-|\sphericalangle E_aGC|=90^\circ$,
+a teda $Z$ leží na Tálesovej kružnici nad priemerom $BC$.
+
+To, že aj $W$ leží na Tálesovej kružnici nad $BC$, ukážeme obdobne.
+Pozrime sa na trojuholník $CGW$. Aby sa jeho uhly nasčítali na
+$180^\circ$, musí platiť $$\begin{equation*}
+    |\sphericalangle CWG| = 180^\circ - |\sphericalangle CGW| - |\sphericalangle GCW| = 180^\circ - (90^\circ - \textcolor[RGB]{74, 111, 216}{\sphericalangle}) - \textcolor[RGB]{129, 143, 61}{\sphericalangle} = 90^\circ + \textcolor[RGB]{74, 111, 216}{\sphericalangle} - \textcolor[RGB]{129, 143, 61}{\sphericalangle} = \textcolor[RGB]{227, 159, 60}{\sphericalangle}.
+\end{equation*}$$
+
+To ale znamená, že
+$|\sphericalangle FWE_a|=180^\circ-\textcolor[RGB]{227, 159, 60}{\sphericalangle}=180^\circ-|\sphericalangle FBE_a|$,
+a teda z obvodových uhlov nad tetivou $FE_a$ máme, že $BFE_aW$ je
+tetivový. Potom ale
+$|\sphericalangle BWC| = 180^\circ-|\sphericalangle BWE_a|=180^\circ-|\sphericalangle BFE_a|=90^\circ$,
+a teda aj $W$ leží na Tálesovej kružnici nad priemerom $BC$.
+
+Máme teda, že $W,X,Y,Z$ ležia všetky na Tálesovej kružnici nad priemerom
+$BC$, čo sme chceli dokázať.
+
+### Čo ak by obrázok vyzeral inak? {#čo-ak-by-obrázok-vyzeral-inak .unnumbered}
+
+Ak ste si porovnávali pasáže s bodmi vpísanej a pripísanej kružnice, asi
+ste si všimli, že sú skoro rovnaké, až na pár detailov -- niekde sa
+namiesto $\alpha$ dostalo $180^\circ-\alpha$. To bolo spôsobené tým, že
+bod $I$ bol medzi $B$ a $X$, kdežto vzhľadom na $E_a$ sú $B$ a $Z$ na
+rovnakej priamky. Môžete si preto premyslieť, že ak by bod $X$ ležal
+vnútri úsečky $DE$ (resp. bod $Y$ mimo nej), tiež by sa nám takto mierne
+pozmenil dôkaz, no fungoval by stále -- totiž, bod $X$ by síce prešiel
+na druhú stranu bodu $E$, a teda by
+$|\sphericalangle EXI|=180^\circ-\textcolor[RGB]{129, 143, 61}{\sphericalangle}$,
+avšak prejde aj na druhú stranu tetivy $EI$, kvôli čomu sa prevráti cez
+$180^\circ$ aj obvodový uhol.
+",8
+d0a85d78aea914cb,kms,"Ježibabke robil spoločnosť jej verný drak Bezzubý, ktorého chovala
+na pelendrekoch a cukrovej vate už celú večnosť. Obľuboval vcelku
+otravnú hru -- myslieť na čísla. Aby mu zapchala ústa, rýchlo mu do nich
+strčila turecký med, ale už bolo neskoro.
+
+Bezzubý myslí na všetky celé kladné čísla $N$ také, že súčet cifier
+čísla $N$ je $12$ a súčet cifier čísla $2N$ je $18$. Na koľko čísel
+myslí Bezzubý?
+","Zamyslime sa na začiatok, čo sa deje s ciferným súčtom čísla, keď ho
+vynásobíme dvomi. Pokiaľ vynásobíme dvojkou cifry $0, 1, 2, 3, 4$,
+dostaneme postupne $0, 2, 4, 6, 8$. Pokiaľ ale vynásobíme
+$5, 6, 7, 8, 9$, z nich dostávame $10, 12, 14, 16, 18$. Pri násobení po
+cifrách však musíme do výsledku zapisovať cifry a poprípade nám môže
+nejaká desiatka ako jednotka do vyššieho rádu. Takže ak označíme $s(n)$
+ciferný súčet čísla $n$, vyzerá to, že vo všeobecnosti by mohlo platiť
+zhruba niečo také, že $s(2n)=2s(n)$, keby nám to nekazili prechody cez
+desiatku.
+
+Mohli by sme mať nápad, že sa pozrieme na to, či pri násobení predošlej
+cifry vznikol prechod cez desiatku a ak áno, pripočítame to k výsledku
+tohto násobenia. S prechodmi cez desiatku je však taký problém, že sa
+môžu na seba . Predstavme si, že by sme násobili $134\cdot3$. Ak chceme
+vedieť, aká cifra bude na mieste stoviek vo výsledku, tak by sme sa
+pozreli na $1\cdot3=3$ a zároveň by sme sa uistili, že pri predošlej
+cifre $3\cdot 3=9<10$ nenastal prechod cez desiatku. Tým by sme dostali,
+že na mieste stoviek má číslo $134\cdot3$ cifru $3$. Lenže
+$134\cdot3=402$ nemá na mieste stoviek cifru $3$. Prečo je to tak? No
+pri násobení na mieste desiatok síce máme len $3\cdot3=9$, avšak z
+násobenia na mieste jednotiek $3\cdot4=12$ nám jednotka, takže výsledok
+už bude $10$. To znamená, že hodnotu cifry na nejakom mieste vo výsledku
+pri násobení jednociferným číslom nám neovplyvňuje len cifra na rovnakom
+mieste v pôvodnom čísle a cifra nasledujúca, ale aj všetky ostatné za
+nimi.
+
+A hoc by sme teraz mohli mať hlavu v smútku, pre násobenie dvomi je však
+svet krajší. Všimnime si, že nám môže nanajvýš jedna jednotka. Zároveň,
+keby sme nepočítali s prechodmi cez desiatku, cifry, ktoré vieme dostať
+vo výsledku, sú len $0, 2, 4, 6$ a $8$. Keď však ktorúkoľvek z nich
+zvýšime o $1$, stále ostaneme pod desiatkou, čiže prechod sa nebude . To
+znamená, že ak chceme **pri násobení dvomi** zistiť, aká cifra bude vo
+výsledku na nejakom mieste, stačí sa v pôvodnom čísle pozerať na cifru
+na rovnakom mieste a cifru za ňou nasledujúcu.
+
+   cifra v pôvodnom čísle na mieste $10^i$   cifra v pôvodnom čísle na mieste $10^{i-1}$   cifra vo výsledku na mieste $10^i$
+  ----------------------------------------- --------------------------------------------- ------------------------------------
+     $0\leq x\leq 4$ (nenastane prechod)         $0\leq y\leq 4$ (nenastal prechod)                       $2x$
+      $5\leq x\leq 9$ (nastane prechod)          $0\leq y\leq 4$ (nenastal prechod)                     $2x-10$
+     $0\leq x\leq 4$ (nenastane prechod)          $5\leq y\leq 9$ (nastal prechod)                       $2x+1$
+      $5\leq x\leq 9$ (nastane prechod)           $5\leq y\leq 9$ (nastal prechod)                     $2x+1-10$
+
+V tabuľke vidíme, že vždy budeme mať vo výsledku namiesto cifry $x$
+hodnotu $2x$, len niekedy k nej musíme niečo pripočítať alebo od nej
+niečo odpočítať. Bolo by fajn zistiť, ako často také niečo budeme robiť.
+
+Uvedomme si, že ak máme cifru menšiu alebo rovnú $4$, nemusíme kvôli nej
+pripočítavať ani odpočítavať nič. Ak však máme cifru väčšiu alebo rovnú
+$5$, na jej mieste sa nám od ciferného súčtu odpočíta desiatka a na
+mieste naľavo sa nám kvôli prechodu cez desiatku pripočíta jednotka.
+Preto za každú cifru väčšiu alebo rovnú $5$ musíme odpočítať deviatku.
+
+Vidíme, že to, o koľko sa nám $s(2n)$ vychýli od $2s(n)$, závisí iba od
+počtu cifier v $n$. Poďme teda zistiť, aký má byť. Označme
+$p_{\geq5}(n)$ počet cifier $n$, ktoré sú väčšie alebo rovné ako $5$.
+Potom $$\begin{equation*}
+    s(2n)=2s(n)-9p_{\geq5}(n).
+\end{equation*}$$
+
+Keďže pre $N$ zadanie požaduje, aby $s(N)=12$ a $s(2N)=18$, tak musí
+platiť $$\begin{align*}
+    s(2N)&=2s(N)-9p_{\geq5}(N),\\
+    18&=24-9p_{\geq5}(N),\\
+    9p_{\geq5}(N)&=6,\\
+    p_{\geq5}(N)&=\frac23.
+\end{align*}$$
+
+To však ale nesedí, lebo počet cifier väčších alebo rovných $5$ musí byť
+celé číslo, čo $\frac23$ nie sú. Preto také $N$ neexistuje.
+
+### Iné riešenie. {#iné-riešenie. .unnumbered}
+
+S ciferným súčtom narábajú niektoré pravidlá deliteľnosti. Napríklad
+číslo je deliteľné tromi práve vtedy, keď je tromi deliteľný aj jeho
+ciferný súčet. Podobné pravidlo platí aj pre deviatku. No a všimnime si,
+že ciferný súčet $2N$ má byť $18$. Ten je deliteľný deviatimi, preto aj
+$9\mid 2N$. Avšak, deviatka a dvojka nemajú spoločné delitele, preto aj
+$N$ samotné musí byť deliteľné deviatimi. To by ale malo mať aj ciferný
+súčet deliteľný deviatimi, čo hodnota $12$ nespĺňa. Tým sme dostali spor
+v podmienkach zo zadania, a teda také číslo $N$ neexistuje.
+",3
+3c6631fbc7fc1c52,kms,"Pávovi sa zapáčila Krtkova čiapka, až ju uchmatol a odletel na neďaleký
+balkón. To Krtko však nemohol nechať tak, keďže to bola jeho obľúbená
+čiapka. Začal teda liezť na balkón po brečtane. Ako sa snažil prehupnúť
+cez zábradlie, zbadal Artušovu manželku Ginevru ako sa bozkáva s
+Lancelotom. To ho úplne vykoľajilo, až sa mu pošmykli ruky a zrúbal sa
+na zem. Hlava sa mu zakrútila až tak, že videl poletovať rovnice.
+
+Nájdite všetky hodnoty reálneho parametra $p$, pre ktorý má rovnica
+$$\bigg|\Big|20\left|x\right|-x^2\Big|-p\bigg|=21$$ práve $12$ rôznych
+koreňov.
+","V tejto úlohe si vcelku pekne vystačíme s geometrickou predstavou.
+Najprv si vieme všimnúť, že ak by parameter $ p $ bol mimo absolútnej
+hodnoty, tak by zvyšok funkcie posúval iba pozdĺž $ y $-ovej osi --
+jednoducho by sme k funkcii prirátavali konštantu. Absolútna hodnota by
+to hádam nemusela veľmi zmeniť, tak poďme do úlohy s tým, že parameter
+sa dorieši nakoniec.
+
+Ako by vyzerala naša funkcia bez parametra $ p $?
+
+Tak funkcia je potom vo forme: $$\begin{equation*}
+\bigg|\Big|20\cdot|x|- x^2\Big|\bigg| = \Big|20\cdot|x|- x^2\Big|.
+\end{equation*}$$ Je na nej úplne zlaté, že párna. Takže sa rovnako
+správa k záporným a kladným číslam. To vidíme, ak do nej napríklad
+dosadíme $ -x $: $$\begin{equation*}
+\Big|20\cdot|-x|- (-x)^2\Big| = \Big|20\cdot|x|- (x)^2\Big|.
+\end{equation*}$$ Vďaka tomu nám stačí pozerať sa iba na $ x $ kladné a
+správanie sa na záporných číslach dostaneme symetriou podľa $ y $-ovej
+osi. Na nezáporných číslach nám vnútorná absolútna hodnota nič nerobí
+(však na to sme to robili), a teda dostávame už pekne sa mračiacu
+konkávnu parabolu: $$\begin{equation*}
+|20\cdot x - x^2| = |x\cdot(20-x)|.
+\end{equation*}$$
+
+Tak naša parabola má priesečníky s $ x $-ovou osou v bodoch $ x = 20 $ a
+$ x = 0 $. Tiež si teraz vieme vypočítať, kde je a akú má hodnotu vo
+vrchole -- parabola je symetrická aspoň na intervale $ [0,20] $ to platí
+aj pre našu. Potom teda je jej vrchol v strede medzi priesečníkmi a
+nadobúdame v ňom hodnotu $|10\cdot(20-10)| = 100$. Super, tak máme dobrú
+predstavu, ako vyzerá naša parabola na kladnom definičnom obore. Celá je
+ešte v absolútnej hodnote, tak záporné funkčné hodnoty zobrazme do
+kladnej polroviny podľa osi $ x $. Tým dostávame červenú krivku na
+obrázku vyššie (všimnite si, ako sa záporné hodnoty paraboly znázornené
+svetlou červenou preklopili cez $ x $-ovú os do kladných). Nakoniec
+záporné čísla dokončíme vďaka parite našej funkcie a dostávame
+nasledujúci obrázok:
+
+Tak a teraz je najvyšší čas sa pozrieť do zadania a zistiť, čo od nás
+vlastne chce -- aký má byť parameter, aby rovnica $$\begin{equation*}
+\bigg|\Big|20\cdot|x|- x^2\Big|-p\bigg| = 21
+\end{equation*}$$ mala práve $ 12 $ koreňov? To však neznamená nič iné,
+ako to, že naša funkcia má mať $ 12 $ priesečníkov s konštantnou čiarou
+$ y = 21 $. Teraz ako je, tak má s každou konštantou maximálne $ 6 $
+priesečníkov. Avšak, mágia príde s parametrom. Ako postupne meníme
+hodnotu parametra, tak funkcia sa nám posúva hore a dole pozdĺž osi
+$ y $ a následne sa nám záporné hodnoty preklápajú na kladné.
+
+Uvedomme, si že na zistenie počtu priesečníkov s hodnotou $ 21 $ nám
+stačí zistiť počet priesečníkov funkcie bez absolútnej hodnoty s
+hodnotami $ 21 $ a $ -21 $. Jednoducho každý priesečník s $ -21 $ sa nám
+zobrazí na priesečník, ktorý nás zaujíma ($ 21 $). Potom však parameter
+naozaj nerobí nič iné ako to, že funkciu posúva nižšie a vyššie. Naša
+funkcia bez vonkajšej absolútnej hodnoty nadobúda každú hodnotu
+maximálne $ 6 $-krát, a teda jedna šestica bude musieť pretnúť $ 21 $ a
+druhá $ -21 $. Takže potrebujeme, aby $$\begin{equation*}
+100 - p > 21,
+\end{equation*}$$ lebo potrebujeme, aby bol vrchol paraboly nad hodnotou
+$ 21 $ a zároveň $$\begin{equation*}
+0 - p < -21,
+\end{equation*}$$ aby najmenšia hodnota na parabole pretla $ -21 $.
+
+A teda $ p \in(21,79) $.
+",5
+ee691f0f48742a6a,kms,"Slavo sa rozhodol naučiť počítač hrať nasledovnú hru:
+
+Najprv Slavo nakreslí do roviny $n$ bodov. Potom počítač ofarbí tieto
+body dvomi farbami, zelenou a červenou. Nakoniec Slavo nakreslí do
+roviny kruh. Pokiaľ sa všetky zelené body nachádzajú vnútri kruhu (alebo
+aj na obvode) a všetky červené body mimo kruhu, tak Slavo vyhrá. Inak
+vyhrá počítač.
+
+Po chvíli učenia bol Slavo s výsledkom spokojný, preto sa rozhodol
+otestovať počítač proti skúsenému oponentovi -- Maťkovi. Maťko to však
+vyhlásil za príliš informatickú úlohu a odmietol to rátať. Dokážete
+úlohu vyriešiť a pomôcť Slavovi? V závislosti od prirodzeného čísla $n$,
+určte, kto má vyhrávajúcu stratégiu.[^1]
+
+[^1]: Hráč má víťaznú stratégiu, ak si vie svojimi ťahmi zaručiť výhru
+    bez ohľadu na to, ako hrá jeho súper.
+","Keďže zadaná úloha sa značne mení podľa toho, aké $n$ si Slavo zvolí,
+skúsme sa najprv pozrieť na nejaké prípady pre malé $n$. Začnime pre
+$n=1$. V tomto prípade pre ľubovoľné ofarbenie počítačom vieme povedať,
+že určite vyhrá Slavo (premyslenie necháme na čitateľa). Pri $n=2$ je
+pre ľubovolne ofarbenie ľahko dokázateľné, že Slavo určite vyhrá (tento
+dôkaz tiež necháme na predstavivosť čitateľa).
+
+Pri prípade $n=3$ to už začne byť zaujímavejšie. V prípade, ak by tieto
+body boli umiestnené na priamke, stačí počítaču len zafarbiť krajné body
+zelenou a stredný bod červenou farbou. V takomto prípade už Slavo určite
+nevie nakresliť kruh. V tomto prípade by vyhral počítač. Slavo je ale
+mladý šibal a môže si vybrať, ako nakreslí tieto body do roviny. Stačí
+mu nakresliť tieto body tak, aby tvorili vrcholy trojuholníka. V tomto
+prípade sa stáva znovu víťazom Slavo.
+
+Zatiaľ nám vychádza, že Slavo vždy vyhrá. začína to preňho vyzerať
+sľubne. Pokračujme ale ďalej a pozrime sa aj na prípad pre $n=4$. Ak
+chce mať Slavo šancu vyhrať, môže usporiadať body do roviny dvomi
+spôsobmi (ako už vieme, nechce aby nejaké $3$ ležali na priamke).
+
+Jedným spôsobom by bolo usporiadať body do nekonvexného štvoruholníka.
+To si vieme ľahko predstaviť ako tri body vo vrcholoch trojuholníka a
+štvrtý niekde vo vnútri trojuholníka. Hneď vidíme, že ak sa počítač
+rozhodne zafarbiť bod vo vnútri trojuholníka červenou farbou a vrcholy
+trojuholníka zelenou farbou, Slavo prehrá.
+
+Druhým spôsobom by bolo usporiadať ich do konvexného štvoruholníka.
+Očividne problémový bude práve prípad, kedy sú vyfarbené body na jednej
+uhlopriečke zelenou farbou a body na druhej uhlopriečke červenou farbou
+(zvyšné teda radi prenecháme čitateľovi). Nakreslime si dva body do
+roviny a označme ich $A$ a $C$ a bez ujmy na všeobecnosti vyfarbíme
+tieto body zelenou farbou. Nakreslime si kružnicu $k$ tak, že tieto body
+$A$ a $C$ ležia v kruhu ktorého hranicou je kružnica $k$. Ak Slavo chce
+vyhrať, musel by červené body $B$ a $D$ umiestniť mimo kruhu
+ohraničeného kružnicou $k$. Aby body $B$, $D$ tvorili uhlopriečku
+konvexného štvoruholníka $ABCD$, tak sa musia nachádzať v opačných
+polrovinách určenými priamkou $LR$. Spravme si ešte priamku
+prechádzajúcu bodmi $A$ a $C$ a jej prieniky s kružnicou $k$ označme $L$
+a $R$.
+
+Poďme sa pozrieť, čo vieme povedať o uhloch v takomto útvare. To, že bod
+$B$ leží vo vonkajšej oblasti kružnice $k$, vieme pekne uchopiť pomocou
+obvodových uhlov. V takejto situáii musí platiť
+$$|\sphericalangle LSR| > |\sphericalangle LBR| \geq |\sphericalangle ABC|,$$
+pričom $\sphericalangle LSR$ je obvodovým uhlom nad tetivou $LR$ v
+polrovine $LRB$. Analogicky pre druhý bod dostávame:
+$$|\sphericalangle LHR| > |\sphericalangle LDR| \geq |\sphericalangle ADC|.$$
+Opäť platí, že $\sphericalangle LHR$ je obvodovým uhlom nad bodmi $L$ a
+$R$. Vieme, že pre obvodové uhly zodpovedajúce rovnakej tetive, ale v
+opačných polrovinách, platí:
+$$|\sphericalangle LHR| + |\sphericalangle LSR| = 180^\circ.$$ Platí
+teda: $$180^\circ > |\sphericalangle ABC| + |\sphericalangle ADC|.$$
+Počítač si ale môže zvoliť, ktoré body zafarbí akou farbou. Stačí mu
+zafarbiť červenou farbou tie body na uhlopriečke, ktorých súčet
+prislúchajúcich vnútorných uhlov je aspoň $180^\circ$. Zvyšné dva body
+zafarbí zelenou farbou. Vtedy by pre súčet uhlov prislúchajúcich
+červeným bodom platil nasledovný vzťah:
+$$180^\circ > |\sphericalangle ABC| + |\sphericalangle ADC| \geq 180^\circ.$$
+Dostávame jasný spor, teda Slavo by nevedel nakresliť pre tento prípad
+kruh tak, aby vyhral. Pre prípad $n=4$ má teda už víťaznú stratégiu
+počítač.
+
+Čo sa deje pre $n>4$? Zoberme z týchto bodov ľubovoľné štyri. Počítač
+ich ofarbí tak, ako sme si ukázali pre $n=4$. Na ofarbení a usporiadaní
+ostatných bodov potom už nezáleží, nakoľko či budú v kruhu alebo mimo
+kruhu zelené alebo červené body, už Slavovi nepomôže splniť podmienku na
+výhru.
+
+Vyšlo nám teda, že pre $n\leq3$ má víťaznú stratégiu Slavo a pre
+$n\geq4$ má už víťaznú stratégiu počítač.
+",5
+aea7f4b1e111599d,kms,"Keď Slavo v úlohe 8 našiel telku, skúsil ju spustiť. Na programe
+Jedinečné Obrazové Juchuchú (JOJ) premietajú novú reality šou, Zámená
+dám. Prebieha na šachovnici $8 \times 8$. Na začiatku sú v prvom rade
+dámy v bielych KMS tričkách a v ôsmom rade sú dámy v modrých kms
+tričkách. Následne sa dámy hýbu v ťahoch (ako šachové dámy), v každom
+ťahu sa pohne práve jedna dáma, farby tričiek hýbajúcich sa dám sa
+striedajú. Aký je minimálny počet ťahov, po ktorom budú v prvom rade
+všetky dámy s modrými a v ôsmom rade všetky dámy s bielymi KMS tričkami?
+","Riešenie je 23. Každé správne riešenie má obsahovať konštrukciu na 23,
+no a dôkaz, že to nejde na menej.
+
+Dôkaz že to nejde na menej: Ako prvé vyriešme iba dámy v rohoch. Je
+jasné, že na menej ako 4 ťahy nevieme tieto dámy umiestniť na druhú
+stranu -- každá dáma sa predsa musí aspoň raz pohnúť. Taktiež tieto dámy
+nejdú vymeniť iba na 4 ťahy, pretože niektorá z nich sa musí pohnúť ako
+prvá, no ale v tejto fáze nemôže prísť až na druhú stranu šachovnice --
+jediné dve miesta, kam by mohla dôjsť, sú predsa zabrané. Na 5 ťahov to
+už ale ide -- označme si políčka šachovnice ako na obrázku. Potom stačí
+pohnúť dámami takto: $A1\mapsto B2$, $A8\mapsto A1$, $H1\mapsto A8$,
+$H8\mapsto H1$, $B2\mapsto H8$.
+
+<figure data-latex-placement=""H"">
+<img src=""obrazky/Problem7.jpg"" />
+</figure>
+
+Teraz si popárujme zvyšné dámy -- spravme dvojice dám tak, že jedna
+dvojica bude oproti sebe (dámy sú inej farby). Hlavná myšlienka je táto:
+tieto dve dámy potrebujú spolu určite aspoň tri ťahy aby sa dostali na
+cielenú druhú stranu. Prečo? Jedna z nich sa musí pohnúť ako prvá, no
+ale jediné miesto kam sa vie dostať na druhej strane jedným ťahom je
+práve to miesto, kde stojí tá druhá dáma. Inak povedané, jedna z nich sa
+musí uhnúť tej druhej, ale nemôže sa posunúť až na druhú stranu
+šachovnice. Teda aspoň jeden krok spravia navyše.
+
+Keď si to spočítame, štyri rohové dámy spravia aspoň 5 ťahov, zvyšných 6
+dvojíc každá spraví aspoň tri ťahy, spolu $5+6\cdot 3=23$.
+
+Konštrukcia na 23: rohové dámy posunieme ako sme opisovali pred tým.
+Štvoricu dám oproti sebe presunúť síce nejde, lebo by sa musela jedna
+farba pohnúť dva krát po sebe. Po chvíľke hrania sa zistíme, že to ale
+spraviť nasledovne:
+
+$B8\mapsto F4$, $B1\mapsto B8$, $C8\mapsto G4$, $C1\mapsto C8$,
+$D8\mapsto B6$, $D1\mapsto D8$.
+
+$G4\mapsto D1$, $G1\mapsto C5$, $F4\mapsto C1$, $F1\mapsto B5$,
+$G8\mapsto G1$, $E1\mapsto G3$,
+
+$E8\mapsto E1$, $B5\mapsto E8$, $B6\mapsto B1$, $G3\mapsto G8$,
+$F8\mapsto F1$, $C5\mapsto F8$.
+
+Pekne to graficky znázornil účastník *Lukáš Gáborik* [na tomto
+odkaze.](https://images.chesscomfiles.com/uploads/game-gifs/90px/green/neo/0/cc/0/0/YVc_YWg_NGhXNDVEYjU2RWM2N1BkN0VkZ0lEY2ZIIWdldzhlSDhQYnchOWZJOQ,,/cXFxcXFxcXEvOC84LzgvOC84LzgvUVFRUVFRUVEgdyBLUWtxIC0gMCAx.gif)
+",7
+3c549e9cdc314156,kms,"Každý úradník v Kanianke je spoľahlivý alebo nespoľahlivý. Tarzan
+potrebuje zapísať svoje deti na matrike. Žiaľ, jemu priradený úradník je
+nespoľahlivý. Navyše každý úradník v Kanianke pošle svojho zákazníka za
+svojím najobľúbenejším kolegom. Jeden úradník môže byť najobľúbenejší
+pre viacero svojich kolegov. Názory úradníkov sa v čase nemenia, teda
+daný úradník má celý život toho istého najobľúbenejšieho kolegu. Pre
+každé prvočíslo $p$ platí, že po tom, ako bol Tarzan poslaný $p$-krát za
+ďalším úradníkom, sa nachádza u spoľahlivého úradníka. Podobne pre každé
+kladné celé číslo $n$, ktoré nie je prvočíslom, platí, že po tom, ako
+bol Tarzan poslaný $n$-krát za ďalším úradníkom, sa nachádza u
+nespoľahlivého úradníka. Dokážte, že úradníkov v Kanianke je nekonečne
+veľa.
+","Dokazovať, že niečoho je nekonečne veľa, vyzerá byť tvrdý oriešok. Asi
+najjednoduchší spôsob, ako niečo také dokázať, je postupovať sporom --
+predpokladať, že úradníkov je iba konečne veľa a vyvodiť z toho niečo,
+čo určite nebude platiť. Potom náš predpoklad konečného počtu úradníkov
+musel byť nesprávny a je ich teda nekonečne veľa.
+
+Prepokladajme teda, že úradníkov je konečne veľa a označme ich počet
+$u$. Úradníci si Tarzana posielajú medzi sebou, každý ho pošle vždy za
+tým istým. Tarzan chodí stále za ďalšími a ďalšími úradníkmi a keďže
+tých je konečne veľa, časom sa musí nejaký zopakovať -- konkrétne po
+návšteve $u+1$ úradníkov sa už musel nejaký zopakovať, keďže ich je len
+$u$ rôznych. Keď sa úradník zopakuje, je zrejmé, že Tarzan začne chodiť
+v kruhu, pretože to, za kým ho úradník pošle, závisí len od toho, pri
+kom stojí. Čiže keď v dvoch rôznych časoch stojí pri tom istom
+úradníkovi, celá postupnosť ďalších úradníkov bude rovnaká.
+
+Za jedným úradníkom môže byť Tarzan poslaný od viacerých iných, takže
+jeho cesta má nejaký začiatok (predperiódu, ktorá môže byť prázdna, ale
+nemusí) a potom sa začne cykliť.
+
+Vezmime si teraz nejaké prvočíslo $p > u$. Také existuje, pretože
+prvočísel je nekonečne veľa, ale čísel menších alebo rovných $u$ je len
+konečne veľa. Po $p$ presunoch Tarzan stojí u spoľahlivého úradníka a
+zároveň už určite je na cykle, po ktorom bude chodiť donekonečna.
+Pokúsime sa ukázať, že po vhodnom počte prechodov cyklu bude poradové
+číslo toho istého úradníka zložené, a teda úradník by mal byť
+nespoľahlivý. To vytvorí spor, pretože ten istý úradník má byť
+spoľahlivý aj nespoľahlivý zároveň, čo je očividne nezmysel.
+
+Označme dĺžku cyklu $n$ (počet úradníkov, resp. počet presunov na ňom,
+je to to isté číslo). Potom k tomuto spoľahlivému úradníkovi príde
+Tarzan po $p$, $p+n$, $p+2n$, $\dots$ krokoch. V tejto postupnosti
+chceme nájsť zložené číslo. Tu si stačí uvedomiť, že stačí po cykle
+prejsť $p$-krát, to bude Tarzan mať za sebou presne $p+pn = p(n+1)$
+presunov, čo určite nie je prvočíslo, zapísali sme ho ako súčin dvoch
+činiteľov väčších ako $1$. Mal by teda stáť u nespoľahlivého úradníka,
+ale tento úradník bol aj $p$-ty v poradí, a teda spoľahlivý.
+
+Náš predpoklad, že úradníkov je iba konečne veľa, nás doviedol ku sporu.
+Úradníkov preto musí byť nekonečný počet.
+",6
+8e24a87fe6d8ae30,kms,"Potom, čo Kubko úspešne zdolal príšeru, ostáva mu len jediné. Musí zadať
+do trezora s drahokamom správny kód -- postupnosť čísel. Aby sa trezor
+odomkol, musia medzi zadávanými číslami platiť správne nerovnosti.
+
+Majme ľubovoľnú postupnosť kladných reálnych čísel
+$a_0,\ a_1,\ a_2,\ \dots$ Dokážte, že nerovnosť
+$$1 + a_n > a_{n-1}\left(1+\frac1n\right)$$ platí pre nekonečne veľa
+kladných celých čísel $n$.
+","Pri takomto type úloh sa nám celkom ponúka to dokázať sporom -- budeme
+predpokladať, že nerovností typu $>$ je v danej postupnosti iba konečný
+počet. Jediný predpoklad, ktorý v úlohe máme, je, že sa jedná o
+postupnosť kladných čísel, preto jediný spor, ktorý môžeme dostať je, že
+v postupnosti (v prípade platnosti opačného tvrdenia k zadaniu) budú
+nekladné čísla.
+
+Ak je iba konečný počet nerovností $>$, potom určite existuje nejaká,
+ktorá je -- t. j. existuje také $k$, že pre všetky $n>k$ platí
+$$\begin{equation}
+    \label{zaklad}
+    a_n+1\le a_{n-1}(1+\tfrac{1}{n}).
+\end{equation}$$ Dokážeme, že potom existuje také $l$, že $a_{l} \le 0$.
+Odteraz, keď budeme niečo hovoriť o premennej $n$, tak budeme hovoriť
+iba o tých $n$, ktoré sú väčšie ako $k$.
+
+Keď niečo chceme dokázať, často sa nám oplatí -- ak nám to daná úloha
+ponúka -- uvažovať najhorší možný prípad, aký pre nás môže nastať. Ak
+dokážeme, že tvrdenie je splnené pre najhorší prípad a zároveň že daný
+prípad je naozaj *najhorší* v zmysle platnosti nášho tvrdenia [^1], tak
+sme vyhrali.
+
+Intuitívne, najhorší prípad, aký môže nastať, je, keď pre všetky $n$
+nastáva v nerovnosti [\[zaklad\]](#zaklad){reference-type=""eqref""
+reference=""zaklad""} rovnosť. Pretože potom jednotlivé $a_i$ budú , a
+teda sa najviac budú brániť nekladnosti. Toto samozrejme musíme dokázať
+nejako poriadne, lebo intuícia môže často klamať. Ukážeme to nasledovne:
+
+Nech $B=\{b_i\}_{i=k}^\infty$ a $C=\{c_i\}_{i=k}^\infty$ sú také
+postupnosti, že $b_k=c_k>0$ a pre obe postupnosti platí
+[\[zaklad\]](#zaklad){reference-type=""eqref"" reference=""zaklad""}, avšak
+pre postupnosť $B$ sú všetky nerovnosti dosahované s rovnosťou. Ukážeme,
+že potom $\forall n>k$ platí $c_n\le b_n$. Opäť sporom, predpokladajme,
+že existuje také $m$, pre ktoré $c_m > b_m$ a nech toto $m$ je najmenšie
+možné s danou vlastnosťou (kombinácia sporu a extremálneho princípu je
+opäť veľmi silný a spoľahlivý dôkazový postup). Potom, vďaka
+[\[zaklad\]](#zaklad){reference-type=""eqref"" reference=""zaklad""} môžeme
+písať: $$\begin{equation*}
+    c_{m-1}(1+\tfrac{1}{m})-1\ge c_m > b_m = b_{m-1}(1+\tfrac{1}{m})-1.
+\end{equation*}$$ Keď sa pozrieme na krajné strany série nerovností, tak
+po použití jednoduchých ekvivalentných úprav dostávame
+$c_{m-1}>b_{m-1}$, čo je spor s tým, že $m$ bolo najmenšie číslo s
+platnosťou danej nerovnosti.
+
+Stačí nám teda ukážať, že v postupnosti $B$ existuje nekladné číslo.
+Vyjadrime si teraz člen $b_n$ len pomocou $b_k$: [^2] $$\begin{align*}
+b_n &= b_{n-1}\frac{n+1}{n}-1=\left(b_{n-2}\frac{n}{n-1}-1\right)\frac{n+1}{n}-1=b_{n-2}\frac{n+1}{n-1}-\frac{n+1}{n}-\frac{n+1}{n+1}=\\&=\left(b_{n-3}\frac{n-1}{n-2}-1\right)\frac{n+1}{n-1}-\frac{n+1}{n}-\frac{n+1}{n+1}=b_{n-3}\frac{n+1}{n-2}-\frac{n+1}{n-1}-\frac{n+1}{n}-\frac{n+1}{n+1}= \dots \\ \dots &= b_k\frac{n+1}{k+1}-\sum_{i=k+2}^{n+1} \frac{n+1}{i}.
+\end{align*}$$
+
+Sledujme teraz rozdiel $b_{n}$ a $b_{n-1}$: $$\begin{align*}
+b_n-b_{n-1}&=b_k\frac{n+1}{k+1}-\sum_{i=k+2}^{n+1} \frac{n+1}{i} -b_k\frac{n}{k+1}+\sum_{i=k+2}^{n} \frac{n}{i} = \frac{b_k}{k+1}-1-\sum_{i=k+2}^{n} \frac{1}{i}=\frac{b_k}{k+1}-1+\sum_{i=1}^{k+1} \frac{1}{i}-\sum_{i=1}^{n} \frac{1}{i}.
+\end{align*}$$
+
+Postupnosť $S=\{\sum_{i=1}^{n} \frac{1}{i}\}_{i=1}^\infty$ sa nazýva
+*harmonický rad* a existuje nespočetné množstvo elegantných, aj
+neelegantných dôkazov, že táto postupnosť diverguje, t. j., intuitívne
+povedané, že členy postupnosti $S$ rastú s rastúcim $n$ nad všetky medze
+až do samého neba. Trochu formálnejšie:
+$\underset{n \xrightarrow{}\infty}{lim} \sum_{i=1}^{n} \frac{1}{i}= +\infty$,
+alebo, kto nevie čo je limita, tak pre všetky $c \in \mathbb{R}$
+existuje také $n_0 \in \mathbb{N}$, že pre všetky $n>n_0$:
+$\sum_{i=1}^{n} \frac{1}{i} > c$.
+
+My si ukážeme jeden z nich (asi najznámejší). [^3] Myšlienku si ukážeme
+na ôsmom člene postupnosti: $$\begin{align*}
+&1+\tfrac{1}{2}+\tfrac{1}{3}+\tfrac{1}{4}+\tfrac{1}{5}+\tfrac{1}{6}+\tfrac{1}{7}+\tfrac{1}{8}>\\&1+\tfrac{1}{2}+\tfrac{1}{4}+\tfrac{1}{4}+\tfrac{1}{8}+\tfrac{1}{8}+\tfrac{1}{8}+\tfrac{1}{8}=1+1/2+1/2+1/2=\tfrac{3+2}{2}.     
+\end{align*}$$ Vo všeobecnosti (ľahko možno uvidieť):
+$$\begin{equation*}
+1+\tfrac{1}{2}+\tfrac{1}{3}+\dots+\tfrac{1}{2^m}>\tfrac{m+2}{2}. 
+\end{equation*}$$ Keďže postupnosť $S$ je rastúca, tak touto hodnotou sú
+ohraničené aj všetky ďalšie členy $S$ po nasledujúcu mocninu dvojky.
+Vidíme teda, že postupnosť rastie nad všetky medze.
+
+Vrátiac sa späť k našej úlohe, ukázali sme, že rozdiel
+$b_n-b_{n-1}=\frac{b_k}{k+1}-1+\sum_{i=1}^{k+1} \frac{1}{i}-\sum_{i=1}^{n} \frac{1}{i}$
+(kde prvé tri členy sú iba konštanta) bude klesať a klesať, až raz bude
+určite záporný a aj potom bude stále len klesať a klesať. To je ale
+rozdiel dvoch po sebe idúcich členov postupnosti $B$. Teda postupnosť
+$B$, bez ohľadu na veľkosť $b_0$, raz padne pod nulu. Teda aj postupnosť
+$C$, čo je len posunutá postupnosť $A$, raz padne pod nulu, čo je spor s
+tým, že naša postupnosť je nezáporná. A to je koniec.
+
+[^1]: Formálne, nech $P$ je predpoklad našej úlohy, nech $B$ je nejaký
+    prípad a nech pre všetky možné prípady $C$ platí
+    $(P\Rightarrow{B})\Rightarrow{C}$. Potom
+    $(P\Rightarrow{B})\Rightarrow{(P\Rightarrow{C})}$.
+
+[^2]: Pre tých, čo nepoznajú ten zvláštny symbol, ktorý sa nachádza na
+    konci nasledujúceho odvodzovania, odporúčam:
+    https://cs.wikipedia.org/wiki/Sumace
+
+[^3]: https://cs.wikipedia.org/wiki/Harmonick%C3%A1\_%C5%99ada
+",9

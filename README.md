@@ -92,6 +92,29 @@ id,competition,problem,solution,difficulty
 - `solution`: Detailed solution explanation
 - `difficulty`: Numeric difficulty rating
 
+## Citation
+
+```
+@inproceedings{zahradnik-suppa-2025-trojsten,
+    title = "Trojsten Benchmark: Evaluating {LLM} Problem-Solving in {S}lovak {STEM} Competition Problems",
+    author = "Zahradn{\'i}k, Adam  and
+      Suppa, Marek",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.1779/",
+    pages = "35094--35109",
+    ISBN = "979-8-89176-332-6",
+    abstract = "Large language models show promising performance on reasoning tasks, yet evaluation methods for low-resource languages remain limited, particularly for complex STEM problem-solving. We introduce Trojsten Benchmark, a Slovak-language dataset of 1,108 high-school competition problems with reference solutions across mathematics, physics, and programming, and a rubric-based LLM grading framework. Using GPT-4 to generate rubrics and grade solutions, we observe 1.05 average absolute deviation from human graders (5-point scale), while benchmarking GPT-3.5-Turbo, GPT-4, GPT-4o, and open-weight models (Llama 3, Phi-3). We quantify multistep reasoning performance by difficulty, show consistent underperformance on harder items, and demonstrate language sensitivity: accuracy drops on English translations of Slovak statements, evidencing challenges beyond translation. Trojsten Benchmark complements English-centric math datasets (e.g., MATH, GSM8K) by targeting open-response, rubric-gradable reasoning under low-resource linguistic framing. We release code and data to enable reproducible evaluation and human-aligned auto-grading for STEM in under-served languages."
+}
+```
+
 ## License
 
 This project is part of academic research. Please contact the authors for usage information.
